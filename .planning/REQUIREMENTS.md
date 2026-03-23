@@ -7,11 +7,11 @@
 
 ### Content Infrastructure
 
-- [ ] **CINF-01**: Scenario content defined as typed TypeScript data objects separated from React components (ScenarioConfig interface)
+- [x] **CINF-01**: Scenario content defined as typed TypeScript data objects separated from React components (ScenarioConfig interface)
 - [ ] **CINF-02**: Generic ScenarioRenderer component that consumes ScenarioConfig and renders any role/phase scenario without role-specific component code
-- [ ] **CINF-03**: Zod schema validation for all scenario content at build/dev time — prevents silent content bugs across 168 scenario slots (8 roles × 3 phases × 7 friction scenarios)
-- [ ] **CINF-04**: Debrief template structure enforced as non-negotiable in schema (what happened / why / how / who you became / tomorrow's action)
-- [ ] **CINF-05**: Each scenario choice carries a `crossRoleImpact[]` array keyed to specific decisions — no hardcoded consequence strings
+- [x] **CINF-03**: Zod schema validation for all scenario content at build/dev time — prevents silent content bugs across 168 scenario slots (8 roles × 3 phases × 7 friction scenarios)
+- [x] **CINF-04**: Debrief template structure enforced as non-negotiable in schema (what happened / why / how / who you became / tomorrow's action)
+- [x] **CINF-05**: Each scenario choice carries a `crossRoleImpact[]` array keyed to specific decisions — no hardcoded consequence strings
 
 ### State Architecture
 
@@ -94,11 +94,11 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CINF-01 | Phase 1 | Pending |
+| CINF-01 | Phase 1 | Complete |
 | CINF-02 | Phase 1 | Pending |
-| CINF-03 | Phase 1 | Pending |
-| CINF-04 | Phase 1 | Pending |
-| CINF-05 | Phase 1 | Pending |
+| CINF-03 | Phase 1 | Complete |
+| CINF-04 | Phase 1 | Complete |
+| CINF-05 | Phase 1 | Complete |
 | STAT-01 | Phase 1 | Pending |
 | STAT-02 | Phase 1 | Pending |
 | STAT-03 | Phase 1 | Pending |
