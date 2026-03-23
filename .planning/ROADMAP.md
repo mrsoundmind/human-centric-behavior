@@ -80,13 +80,13 @@ Plans:
   2. The cross-role impact view shows at least 2 named other designations affected by the user's actual choices — consequence strings are keyed to the specific choices made, not generic fallback text
   3. A user who completes two different role journeys sees a compound insight on the second completion that references the pattern from their first role — not a generic completion screen
   4. The completion screen includes a single concrete commitment the user can make, plus the role-specific scripts and rubric from the existing completion pattern
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 04-01: Static cross-role impact map — edge definitions for all role-phase decision combinations across the 3 authored roles; CrossRoleImpactEngine module
-- [ ] 04-02: JourneyCompleteView — blind spot archetype display, behavioral narrative, single commitment surface, canvas-confetti, radar chart profile
-- [ ] 04-03: CrossRoleImpactView — animated ripple visualization, consequence strings keyed to actual choices, consequence framing (not accusation)
-- [ ] 04-04: Multi-role compound insights — second role completion surfaces pattern delta from first completed role
+- [ ] 04-01-PLAN.md — Populate crossRoleImpactMap via buildImpactMap() from scenario data, extract FRICTION_CONFIG to shared file (XROL-01)
+- [ ] 04-02-PLAN.md — JourneyCompleteView with archetype profile, phase breakdown bars, tomorrow's action, scripts/rubric, canvas-confetti, DesignationPortal "complete" mode wiring (BEHV-02, BEHV-03)
+- [ ] 04-03-PLAN.md — CrossRoleImpactView with choice-keyed consequence cards grouped by affected role, severity indicators (XROL-02)
+- [ ] 04-04-PLAN.md — Multi-role compound insights: pattern delta comparing archetypes across completed roles (XROL-03)
 
 ### Phase 5: Full Platform Delivery
 **Goal**: All 8 designation role journeys are complete, the client-facing layers are audited and fixed, and navigation between all platform layers is seamless with no dead ends
