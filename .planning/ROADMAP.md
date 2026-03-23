@@ -98,15 +98,15 @@ Plans:
   3. A user completing Layer 1 (felt friction) is prompted with a contextual bridge to Layer 2 (SDLC walkthrough) — not a generic home screen
   4. A user completing Layer 2 is prompted with a contextual bridge into the Designation Portal — the SDLC phases they just walked are the same backbone they will navigate in their role
   5. The full cross-role impact map is populated for all 8 role combinations; a user who completes 3+ roles sees compounding cross-role pattern insights
-**Plans**: TBD
+**Plans**: 6 plans
 
 Plans:
-- [ ] 05-01: Sales and Designer role SDLC journeys — all 3 phases × 4 friction dimensions + cross-role impact edges
-- [ ] 05-02: BA and CRM role SDLC journeys — all 3 phases × 4 friction dimensions + cross-role impact edges
-- [ ] 05-03: Strategy role SDLC journey — all 3 phases × 4 friction dimensions + cross-role impact edges
-- [ ] 05-04: Client experience audit — primer flow gaps, funnel friction completeness, revenue impact messaging
-- [ ] 05-05: Layer navigation audit — Layer 1 → Layer 2 → Designation Portal bridges, no dead ends, progression clarity
-- [ ] 05-06: Full cross-role impact map completion and multi-role compound insight validation
+- [ ] 05-01-PLAN.md — Sales and Designer role SDLC journeys: 24 scenarios across 3 phases x 4 friction dimensions (AUDT-01)
+- [ ] 05-02-PLAN.md — BA and CRM role SDLC journeys: 24 scenarios across 3 phases x 4 friction dimensions (AUDT-01)
+- [ ] 05-03-PLAN.md — Strategy role SDLC journey: 12 scenarios across 3 phases x 4 friction dimensions (AUDT-01)
+- [ ] 05-04-PLAN.md — Client experience audit: ClientFinalConnect bridge to /internalteam, funnel friction pair verification (AUDT-01, AUDT-02)
+- [ ] 05-05-PLAN.md — Layer navigation bridges: Layer2Complete contextual messaging, JourneyCompleteView multi-role arc, ROLE_COMPLETION_CONTENT for 5 new roles (AUDT-03, AUDT-04, AUDT-05)
+- [ ] 05-06-PLAN.md — DesignationPortal wiring for 5 new roles + cross-role impact map completion with all 24 scenario files (AUDT-01, AUDT-04, AUDT-05)
 
 ## Progress
 
