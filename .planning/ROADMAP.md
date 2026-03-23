@@ -30,7 +30,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Zod validation catches a malformed scenario config (missing debrief field) at dev startup with a clear error, before any UI renders
   4. localStorage schema version mismatch triggers a graceful progress-reset message instead of a silent broken state
   5. All pre-existing memory leaks and timer cleanup issues from CONCERNS.md are resolved; no console warnings on mount/unmount cycle
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
 - [ ] 01-01: TypeScript content schema — ScenarioConfig, Choice, Outcome, DecisionRecord, ScoringProfile, ImpactEdge interfaces + Zod validation
