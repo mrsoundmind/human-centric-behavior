@@ -22,10 +22,10 @@
 
 ### Scoring & Behavioral Profiling
 
-- [ ] **SCOR-01**: Pure TypeScript scoring engine module (no React imports) — exports computeRunningScore() and computeProfile()
-- [ ] **SCOR-02**: 4-dimension behavioral tagging on every choice: client friction, internal bureaucracy, knowledge gaps, conflict avoidance
+- [x] **SCOR-01**: Pure TypeScript scoring engine module (no React imports) — exports computeRunningScore() and computeProfile()
+- [x] **SCOR-02**: 4-dimension behavioral tagging on every choice: client friction, internal bureaucracy, knowledge gaps, conflict avoidance
 - [ ] **SCOR-03**: Blind spot profile generation — pattern detection across all phases showing tendency archetypes (e.g., "consistently avoids conflict in Requirements but takes risks in Development")
-- [ ] **SCOR-04**: Tendency-weighted multi-dimensional scoring — NOT binary right/wrong per choice
+- [x] **SCOR-04**: Tendency-weighted multi-dimensional scoring — NOT binary right/wrong per choice
 - [ ] **SCOR-05**: Cumulative pattern display that surfaces decision patterns across the full journey, not individual moments
 
 ### SDLC-Merged Role Journeys
@@ -105,10 +105,10 @@
 | STAT-04 | Phase 1 | Complete |
 | TECH-01 | Phase 1 | Complete |
 | TECH-02 | Phase 1 | Complete |
-| SCOR-01 | Phase 2 | Pending |
-| SCOR-02 | Phase 2 | Pending |
+| SCOR-01 | Phase 2 | Complete |
+| SCOR-02 | Phase 2 | Complete |
 | SCOR-03 | Phase 2 | Pending |
-| SCOR-04 | Phase 2 | Pending |
+| SCOR-04 | Phase 2 | Complete |
 | SCOR-05 | Phase 2 | Pending |
 | ROLE-01 | Phase 3 | Pending |
 | ROLE-02 | Phase 3 | Pending |
