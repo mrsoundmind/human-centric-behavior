@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { DesignationSelect, Designation } from "./DesignationSelect";
+import { DesignationPortal } from "./DesignationPortal";
 import { InternalIntroScreen } from "./InternalIntroScreen";
 import { SalesJourney } from "./sales/SalesJourney";
 import { RoleBriefingView } from "./RoleBriefingView";
@@ -115,7 +116,13 @@ export const InternalExperience = ({ onBack, initialStep }: InternalExperiencePr
                     )}
 
                     {step === "designation" && (
-                        <DesignationSelect onSelect={handleRoleSelect} />
+                        <DesignationPortal
+                            onStartQuickMode={(selectedRole) => {
+                                setRole(selectedRole);
+                                setStep("role-briefing");
+                            }}
+                            onComplete={handleJourneyComplete}
+                        />
                     )}
 
                     {step === "role-briefing" && role && (

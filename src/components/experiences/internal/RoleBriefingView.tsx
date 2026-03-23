@@ -3,8 +3,9 @@ import { Designation } from "./DesignationSelect";
 
 interface RoleBriefingViewProps {
     role: Designation;
-    onContinue: () => void;
+    onContinue?: () => void;
     onBack: () => void;
+    onSelectMode?: (mode: "full-sdlc" | "quick") => void;
 }
 
 const ROLE_BRIEFINGS: Record<Designation, {
@@ -63,7 +64,7 @@ const ROLE_BRIEFINGS: Record<Designation, {
     }
 };
 
-export const RoleBriefingView = ({ role, onContinue, onBack }: RoleBriefingViewProps) => {
+export const RoleBriefingView = ({ role, onContinue, onBack, onSelectMode }: RoleBriefingViewProps) => {
     const data = ROLE_BRIEFINGS[role];
 
     return (
@@ -104,13 +105,38 @@ export const RoleBriefingView = ({ role, onContinue, onBack }: RoleBriefingViewP
                     </div>
                 </div>
 
-                <div className="mt-16 text-center">
-                    <button
-                        onClick={onContinue}
-                        className="px-12 py-4 bg-white text-black font-bold text-xl rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-                    >
-                        Enter Simulation
-                    </button>
+                <div className="mt-16 space-y-4">
+                    {onSelectMode ? (
+                        <div className="grid md:grid-cols-2 gap-4">
+                            <button
+                                onClick={() => onSelectMode("full-sdlc")}
+                                className="group flex flex-col gap-2 px-8 py-6 bg-white text-black font-bold rounded-2xl hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(255,255,255,0.3)] text-left"
+                            >
+                                <span className="text-lg">Full SDLC Journey</span>
+                                <span className="text-xs font-normal text-gray-600 leading-snug">
+                                    Walk through Discovery, Requirements, and Design phases with role-specific friction scenarios
+                                </span>
+                            </button>
+                            <button
+                                onClick={() => onSelectMode("quick")}
+                                className="group flex flex-col gap-2 px-8 py-6 bg-white/10 border border-white/20 text-white font-bold rounded-2xl hover:bg-white/20 hover:scale-[1.02] transition-all text-left"
+                            >
+                                <span className="text-lg">Quick Scenarios</span>
+                                <span className="text-xs font-normal text-gray-400 leading-snug">
+                                    Play the original 3-scenario experience
+                                </span>
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="text-center">
+                            <button
+                                onClick={onContinue}
+                                className="px-12 py-4 bg-white text-black font-bold text-xl rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                            >
+                                Enter Simulation
+                            </button>
+                        </div>
+                    )}
                 </div>
             </motion.div>
         </div>
