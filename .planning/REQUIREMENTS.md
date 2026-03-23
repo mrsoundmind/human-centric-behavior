@@ -15,10 +15,10 @@
 
 ### State Architecture
 
-- [ ] **STAT-01**: Zustand store with Immer middleware for designation journey state (replaces per-component useState for journey tracking)
-- [ ] **STAT-02**: Domain-split contexts — SDLCContext remains for Layer 2, new DesignationStore handles role journey state independently
-- [ ] **STAT-03**: localStorage schema versioning with migration guard — prevents returning user progress corruption on schema changes
-- [ ] **STAT-04**: Append-only decisions log per journey session — stores full ordered decision record (role, phase, choice, timestamp, friction dimension)
+- [x] **STAT-01**: Zustand store with Immer middleware for designation journey state (replaces per-component useState for journey tracking)
+- [x] **STAT-02**: Domain-split contexts — SDLCContext remains for Layer 2, new DesignationStore handles role journey state independently
+- [x] **STAT-03**: localStorage schema versioning with migration guard — prevents returning user progress corruption on schema changes
+- [x] **STAT-04**: Append-only decisions log per journey session — stores full ordered decision record (role, phase, choice, timestamp, friction dimension)
 
 ### Scoring & Behavioral Profiling
 
@@ -99,10 +99,10 @@
 | CINF-03 | Phase 1 | Complete |
 | CINF-04 | Phase 1 | Complete |
 | CINF-05 | Phase 1 | Complete |
-| STAT-01 | Phase 1 | Pending |
-| STAT-02 | Phase 1 | Pending |
-| STAT-03 | Phase 1 | Pending |
-| STAT-04 | Phase 1 | Pending |
+| STAT-01 | Phase 1 | Complete |
+| STAT-02 | Phase 1 | Complete |
+| STAT-03 | Phase 1 | Complete |
+| STAT-04 | Phase 1 | Complete |
 | TECH-01 | Phase 1 | Complete |
 | TECH-02 | Phase 1 | Complete |
 | SCOR-01 | Phase 2 | Pending |

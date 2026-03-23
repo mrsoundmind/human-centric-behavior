@@ -116,7 +116,7 @@ Phases execute sequentially: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 2/4 | In Progress|  |
+| 1. Foundation | 3/4 | In Progress|  |
 | 2. Scoring Engine | 0/2 | Not started | - |
 | 3. Role Content — First Wave | 0/5 | Not started | - |
 | 4. Completion and Cross-Role Impact | 0/4 | Not started | - |
