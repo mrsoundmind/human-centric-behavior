@@ -94,47 +94,47 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CINF-01 | TBD | Pending |
-| CINF-02 | TBD | Pending |
-| CINF-03 | TBD | Pending |
-| CINF-04 | TBD | Pending |
-| CINF-05 | TBD | Pending |
-| STAT-01 | TBD | Pending |
-| STAT-02 | TBD | Pending |
-| STAT-03 | TBD | Pending |
-| STAT-04 | TBD | Pending |
-| SCOR-01 | TBD | Pending |
-| SCOR-02 | TBD | Pending |
-| SCOR-03 | TBD | Pending |
-| SCOR-04 | TBD | Pending |
-| SCOR-05 | TBD | Pending |
-| ROLE-01 | TBD | Pending |
-| ROLE-02 | TBD | Pending |
-| ROLE-03 | TBD | Pending |
-| ROLE-04 | TBD | Pending |
-| ROLE-05 | TBD | Pending |
-| ROLE-06 | TBD | Pending |
-| ROLE-07 | TBD | Pending |
-| ROLE-08 | TBD | Pending |
-| XROL-01 | TBD | Pending |
-| XROL-02 | TBD | Pending |
-| XROL-03 | TBD | Pending |
-| BEHV-01 | TBD | Pending |
-| BEHV-02 | TBD | Pending |
-| BEHV-03 | TBD | Pending |
-| AUDT-01 | TBD | Pending |
-| AUDT-02 | TBD | Pending |
-| AUDT-03 | TBD | Pending |
-| AUDT-04 | TBD | Pending |
-| AUDT-05 | TBD | Pending |
-| TECH-01 | TBD | Pending |
-| TECH-02 | TBD | Pending |
+| CINF-01 | Phase 1 | Pending |
+| CINF-02 | Phase 1 | Pending |
+| CINF-03 | Phase 1 | Pending |
+| CINF-04 | Phase 1 | Pending |
+| CINF-05 | Phase 1 | Pending |
+| STAT-01 | Phase 1 | Pending |
+| STAT-02 | Phase 1 | Pending |
+| STAT-03 | Phase 1 | Pending |
+| STAT-04 | Phase 1 | Pending |
+| TECH-01 | Phase 1 | Pending |
+| TECH-02 | Phase 1 | Pending |
+| SCOR-01 | Phase 2 | Pending |
+| SCOR-02 | Phase 2 | Pending |
+| SCOR-03 | Phase 2 | Pending |
+| SCOR-04 | Phase 2 | Pending |
+| SCOR-05 | Phase 2 | Pending |
+| ROLE-01 | Phase 3 | Pending |
+| ROLE-02 | Phase 3 | Pending |
+| ROLE-03 | Phase 3 | Pending |
+| ROLE-04 | Phase 3 | Pending |
+| ROLE-05 | Phase 3 | Pending |
+| ROLE-06 | Phase 3 | Pending |
+| ROLE-07 | Phase 3 | Pending |
+| ROLE-08 | Phase 3 | Pending |
+| BEHV-01 | Phase 3 | Pending |
+| XROL-01 | Phase 4 | Pending |
+| XROL-02 | Phase 4 | Pending |
+| XROL-03 | Phase 4 | Pending |
+| BEHV-02 | Phase 4 | Pending |
+| BEHV-03 | Phase 4 | Pending |
+| AUDT-01 | Phase 5 | Pending |
+| AUDT-02 | Phase 5 | Pending |
+| AUDT-03 | Phase 5 | Pending |
+| AUDT-04 | Phase 5 | Pending |
+| AUDT-05 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 35 total
-- Mapped to phases: 0
-- Unmapped: 35
+- Mapped to phases: 35
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-23*
-*Last updated: 2026-03-23 after initial definition*
+*Last updated: 2026-03-23 after roadmap creation — all 35 requirements mapped to phases 1-5*
