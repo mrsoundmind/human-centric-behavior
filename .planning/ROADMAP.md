@@ -63,14 +63,13 @@ Plans:
   3. The existing 3-scenario role journeys remain accessible via a separate entry point — no content removed
   4. Each phase debrief enforces all 5 debrief fields (what happened / why / consequence / who you became / tomorrow's action) — a scenario missing any field fails Zod validation at startup
   5. All 3 completed roles' decision logs are persisted in localStorage under isolated per-role keys; refreshing mid-journey resumes at the correct phase
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 03-01: DebriefView component — 5-field debrief structure, workflowAnchor required field, tomorrow's action rendering
-- [ ] 03-02: PM role SDLC journey — Discovery, Requirements, Design phases × 4 friction dimensions (approval bottleneck, knowledge silo, conflict avoidance + client friction)
-- [ ] 03-03: Developer role SDLC journey — Discovery, Requirements, Design phases × 4 friction dimensions
-- [ ] 03-04: QA role SDLC journey — Discovery, Requirements, Design phases × 4 friction dimensions
-- [ ] 03-05: Multi-role progress tracking — completedRoles field in persisted state, per-role localStorage key isolation
+- [ ] 03-01-PLAN.md — PM role SDLC journey: 12 scenarios across Discovery, Requirements, Design phases (ROLE-01, ROLE-02, ROLE-03, ROLE-04, ROLE-05, ROLE-06, BEHV-01)
+- [ ] 03-02-PLAN.md — Developer role SDLC journey: 12 scenarios across Discovery, Requirements, Design phases (ROLE-01, ROLE-02, ROLE-03, ROLE-04, ROLE-05, ROLE-06, BEHV-01)
+- [ ] 03-03-PLAN.md — QA role SDLC journey: 12 scenarios across Discovery, Requirements, Design phases (ROLE-01, ROLE-02, ROLE-03, ROLE-04, ROLE-05, ROLE-06, BEHV-01)
+- [ ] 03-04-PLAN.md — DesignationPortal multi-role wiring: load all 36 scenarios, fix role bug, phase-grouped navigation, validate-all script (ROLE-07, ROLE-08)
 
 ### Phase 4: Completion and Cross-Role Impact
 **Goal**: After completing a role journey, the user sees their behavioral blind spot profile and how their decisions rippled into other designations — built against real scored data from Phase 3
@@ -118,6 +117,6 @@ Phases execute sequentially: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete   | 2026-03-23 |
 | 2. Scoring Engine | 2/2 | Complete   | 2026-03-23 |
-| 3. Role Content — First Wave | 0/5 | Not started | - |
+| 3. Role Content — First Wave | 0/4 | Not started | - |
 | 4. Completion and Cross-Role Impact | 0/4 | Not started | - |
 | 5. Full Platform Delivery | 0/6 | Not started | - |
