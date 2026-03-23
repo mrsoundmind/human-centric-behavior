@@ -13,7 +13,7 @@ This roadmap transforms the existing 3-scenario-per-role designation portal into
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Lock TypeScript content schema, state architecture, and navigation hook — the three architectural prerequisites every downstream phase depends on (completed 2026-03-23)
-- [ ] **Phase 2: Scoring Engine** - Build and validate the pure TypeScript behavioral scoring module before a single SDLC-merged scenario is authored
+- [x] **Phase 2: Scoring Engine** - Build and validate the pure TypeScript behavioral scoring module before a single SDLC-merged scenario is authored (completed 2026-03-23)
 - [ ] **Phase 3: Role Content — First Wave** - Author SDLC-merged journeys for 3 roles using the validated architecture, proving the full pattern from scenario to debrief
 - [ ] **Phase 4: Completion and Cross-Role Impact** - Build journey completion views, blind spot profile display, and cross-role impact visualization against real scored data
 - [ ] **Phase 5: Full Platform Delivery** - Complete all 8 role journeys, audit client-facing layers, fix navigation between all layers, ship cohesive platform
@@ -117,7 +117,7 @@ Phases execute sequentially: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete   | 2026-03-23 |
-| 2. Scoring Engine | 0/2 | Not started | - |
+| 2. Scoring Engine | 2/2 | Complete   | 2026-03-23 |
 | 3. Role Content — First Wave | 0/5 | Not started | - |
 | 4. Completion and Cross-Role Impact | 0/4 | Not started | - |
 | 5. Full Platform Delivery | 0/6 | Not started | - |
