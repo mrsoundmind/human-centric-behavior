@@ -3,8 +3,24 @@ import { motion } from "framer-motion";
 import { Mail, MessageSquare } from "lucide-react";
 import { SlackMessage } from "../SharedComponents";
 
+export interface ProposalCompletionData {
+    impact: {
+        externalTrust: number;
+        internalCapital: number;
+        retainedValue: number;
+    };
+    debrief: {
+        title: string;
+        why: string;
+        what: string;
+        how: string;
+        who: string;
+        tomorrow: string;
+    };
+}
+
 interface Stage3Props {
-    onComplete: (data: { impact: any, debrief: any }) => void;
+    onComplete: (data: ProposalCompletionData) => void;
 }
 
 export const Stage3_Proposal = ({ onComplete }: Stage3Props) => {

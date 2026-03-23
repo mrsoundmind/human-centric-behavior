@@ -2,8 +2,24 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mic, Video, Layout, MessageSquare } from "lucide-react";
 
+export interface MeetingCompletionData {
+    impact: {
+        externalTrust: number;
+        internalCapital: number;
+        retainedValue: number;
+    };
+    debrief: {
+        title: string;
+        why: string;
+        what: string;
+        how: string;
+        who: string;
+        tomorrow: string;
+    };
+}
+
 interface Stage2Props {
-    onComplete: (data: { impact: any, debrief: any }) => void;
+    onComplete: (data: MeetingCompletionData) => void;
 }
 
 export const Stage2_Meeting = ({ onComplete }: Stage2Props) => {

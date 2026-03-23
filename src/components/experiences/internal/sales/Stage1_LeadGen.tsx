@@ -4,8 +4,24 @@ import { motion } from "framer-motion";
 import { Send, Search, Bell, Home, Briefcase, MessageSquare, Users, Share2 } from "lucide-react";
 import { SlackMessage } from "../SharedComponents";
 
+export interface LeadGenCompletionData {
+    impact: {
+        externalTrust: number;
+        internalCapital: number;
+        retainedValue: number;
+    };
+    debrief: {
+        title: string;
+        why: string;
+        what: string;
+        how: string;
+        who: string;
+        tomorrow: string;
+    };
+}
+
 interface Stage1Props {
-    onComplete: (data: { impact: any, debrief: any }) => void;
+    onComplete: (data: LeadGenCompletionData) => void;
 }
 
 export const Stage1_LeadGen = ({ onComplete }: Stage1Props) => {

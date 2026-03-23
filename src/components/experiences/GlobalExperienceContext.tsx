@@ -94,7 +94,12 @@ export const GlobalExperienceProvider = ({ children }: { children: ReactNode }) 
 
   // Load persistence on mount
   useEffect(() => {
-    const saved = localStorage.getItem("hcl_max_unlocked_layer");
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem("hcl_max_unlocked_layer");
+    } catch {
+      // Privacy mode or storage unavailable — use default
+    }
     if (saved === "layer1.5" || saved === "layer2") {
       setMaxUnlockedLayer(saved as Layer);
     }
@@ -119,7 +124,11 @@ export const GlobalExperienceProvider = ({ children }: { children: ReactNode }) 
     // Only update if changed
     if (newMax !== maxUnlockedLayer) {
       setMaxUnlockedLayer(newMax);
-      localStorage.setItem("hcl_max_unlocked_layer", newMax);
+      try {
+        localStorage.setItem("hcl_max_unlocked_layer", newMax);
+      } catch {
+        // Privacy mode or quota exceeded — progress not persisted
+      }
     }
   }, [layer1.completedExperiences.length, layer15.uxNamedPhaseComplete, maxUnlockedLayer]);
 

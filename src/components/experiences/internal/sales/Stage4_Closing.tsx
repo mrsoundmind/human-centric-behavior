@@ -3,8 +3,24 @@ import { motion } from "framer-motion";
 import { FileSignature, MessageSquare } from "lucide-react";
 import { SlackMessage } from "../SharedComponents";
 
+export interface ClosingCompletionData {
+    impact: {
+        externalTrust: number;
+        internalCapital: number;
+        retainedValue: number;
+    };
+    debrief: {
+        title: string;
+        why: string;
+        what: string;
+        how: string;
+        who: string;
+        tomorrow: string;
+    };
+}
+
 interface Stage4Props {
-    onComplete: (data: { impact: any, debrief: any }) => void;
+    onComplete: (data: ClosingCompletionData) => void;
 }
 
 export const Stage4_Closing = ({ onComplete }: Stage4Props) => {

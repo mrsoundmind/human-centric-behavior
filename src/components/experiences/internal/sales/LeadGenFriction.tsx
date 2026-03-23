@@ -3,8 +3,19 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Send, Users, AlertTriangle, CheckCircle, XCircle, ArrowRight } from "lucide-react";
 
+export interface LeadGenFrictionCompletionData {
+    decision: string;
+    impact: {
+        trust: number;
+        margin: number;
+        morale: number;
+        clientConfidence: number;
+    };
+    description: string;
+}
+
 interface LeadGenFrictionProps {
-    onComplete: (data: any) => void;
+    onComplete: (data: LeadGenFrictionCompletionData) => void;
 }
 
 export const LeadGenFriction = ({ onComplete }: LeadGenFrictionProps) => {
