@@ -1,4 +1,14 @@
-import type { Designation, SDLCPhase } from "./types";
+import type { Designation, SDLCPhase, ScenarioConfig } from "./types";
+
+import { pmDiscoveryScenarios } from "./pm/discovery";
+import { pmRequirementsScenarios } from "./pm/requirements";
+import { pmDesignScenarios } from "./pm/design";
+import { developerDiscoveryScenarios } from "./developer/discovery";
+import { developerRequirementsScenarios } from "./developer/requirements";
+import { developerDesignScenarios } from "./developer/design";
+import { qaDiscoveryScenarios } from "./qa/discovery";
+import { qaRequirementsScenarios } from "./qa/requirements";
+import { qaDesignScenarios } from "./qa/design";
 
 /**
  * ImpactEdge represents a cross-role consequence: a choice made by one role
@@ -13,14 +23,45 @@ export interface ImpactEdge {
   targetRole: Designation;
   targetPhase: SDLCPhase;
   consequence: string;
+  severity: "low" | "medium" | "high";
 }
 
 /**
- * Static cross-role impact map.
- *
- * Stub — intentionally empty in Phase 1.
- * Populated in Phase 4 when the CrossRoleImpactEngine visualization is built.
- * Domain design (who depends on whom at which SDLC phase) requires CEO/SME input
- * before this map can be authoritatively filled (see STATE.md blockers).
+ * Derives ImpactEdge[] from all scenario files by walking each choice's
+ * crossRoleImpact array. Runs at import time — the map is static once loaded.
  */
-export const crossRoleImpactMap: ImpactEdge[] = [];
+export function buildImpactMap(scenarios: ScenarioConfig[]): ImpactEdge[] {
+  const edges: ImpactEdge[] = [];
+  for (const scenario of scenarios) {
+    for (const choice of scenario.choices) {
+      for (const impact of choice.crossRoleImpact) {
+        edges.push({
+          sourceRole: scenario.role,
+          sourcePhase: scenario.phase,
+          sourceChoiceId: choice.id,
+          targetRole: impact.affectedRole,
+          targetPhase: impact.affectedPhase,
+          consequence: impact.description,
+          severity: impact.severity,
+        });
+      }
+    }
+  }
+  return edges;
+}
+
+/**
+ * Static cross-role impact map populated from all 9 scenario files.
+ * Each edge links a specific choice (by choiceId) to its cross-role consequence.
+ */
+export const crossRoleImpactMap: ImpactEdge[] = buildImpactMap([
+  ...pmDiscoveryScenarios,
+  ...pmRequirementsScenarios,
+  ...pmDesignScenarios,
+  ...developerDiscoveryScenarios,
+  ...developerRequirementsScenarios,
+  ...developerDesignScenarios,
+  ...qaDiscoveryScenarios,
+  ...qaRequirementsScenarios,
+  ...qaDesignScenarios,
+]);
