@@ -7,19 +7,25 @@
  *   "quick"     → delegates to parent via onStartQuickMode (existing role journeys)
  *   "full-sdlc" → Full SDLC journey: ScenarioRenderer + usePhaseNavigation + useDesignationStore
  *
- * Phase 1 stub: Only PM has scenario data. Other roles show a "coming soon" placeholder.
- * Real scenario content for all roles is authored in Phase 3.
+ * All 3 roles (PM, Developer, QA) have full SDLC journeys with 12 scenarios each.
  */
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { DesignationSelect, Designation } from "./DesignationSelect";
 import { RoleBriefingView } from "./RoleBriefingView";
 import { ScenarioRenderer } from "./designation-portal/ScenarioRenderer";
 import { pmDiscoveryScenarios } from "../../../../data/scenarios/pm/discovery";
+import { pmRequirementsScenarios } from "../../../../data/scenarios/pm/requirements";
+import { pmDesignScenarios } from "../../../../data/scenarios/pm/design";
+import { developerDiscoveryScenarios } from "../../../../data/scenarios/developer/discovery";
+import { developerRequirementsScenarios } from "../../../../data/scenarios/developer/requirements";
+import { developerDesignScenarios } from "../../../../data/scenarios/developer/design";
+import { qaDiscoveryScenarios } from "../../../../data/scenarios/qa/discovery";
+import { qaRequirementsScenarios } from "../../../../data/scenarios/qa/requirements";
+import { qaDesignScenarios } from "../../../../data/scenarios/qa/design";
 import { useDesignationStore } from "../../../state/designation-store";
 import { usePhaseNavigation } from "../../../state/hooks/usePhaseNavigation";
-import type { Choice } from "../../../../data/scenarios/types";
+import type { Choice, SDLCPhase, ScenarioConfig, Designation as DesignationType } from "../../../../data/scenarios/types";
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
@@ -28,7 +34,39 @@ interface DesignationPortalProps {
   onComplete: () => void;
 }
 
-// ─── Full SDLC Journey (PM — Phase 1 stub) ───────────────────────────────────
+// ─── Phase-Grouped Scenario Data ──────────────────────────────────────────────
+
+type SDLCPhaseGroup = { phase: SDLCPhase; scenarios: ScenarioConfig[] };
+
+const ROLE_PHASE_GROUPS: Record<string, SDLCPhaseGroup[]> = {
+  pm: [
+    { phase: "discovery", scenarios: pmDiscoveryScenarios },
+    { phase: "requirements", scenarios: pmRequirementsScenarios },
+    { phase: "design", scenarios: pmDesignScenarios },
+  ],
+  developer: [
+    { phase: "discovery", scenarios: developerDiscoveryScenarios },
+    { phase: "requirements", scenarios: developerRequirementsScenarios },
+    { phase: "design", scenarios: developerDesignScenarios },
+  ],
+  qa: [
+    { phase: "discovery", scenarios: qaDiscoveryScenarios },
+    { phase: "requirements", scenarios: qaRequirementsScenarios },
+    { phase: "design", scenarios: qaDesignScenarios },
+  ],
+};
+
+const SDLC_PHASE_LABELS: Record<SDLCPhase, string> = {
+  discovery: "Discovery",
+  requirements: "Requirements",
+  design: "Design",
+  development: "Development",
+  testing: "Testing",
+  launch: "Launch",
+  maintenance: "Maintenance",
+};
+
+// ─── Full SDLC Journey (All Roles) ───────────────────────────────────────────
 
 interface FullSDLCJourneyProps {
   role: Designation;
@@ -37,40 +75,37 @@ interface FullSDLCJourneyProps {
 
 const FullSDLCJourney = ({ role, onComplete }: FullSDLCJourneyProps) => {
   const recordDecision = useDesignationStore((s) => s.recordDecision);
+  const initRole = useDesignationStore((s) => s.initRole);
+  const advancePhase = useDesignationStore((s) => s.advancePhase);
   const [selectedChoiceId, setSelectedChoiceId] = useState<string | null>(null);
   const [isDebriefVisible, setIsDebriefVisible] = useState(false);
+  const [sdlcPhaseIndex, setSDLCPhaseIndex] = useState(0);
+
+  const phaseGroups = ROLE_PHASE_GROUPS[role] ?? [];
+  const currentPhaseGroup = phaseGroups[sdlcPhaseIndex];
+
+  useEffect(() => {
+    if (phaseGroups.length > 0) {
+      initRole(role as DesignationType, phaseGroups[0].phase);
+    }
+  }, [role]);
 
   const nav = usePhaseNavigation({
-    phases: pmDiscoveryScenarios,
-    onComplete,
+    phases: currentPhaseGroup?.scenarios ?? [],
+    onComplete: () => {
+      if (sdlcPhaseIndex < phaseGroups.length - 1) {
+        const nextPhase = phaseGroups[sdlcPhaseIndex + 1].phase;
+        advancePhase(role as DesignationType, nextPhase);
+        setSDLCPhaseIndex((i) => i + 1);
+        setSelectedChoiceId(null);
+        setIsDebriefVisible(false);
+      } else {
+        onComplete();
+      }
+    },
   });
 
-  if (role !== "pm") {
-    return (
-      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-8">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-xl text-center space-y-6"
-        >
-          <div className="text-4xl">🚧</div>
-          <h2 className="text-2xl font-display font-bold text-white">
-            Full SDLC Journey for {role.charAt(0).toUpperCase() + role.slice(1)} — Coming Soon
-          </h2>
-          <p className="text-gray-400 leading-relaxed">
-            Full SDLC scenario content for this role is being authored in Phase 3. In the
-            meantime, use Quick Scenarios to experience the existing journey.
-          </p>
-          <button
-            onClick={onComplete}
-            className="px-8 py-3 bg-white/10 border border-white/20 text-white rounded-full hover:bg-white/20 transition-colors text-sm font-mono"
-          >
-            Back to Role Selection
-          </button>
-        </motion.div>
-      </div>
-    );
-  }
+  if (!currentPhaseGroup) return null;
 
   const handleChoiceSelected = (choice: Choice) => {
     setSelectedChoiceId(choice.id);
@@ -80,7 +115,7 @@ const FullSDLCJourney = ({ role, onComplete }: FullSDLCJourneyProps) => {
       frictionTag: choice.frictionTag,
       timestamp: Date.now(),
       phase: nav.current.phase,
-      role: "pm",
+      role: role as DesignationType,
     });
     nav.setHasDecision(true);
   };
@@ -92,14 +127,21 @@ const FullSDLCJourney = ({ role, onComplete }: FullSDLCJourneyProps) => {
   };
 
   return (
-    <ScenarioRenderer
-      scenario={nav.current}
-      onChoiceSelected={handleChoiceSelected}
-      selectedChoiceId={selectedChoiceId}
-      onAdvance={handleAdvance}
-      isDebriefVisible={isDebriefVisible}
-      mode="active"
-    />
+    <div className="relative">
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
+        <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+          Phase {sdlcPhaseIndex + 1} of {phaseGroups.length}: {SDLC_PHASE_LABELS[currentPhaseGroup.phase]}
+        </span>
+      </div>
+      <ScenarioRenderer
+        scenario={nav.current}
+        onChoiceSelected={handleChoiceSelected}
+        selectedChoiceId={selectedChoiceId}
+        onAdvance={handleAdvance}
+        isDebriefVisible={isDebriefVisible}
+        mode="active"
+      />
+    </div>
   );
 };
 
