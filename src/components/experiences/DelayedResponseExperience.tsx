@@ -16,29 +16,39 @@ export const DelayedResponseExperience = ({ onComplete }: DelayedResponseExperie
   const [results, setResults] = useState<string[] | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [userActions, setUserActions] = useState<string[]>([]);
-  const [waitStartTime, setWaitStartTime] = useState<number | null>(null);
+  const waitStartTimeRef = useRef<number | null>(null);
   const [totalWaitTime, setTotalWaitTime] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const reflectionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Clean up search timers on unmount
+  useEffect(() => {
+    return () => {
+      if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
+      if (reflectionTimerRef.current) clearTimeout(reflectionTimerRef.current);
+    };
+  }, []);
 
   const handleSearch = () => {
     if (!searchText.trim() || isSearching) return;
 
     setIsSearching(true);
     setResults(null);
-    setWaitStartTime(Date.now());
+    waitStartTimeRef.current = Date.now();
 
     // 8 second delay with NO loading indicator
-    setTimeout(() => {
+    searchTimerRef.current = setTimeout(() => {
       setResults([
         "Search result 1",
         "Search result 2",
         "Search result 3"
       ]);
       setIsSearching(false);
-      if (waitStartTime) {
-        setTotalWaitTime(Date.now() - waitStartTime);
+      if (waitStartTimeRef.current) {
+        setTotalWaitTime(Date.now() - waitStartTimeRef.current);
       }
-      setTimeout(() => setStage("reflection"), 2000);
+      reflectionTimerRef.current = setTimeout(() => setStage("reflection"), 2000);
     }, 8000);
   };
 
