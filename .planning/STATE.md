@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Phase 1 context gathered
-last_updated: "2026-03-23T09:03:12.477Z"
-last_activity: 2026-03-23 — Roadmap created, phases derived from requirements, all 35 v1 requirements mapped
+status: in-progress
+stopped_at: "Completed 01-foundation-01-04-PLAN.md"
+last_updated: "2026-03-23T10:00:00.000Z"
+last_activity: 2026-03-23 — Plan 01-04 complete — memory leaks fixed, sales callbacks typed, localStorage guarded
 progress:
   total_phases: 5
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  total_plans: 4
+  completed_plans: 4
+  percent: 20
 ---
 
 # Project State
@@ -26,28 +26,28 @@ See: .planning/PROJECT.md (updated 2026-03-23)
 ## Current Position
 
 Phase: 1 of 5 (Foundation)
-Plan: 0 of 4 in current phase
-Status: Ready to plan
-Last activity: 2026-03-23 — Roadmap created, phases derived from requirements, all 35 v1 requirements mapped
+Plan: 4 of 4 in current phase
+Status: Phase 1 complete — all 4 plans executed
+Last activity: 2026-03-23 — Plan 01-04 complete — memory leaks fixed, sales callbacks typed, localStorage guarded
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [██░░░░░░░░] 20%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
-- Average duration: -
-- Total execution time: -
+- Total plans completed: 4
+- Average duration: ~2 min/plan
+- Total execution time: ~127s (01-04 only timed)
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| Phase 1 — Foundation | 4 | ~127s | ~32s |
 
 **Recent Trend:**
-- Last 5 plans: -
-- Trend: -
+- Last 5 plans: 01-01, 01-02, 01-03, 01-04
+- Trend: Stable
 
 *Updated after each plan completion*
 
@@ -61,6 +61,13 @@ Recent decisions affecting current work:
 - [Pre-phase]: Architecture is strictly sequential — types/state before scoring, scoring before content, content before completion views. Skipping order has HIGH recovery cost (per research).
 - [Pre-phase]: Scoring must use behavioral tags (not numeric points) or the platform activates test-taking behavior — never show a score during a journey, only pattern narrative at completion.
 - [Pre-phase]: Cross-role impact map design requires domain expertise (who depends on whom at which SDLC phase) — flag for CEO/SME input before Phase 1 coding begins.
+- [01-01]: Zod schema is single source of truth — TypeScript types derived via z.infer, preventing type/schema divergence.
+- [01-01]: SDLCPhase defined in data/scenarios/types.ts (not extracted from SDLCContext.tsx) — new data-layer infrastructure independent of existing Layer 2.
+- [01-01]: validateScenario() throws at import time with file path + Zod issues — malformed scenario data fails loudly during development.
+- [01-01]: crossRoleImpactMap left empty stub — Phase 4 requires CEO/SME domain expertise before it can be authoritatively filled.
+- [01-04]: waitStartTime converted from useState to useRef to eliminate stale closure in setTimeout callback — no behavior change.
+- [01-04]: SDLCContext designConfiguration: any left unchanged — Phase 1 locked decision: do not break existing code with strict type changes.
+- [01-04]: GlobalExperienceContext localStorage calls wrapped in try/catch — privacy mode and quota exceeded handled gracefully.
 
 ### Pending Todos
 
@@ -74,6 +81,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-23T09:03:12.475Z
-Stopped at: Phase 1 context gathered
-Resume file: .planning/phases/01-foundation/01-CONTEXT.md
+Last session: 2026-03-23T10:00:00.000Z
+Stopped at: Completed 01-foundation-01-04-PLAN.md — Phase 1 all plans complete
+Resume file: .planning/phases/01-foundation/01-04-SUMMARY.md

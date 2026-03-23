@@ -61,8 +61,8 @@
 
 ### Technical Health
 
-- [ ] **TECH-01**: Fix existing CONCERNS.md issues: memory leaks in event listeners, timer cleanup, unguarded localStorage access
-- [ ] **TECH-02**: Address type safety — reduce `any` usage in role journey components, type completion callbacks properly
+- [x] **TECH-01**: Fix existing CONCERNS.md issues: memory leaks in event listeners, timer cleanup, unguarded localStorage access
+- [x] **TECH-02**: Address type safety — reduce `any` usage in role journey components, type completion callbacks properly
 
 ## v2 Requirements
 
@@ -103,8 +103,8 @@
 | STAT-02 | Phase 1 | Pending |
 | STAT-03 | Phase 1 | Pending |
 | STAT-04 | Phase 1 | Pending |
-| TECH-01 | Phase 1 | Pending |
-| TECH-02 | Phase 1 | Pending |
+| TECH-01 | Phase 1 | Complete |
+| TECH-02 | Phase 1 | Complete |
 | SCOR-01 | Phase 2 | Pending |
 | SCOR-02 | Phase 2 | Pending |
 | SCOR-03 | Phase 2 | Pending |
