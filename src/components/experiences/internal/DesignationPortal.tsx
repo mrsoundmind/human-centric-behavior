@@ -13,6 +13,7 @@
 import { useState, useEffect } from "react";
 import { DesignationSelect, Designation } from "./DesignationSelect";
 import { RoleBriefingView } from "./RoleBriefingView";
+import { JourneyCompleteView } from "./JourneyCompleteView";
 import { ScenarioRenderer } from "./designation-portal/ScenarioRenderer";
 import { pmDiscoveryScenarios } from "../../../../data/scenarios/pm/discovery";
 import { pmRequirementsScenarios } from "../../../../data/scenarios/pm/requirements";
@@ -147,11 +148,13 @@ const FullSDLCJourney = ({ role, onComplete }: FullSDLCJourneyProps) => {
 
 // ─── DesignationPortal ───────────────────────────────────────────────────────
 
-type PortalMode = "select" | "briefing" | "full-sdlc" | "quick";
+type PortalMode = "select" | "briefing" | "full-sdlc" | "quick" | "complete";
 
 export const DesignationPortal = ({ onStartQuickMode, onComplete }: DesignationPortalProps) => {
   const [selectedRole, setSelectedRole] = useState<Designation | null>(null);
+  const [completedRole, setCompletedRole] = useState<Designation | null>(null);
   const [mode, setMode] = useState<PortalMode>("select");
+  const completeRole = useDesignationStore((s) => s.completeRole);
 
   if (mode === "select") {
     return (
@@ -181,7 +184,28 @@ export const DesignationPortal = ({ onStartQuickMode, onComplete }: DesignationP
   }
 
   if (mode === "full-sdlc" && selectedRole) {
-    return <FullSDLCJourney role={selectedRole} onComplete={onComplete} />;
+    return (
+      <FullSDLCJourney
+        role={selectedRole}
+        onComplete={() => {
+          completeRole(selectedRole as DesignationType);
+          setCompletedRole(selectedRole as DesignationType);
+          setMode("complete");
+        }}
+      />
+    );
+  }
+
+  if (mode === "complete" && completedRole) {
+    return (
+      <JourneyCompleteView
+        role={completedRole}
+        onReturnHome={() => {
+          setCompletedRole(null);
+          setMode("select");
+        }}
+      />
+    );
   }
 
   return null;
