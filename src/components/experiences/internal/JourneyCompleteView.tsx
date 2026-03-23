@@ -18,7 +18,7 @@ import { useDesignationStore } from "../../../state/designation-store";
 import { computeProfile } from "../../../../data/scoring-engine";
 import { FRICTION_CONFIG } from "./designation-portal/friction-config";
 import { CrossRoleImpactView } from "./designation-portal/CrossRoleImpactView";
-import type { Designation, FrictionDimension } from "../../../../data/scenarios/types";
+import type { Designation, FrictionDimension, DecisionRecord } from "../../../../data/scenarios/types";
 import type { ScoringProfile, PhaseScore } from "../../../../data/scoring-engine";
 
 // ─── Props ──────────────────────────────────────────────────────────────────
@@ -172,6 +172,40 @@ const ROLE_COMPLETION_CONTENT: Partial<Record<Designation, RoleCompletionContent
   },
 };
 
+// ─── Role Display Names ─────────────────────────────────────────────────────
+
+const ROLE_DISPLAY: Record<Designation, string> = {
+  sales: "Sales",
+  pm: "Product Manager",
+  developer: "Developer",
+  qa: "QA",
+  designer: "Designer",
+  ba: "Business Analyst",
+  crm: "CRM",
+  strategy: "Strategy",
+};
+
+// ─── Compound Insight Builder ───────────────────────────────────────────────
+
+function buildCompoundInsight(
+  currentRole: Designation,
+  currentProfile: ScoringProfile,
+  previousRole: Designation,
+  previousDecisions: DecisionRecord[]
+): string | null {
+  const prevResult = computeProfile(previousDecisions);
+  if (prevResult.status !== "complete") return null;
+
+  const prevProfile = prevResult.profile;
+  const samePattern = prevProfile.archetypeBaseKey === currentProfile.archetypeBaseKey;
+
+  if (samePattern) {
+    return `As a ${ROLE_DISPLAY[previousRole]}, you were a ${prevProfile.archetypeName}. As a ${ROLE_DISPLAY[currentRole]}, you remained a ${currentProfile.archetypeName}. This pattern holds across roles — your default response to friction is consistent regardless of your position in the delivery chain.`;
+  }
+
+  return `As a ${ROLE_DISPLAY[previousRole]}, you were a ${prevProfile.archetypeName}. As a ${ROLE_DISPLAY[currentRole]}, you became a ${currentProfile.archetypeName}. Your pattern shifted from ${FRICTION_CONFIG[prevProfile.dominantDimension].label.toLowerCase()} to ${FRICTION_CONFIG[currentProfile.dominantDimension].label.toLowerCase()} when you changed roles.`;
+}
+
 // ─── Dimension Bar Component ────────────────────────────────────────────────
 
 const DimensionBar = ({ dimension, value }: { dimension: FrictionDimension; value: number }) => {
@@ -222,7 +256,20 @@ const PhaseBreakdown = ({ phases }: { phases: PhaseScore[] }) => (
 
 export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewProps) => {
   const decisions = useDesignationStore((s) => s.roles[role]?.decisions ?? []);
+  const completedRoles = useDesignationStore((s) => s.completedRoles);
   const profileResult = useMemo(() => computeProfile(decisions), [decisions]);
+
+  // Compound insight for multi-role completions
+  const previousRole = completedRoles.find((r) => r !== role) ?? null;
+  const previousDecisions = useDesignationStore(
+    (s) => (previousRole ? (s.roles[previousRole]?.decisions ?? []) : [])
+  );
+
+  const compoundInsight = useMemo(() => {
+    if (completedRoles.length < 2 || !previousRole || profileResult.status !== "complete")
+      return null;
+    return buildCompoundInsight(role, profileResult.profile, previousRole, previousDecisions);
+  }, [completedRoles.length, previousRole, role, profileResult, previousDecisions]);
 
   // Fire confetti once on mount
   useEffect(() => {
@@ -305,6 +352,22 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
             </div>
           </div>
         </motion.div>
+
+        {/* Compound Insight (multi-role) */}
+        {compoundInsight && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+          >
+            <span className="text-xs font-mono text-gray-500 uppercase tracking-widest block mb-3">
+              Cross-Role Pattern
+            </span>
+            <div className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6">
+              <p className="text-gray-300 leading-relaxed italic">{compoundInsight}</p>
+            </div>
+          </motion.div>
+        )}
 
         {/* Phase Breakdown */}
         <PhaseBreakdown phases={profile.phaseBreakdown} />
