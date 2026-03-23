@@ -47,11 +47,11 @@ Plans:
   2. Every choice in a scenario carries a behavioral tag from exactly one of the 4 friction dimensions; the engine accumulates tags correctly across a simulated decision log
   3. A simulated full journey (21 decisions across 3 phases) produces a named blind spot archetype that names the specific SDLC phase and dimension where the pattern is strongest
   4. Cumulative pattern output shows which phase the user shifted behavior — not a single aggregated score — across the full decision sequence
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Scoring engine core — computeRunningScore(), computeProfile(), 4-dimension behavioral tagging schema, tendency-weighted multi-dimensional accumulation
-- [ ] 02-02: Blind spot profile generation — pattern detection, archetype derivation, cumulative pattern display across full journey
+- [ ] 02-01-PLAN.md — Scoring engine types, archetype lookup table, and computeRunningScore (SCOR-01, SCOR-02, SCOR-04)
+- [ ] 02-02-PLAN.md — computeProfile with blind spot detection, shift detection, and Node-runnable validation script (SCOR-03, SCOR-05)
 
 ### Phase 3: Role Content — First Wave
 **Goal**: Three complete SDLC-merged role journeys exist — from phase entry through all 3 SDLC phases to debrief — with all 4 friction dimensions covered and the existing 3-scenario journeys preserved
