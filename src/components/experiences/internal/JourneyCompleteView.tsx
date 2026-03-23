@@ -17,6 +17,7 @@ import { ArrowRight, Target, MessageSquare, ListChecks, AlertTriangle } from "lu
 import { useDesignationStore } from "../../../state/designation-store";
 import { computeProfile } from "../../../../data/scoring-engine";
 import { FRICTION_CONFIG } from "./designation-portal/friction-config";
+import { CrossRoleImpactView } from "./designation-portal/CrossRoleImpactView";
 import type { Designation, FrictionDimension } from "../../../../data/scenarios/types";
 import type { ScoringProfile, PhaseScore } from "../../../../data/scoring-engine";
 
@@ -343,6 +344,9 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
           </span>
           <p className="text-amber-100 leading-relaxed">{profile.doThis}</p>
         </motion.div>
+
+        {/* Cross-Role Impact */}
+        <CrossRoleImpactView decisions={decisions} />
 
         {/* Role-Specific Content (only for Phase 3 roles) */}
         {roleContent && (
