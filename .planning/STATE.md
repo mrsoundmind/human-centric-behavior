@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Phase 5 context gathered, auto-advancing to plan-phase
-stopped_at: Completed 05-01-PLAN.md — Sales and Designer SDLC scenarios
-last_updated: "2026-03-24T03:13:23.444Z"
+stopped_at: Completed 05-02-PLAN.md — BA and CRM SDLC scenarios
+last_updated: "2026-03-24T03:13:46.000Z"
 last_activity: 2026-03-23 — Phase 5 context gathered — 5 remaining role journeys, client experience audit, layer navigation bridges
 progress:
   total_phases: 5
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-03-23)
 ## Current Position
 
 Phase: 5 of 5 (Full Platform Delivery)
-Plan: 0 of ~6 in current phase (planning stage)
-Status: Phase 5 context gathered, auto-advancing to plan-phase
-Last activity: 2026-03-23 — Phase 5 context gathered — 5 remaining role journeys, client experience audit, layer navigation bridges
+Plan: 2 of ~6 in current phase
+Status: in_progress
+Last activity: 2026-03-24 — Completed Plan 02 — BA and CRM SDLC scenarios (24 scenarios, 6 files)
 
 Progress: [████████░░] 80%
 
@@ -96,6 +96,8 @@ Recent decisions affecting current work:
 - [Phase 05-full-platform-delivery]: Indian B2B context grounding: IBC clients, SAP integrations, TCS projects, rupee amounts used throughout Sales and Designer scenarios for immediate audience recognition
 - [Phase 05-full-platform-delivery]: tomorrowAction artifact specificity: every action names a concrete artifact (template, checklist, matrix, guide, brief) — not generic advice — per plan requirement
 - [Phase 05-full-platform-delivery]: crossRoleImpact on friction choices only: better-choice path always has empty array, friction choice documents downstream cascade to reinforce pedagogical consequence chain
+- [05-02]: BA scenario themes centre on three pain points: requirement clarity (traceability, change management), stakeholder alignment (priority workshops, 3-way calls), UAT facilitation (scripts, environment procurement lead times)
+- [05-02]: CRM scenario themes centre on three pain points: client retention friction (logging, health checks), escalation handling (war room protocols, single ownership), renewal operations (legal lead times, champion continuity)
 
 ### Pending Todos
 
