@@ -1,13 +1,13 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { AlertTriangle, TrendingDown, Users, ArrowRight, ShieldAlert } from "lucide-react";
 import { useState } from "react";
 
 interface SystemReactionProps {
-    choice: 'defensive' | 'investigative';
+    choice?: 'defensive' | 'investigative';
     onContinue: () => void;
 }
 
-export const SystemReaction = ({ choice, onContinue }: SystemReactionProps) => {
+export const SystemReaction = ({ choice = 'defensive', onContinue }: SystemReactionProps) => {
     const [step, setStep] = useState(0);
 
     const isDefensive = choice === 'defensive';
