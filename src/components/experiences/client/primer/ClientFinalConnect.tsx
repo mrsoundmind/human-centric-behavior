@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 interface ClientFinalConnectProps {
     onRestart: () => void;
@@ -37,6 +38,14 @@ export const ClientFinalConnect = ({ onRestart }: ClientFinalConnectProps) => {
                     <span>Let's Connect</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </a>
+
+                <Link
+                    to="/internalteam"
+                    className="group relative inline-flex items-center gap-3 px-12 py-5 bg-transparent border border-white/20 text-white rounded-full font-bold text-xl hover:border-white/60 transition-all"
+                >
+                    <span>See how your team navigates these frictions</span>
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
 
                 <button
                     onClick={onRestart}
