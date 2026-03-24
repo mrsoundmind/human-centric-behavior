@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Phase 5 context gathered, auto-advancing to plan-phase
-stopped_at: Completed 05-03-PLAN.md
-last_updated: "2026-03-24T03:10:45.496Z"
+stopped_at: Completed 05-01-PLAN.md — Sales and Designer SDLC scenarios
+last_updated: "2026-03-24T03:13:23.444Z"
 last_activity: 2026-03-23 — Phase 5 context gathered — 5 remaining role journeys, client experience audit, layer navigation bridges
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 20
-  completed_plans: 9
+  completed_plans: 10
   percent: 80
 ---
 
@@ -57,6 +57,7 @@ Progress: [████████░░] 80%
 | Phase 05-full-platform-delivery P04 | 5min | 2 tasks | 1 files |
 | Phase 05-full-platform-delivery P05 | 8 | 2 tasks | 2 files |
 | Phase 05-full-platform-delivery P03 | 214 | 2 tasks | 3 files |
+| Phase 05-full-platform-delivery P01 | 372 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -92,6 +93,9 @@ Recent decisions affecting current work:
 - [Phase 05-05]: All 8 designation roles now have ROLE_COMPLETION_CONTENT (sales, designer, ba, crm, strategy added). Navigation: Explore Another Role (primary) + Return to Main Experience (secondary).
 - [Phase 05-full-platform-delivery]: Strategy scenarios use Indian B2B rupee context (₹3-8Cr) and target pm, ba, developer, sales, crm roles for crossRoleImpact
 - [Phase 05-full-platform-delivery]: tomorrowActions name specific workflow artifacts (Evidence Gate, Strategic Trade-Off Brief, Measurement Architecture, Strategic Review Cadence) — not generic advice
+- [Phase 05-full-platform-delivery]: Indian B2B context grounding: IBC clients, SAP integrations, TCS projects, rupee amounts used throughout Sales and Designer scenarios for immediate audience recognition
+- [Phase 05-full-platform-delivery]: tomorrowAction artifact specificity: every action names a concrete artifact (template, checklist, matrix, guide, brief) — not generic advice — per plan requirement
+- [Phase 05-full-platform-delivery]: crossRoleImpact on friction choices only: better-choice path always has empty array, friction choice documents downstream cascade to reinforce pedagogical consequence chain
 
 ### Pending Todos
 
@@ -105,6 +109,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-24T03:10:45.492Z
-Stopped at: Completed 05-03-PLAN.md
+Last session: 2026-03-24T03:13:23.439Z
+Stopped at: Completed 05-01-PLAN.md — Sales and Designer SDLC scenarios
 Resume file: None
