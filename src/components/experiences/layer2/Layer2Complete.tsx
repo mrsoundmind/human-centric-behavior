@@ -175,6 +175,15 @@ export const Layer2Complete = ({ onRestart, onNext }: Layer2CompleteProps) => {
           </p>
         </motion.div>
 
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3.5 }}
+          className="text-center text-muted-foreground text-lg max-w-2xl mx-auto"
+        >
+          You just walked through the full SDLC. Now experience these same phases from your specific role's perspective — and discover the friction patterns you create for others.
+        </motion.p>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -186,7 +195,7 @@ export const Layer2Complete = ({ onRestart, onNext }: Layer2CompleteProps) => {
               onClick={onNext}
               className="px-10 py-5 bg-primary text-primary-foreground font-display text-xl rounded-md hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl w-full md:w-auto"
             >
-              Continue to Team Training →
+              See it from your role →
             </button>
           )}
 
