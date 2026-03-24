@@ -53,8 +53,8 @@
 
 ### Platform Audit
 
-- [ ] **AUDT-01**: Audit client-facing primer flow for completeness and impact — identify gaps, fix dead ends
-- [ ] **AUDT-02**: Audit funnel friction experiences and their "good" counterparts for consistency
+- [x] **AUDT-01**: Audit client-facing primer flow for completeness and impact — identify gaps, fix dead ends
+- [x] **AUDT-02**: Audit funnel friction experiences and their "good" counterparts for consistency
 - [ ] **AUDT-03**: Connect Layer 2 SDLC to designation portal — SDLC is the backbone, not a separate experience
 - [ ] **AUDT-04**: Fix navigation flow between all layers — no dead ends, clear progression
 - [ ] **AUDT-05**: Completion of one layer naturally bridges to the next with contextual prompts
@@ -124,8 +124,8 @@
 | XROL-03 | Phase 4 | Pending |
 | BEHV-02 | Phase 4 | Pending |
 | BEHV-03 | Phase 4 | Pending |
-| AUDT-01 | Phase 5 | Pending |
-| AUDT-02 | Phase 5 | Pending |
+| AUDT-01 | Phase 5 | Complete |
+| AUDT-02 | Phase 5 | Complete |
 | AUDT-03 | Phase 5 | Pending |
 | AUDT-04 | Phase 5 | Pending |
 | AUDT-05 | Phase 5 | Pending |
