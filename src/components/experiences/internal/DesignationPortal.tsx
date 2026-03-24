@@ -24,6 +24,21 @@ import { developerDesignScenarios } from "../../../../data/scenarios/developer/d
 import { qaDiscoveryScenarios } from "../../../../data/scenarios/qa/discovery";
 import { qaRequirementsScenarios } from "../../../../data/scenarios/qa/requirements";
 import { qaDesignScenarios } from "../../../../data/scenarios/qa/design";
+import { salesDiscoveryScenarios } from "../../../../data/scenarios/sales/discovery";
+import { salesRequirementsScenarios } from "../../../../data/scenarios/sales/requirements";
+import { salesDesignScenarios } from "../../../../data/scenarios/sales/design";
+import { designerDiscoveryScenarios } from "../../../../data/scenarios/designer/discovery";
+import { designerRequirementsScenarios } from "../../../../data/scenarios/designer/requirements";
+import { designerDesignScenarios } from "../../../../data/scenarios/designer/design";
+import { baDiscoveryScenarios } from "../../../../data/scenarios/ba/discovery";
+import { baRequirementsScenarios } from "../../../../data/scenarios/ba/requirements";
+import { baDesignScenarios } from "../../../../data/scenarios/ba/design";
+import { crmDiscoveryScenarios } from "../../../../data/scenarios/crm/discovery";
+import { crmRequirementsScenarios } from "../../../../data/scenarios/crm/requirements";
+import { crmDesignScenarios } from "../../../../data/scenarios/crm/design";
+import { strategyDiscoveryScenarios } from "../../../../data/scenarios/strategy/discovery";
+import { strategyRequirementsScenarios } from "../../../../data/scenarios/strategy/requirements";
+import { strategyDesignScenarios } from "../../../../data/scenarios/strategy/design";
 import { useDesignationStore } from "../../../state/designation-store";
 import { usePhaseNavigation } from "../../../state/hooks/usePhaseNavigation";
 import type { Choice, SDLCPhase, ScenarioConfig, Designation as DesignationType } from "../../../../data/scenarios/types";
@@ -54,6 +69,31 @@ const ROLE_PHASE_GROUPS: Record<string, SDLCPhaseGroup[]> = {
     { phase: "discovery", scenarios: qaDiscoveryScenarios },
     { phase: "requirements", scenarios: qaRequirementsScenarios },
     { phase: "design", scenarios: qaDesignScenarios },
+  ],
+  sales: [
+    { phase: "discovery", scenarios: salesDiscoveryScenarios },
+    { phase: "requirements", scenarios: salesRequirementsScenarios },
+    { phase: "design", scenarios: salesDesignScenarios },
+  ],
+  designer: [
+    { phase: "discovery", scenarios: designerDiscoveryScenarios },
+    { phase: "requirements", scenarios: designerRequirementsScenarios },
+    { phase: "design", scenarios: designerDesignScenarios },
+  ],
+  ba: [
+    { phase: "discovery", scenarios: baDiscoveryScenarios },
+    { phase: "requirements", scenarios: baRequirementsScenarios },
+    { phase: "design", scenarios: baDesignScenarios },
+  ],
+  crm: [
+    { phase: "discovery", scenarios: crmDiscoveryScenarios },
+    { phase: "requirements", scenarios: crmRequirementsScenarios },
+    { phase: "design", scenarios: crmDesignScenarios },
+  ],
+  strategy: [
+    { phase: "discovery", scenarios: strategyDiscoveryScenarios },
+    { phase: "requirements", scenarios: strategyRequirementsScenarios },
+    { phase: "design", scenarios: strategyDesignScenarios },
   ],
 };
 
