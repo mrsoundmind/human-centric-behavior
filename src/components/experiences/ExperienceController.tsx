@@ -13,6 +13,7 @@ import { Layer15Controller } from "./layer15/Layer15Controller";
 import { Layer2Controller, Layer2Step, DiscoveryScreen, RequirementsScreen, DesignScreen, DevScreen, TestScreen, LaunchScreen, MaintenanceStage, LAYER2_ORDER, DISCOVERY_SCREENS, REQUIREMENTS_SCREENS, DESIGN_SCREENS } from "./layer2/Layer2Controller";
 import { InternalExperience } from "./internal/InternalExperience";
 import { DebugMenu } from "../common/DebugMenu";
+import { GlobalMenu } from "../navigation/GlobalMenu";
 
 type ExperienceStep =
   | "intro"
@@ -155,6 +156,20 @@ const ExperienceControllerInner = () => {
   return (
     <>
       {showLayerSwitcher && <LayerSwitcher />}
+
+      <GlobalMenu onNavigate={(step) => {
+          setCurrentStep(step as ExperienceStep);
+          if (step === "layer15") setCurrentLayer("layer1.5");
+          else if (step === "layer2") {
+            setCurrentLayer("layer2");
+            setLayer2InitialStep(undefined);
+            setLayer2InitialScreen(undefined);
+            setLayer2Key(prev => prev + 1);
+          }
+          else if (step === "internal-training" || step === "designation" || step === "intro") {
+            setCurrentLayer("layer1");
+          }
+      }} />
 
       {needsPlaceholder && (
         <motion.div

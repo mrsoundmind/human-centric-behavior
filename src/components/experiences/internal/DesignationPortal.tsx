@@ -48,6 +48,7 @@ import type { Choice, SDLCPhase, ScenarioConfig, Designation as DesignationType 
 interface DesignationPortalProps {
   onStartQuickMode: (role: Designation) => void;
   onComplete: () => void;
+  onBack?: () => void;
 }
 
 // ─── Phase-Grouped Scenario Data ──────────────────────────────────────────────
@@ -112,9 +113,10 @@ const SDLC_PHASE_LABELS: Record<SDLCPhase, string> = {
 interface FullSDLCJourneyProps {
   role: Designation;
   onComplete: () => void;
+  onBack: () => void;
 }
 
-const FullSDLCJourney = ({ role, onComplete }: FullSDLCJourneyProps) => {
+const FullSDLCJourney = ({ role, onComplete, onBack }: FullSDLCJourneyProps) => {
   const recordDecision = useDesignationStore((s) => s.recordDecision);
   const initRole = useDesignationStore((s) => s.initRole);
   const advancePhase = useDesignationStore((s) => s.advancePhase);
@@ -168,7 +170,14 @@ const FullSDLCJourney = ({ role, onComplete }: FullSDLCJourneyProps) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full min-h-screen bg-black text-white">
+      <button
+        onClick={onBack}
+        className="fixed top-6 left-6 z-50 text-gray-500 hover:text-white transition-colors text-sm font-mono"
+      >
+        ← Back to Briefing
+      </button>
+
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
         <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
           Phase {sdlcPhaseIndex + 1} of {phaseGroups.length}: {SDLC_PHASE_LABELS[currentPhaseGroup.phase]}
@@ -190,7 +199,7 @@ const FullSDLCJourney = ({ role, onComplete }: FullSDLCJourneyProps) => {
 
 type PortalMode = "select" | "briefing" | "full-sdlc" | "quick" | "complete";
 
-export const DesignationPortal = ({ onStartQuickMode, onComplete }: DesignationPortalProps) => {
+export const DesignationPortal = ({ onStartQuickMode, onComplete, onBack }: DesignationPortalProps) => {
   const [selectedRole, setSelectedRole] = useState<Designation | null>(null);
   const [completedRole, setCompletedRole] = useState<Designation | null>(null);
   const [mode, setMode] = useState<PortalMode>("select");
@@ -198,12 +207,22 @@ export const DesignationPortal = ({ onStartQuickMode, onComplete }: DesignationP
 
   if (mode === "select") {
     return (
-      <DesignationSelect
-        onSelect={(role) => {
-          setSelectedRole(role);
-          setMode("briefing");
-        }}
-      />
+      <div className="relative">
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="fixed top-6 left-6 z-50 text-gray-500 hover:text-white transition-colors text-sm font-mono"
+          >
+            ← Back
+          </button>
+        )}
+        <DesignationSelect
+          onSelect={(role) => {
+            setSelectedRole(role);
+            setMode("briefing");
+          }}
+        />
+      </div>
     );
   }
 
@@ -232,6 +251,7 @@ export const DesignationPortal = ({ onStartQuickMode, onComplete }: DesignationP
           setCompletedRole(selectedRole as DesignationType);
           setMode("complete");
         }}
+        onBack={() => setMode("briefing")}
       />
     );
   }

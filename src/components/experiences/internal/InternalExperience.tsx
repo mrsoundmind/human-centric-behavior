@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { DesignationSelect, Designation } from "./DesignationSelect";
 import { DesignationPortal } from "./DesignationPortal";
@@ -40,6 +40,11 @@ export const InternalExperience = ({ onBack, initialStep }: InternalExperiencePr
     const [step, setStep] = useState<InternalStep>(initialStep || "intro");
     const [role, setRole] = useState<Designation | null>(null);
 
+    // Sync with external navigation (like debug menu)
+    useEffect(() => {
+        if (initialStep) setStep(initialStep);
+    }, [initialStep]);
+
     const handleRoleSelect = (selected: Designation) => {
         setRole(selected);
         setStep("role-briefing");
@@ -74,14 +79,7 @@ export const InternalExperience = ({ onBack, initialStep }: InternalExperiencePr
 
     return (
         <div className="min-h-screen bg-black text-white">
-            {onBack && step === "designation" && (
-                <button
-                    onClick={onBack}
-                    className="fixed top-6 left-6 z-50 text-gray-500 hover:text-white transition-colors text-sm font-mono"
-                >
-                    ← Back
-                </button>
-            )}
+            {/* Overlapping back button removed. Handled by DesignationPortal. */}
 
             <AnimatePresence mode="wait">
                 <motion.div
@@ -117,19 +115,12 @@ export const InternalExperience = ({ onBack, initialStep }: InternalExperiencePr
 
                     {step === "designation" && (
                         <DesignationPortal
+                            onBack={onBack}
                             onStartQuickMode={(selectedRole) => {
                                 setRole(selectedRole);
-                                setStep("role-briefing");
+                                setStep("role-journey");
                             }}
                             onComplete={handleJourneyComplete}
-                        />
-                    )}
-
-                    {step === "role-briefing" && role && (
-                        <RoleBriefingView
-                            role={role}
-                            onContinue={() => setStep("role-journey")}
-                            onBack={() => setStep("designation")}
                         />
                     )}
 

@@ -11,6 +11,8 @@ interface LayerSwitcherProps {
  * State persists across layers.
  */
 export const LayerSwitcher = ({ className = "" }: LayerSwitcherProps) => {
+  return null;
+  // Previously rendered the Feel | Understand | Apply menu
   const { state, setCurrentLayer, getLayerProgress, canAccessLayer } = useGlobalExperience();
 
   const layers: { id: Layer; label: string; description: string }[] = [

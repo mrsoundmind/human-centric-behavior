@@ -155,6 +155,19 @@ export const FrictionSimulation = ({ frictionId, onComplete, onBack }: FrictionS
         },
 
         // Fallback
+        
+        "solutioning": { role: "Strategy & CRM", title: "The Solutioning", mission: "Focus on the problem to solve, not the features to build.", stakes: "Building what the client asks for, rather than what they need, creates useless bloatware.", context: "Client says: 'We need a chatbot.'", prompt: "What is your response to the client?", choices: [{ id: "bad", text: "Say 'Okay, we will add a chatbot to the SOW.'", result: "Failure. Chatbot goes unused because the real problem was confusing navigation." }, { id: "good", text: "Ask 'What problem is the chatbot trying to solve for your users?'", result: "Success. You uncover they just need a better FAQ page. Saved $20k." }], visualType: "iceberg" },
+        "hippo_effect": { role: "Strategy & PM", title: "The HiPPO Effect", mission: "Protect the data from the Highest Paid Person's Opinion.", stakes: "If opinions override data, the product serves the ego, not the user.", context: "The CEO says: 'I don't like the blue button, make it red.' Data shows blue converts 15% better.", prompt: "How do you handle the CEO's request?", choices: [{ id: "bad", text: "Change the button to red immediately.", result: "Failure. Conversions drop by 15%. Target missed." }, { id: "good", text: "Show the A/B test data and explain the revenue impact of the blue button.", result: "Success. CEO agrees to follow the data." }], visualType: "target_focus" },
+        "feature_factory": { role: "Product Manager", title: "The Feature Factory", mission: "Ship outcomes, not just outputs.", stakes: "Shipping 10 features that nobody uses is worse than shipping 0 features.", context: "Roadmap planning. You have capacity for 3 features. Sales wants a new dashboard, Support wants a chat tool.", prompt: "How do you decide what to build?", choices: [{ id: "bad", text: "Build both to keep everyone happy.", result: "Failure. Both features are half-baked and buggy." }, { id: "good", text: "Tie each request to a core OKR and only build what moves the metric.", result: "Success. The one feature you ship increases retention by 10%." }], visualType: "chain_link" },
+        "telephone_game": { role: "Product Manager", title: "The Telephone Game", mission: "Don't let context dilute through the chain of command.", stakes: "When meaning is lost, the final product solves a problem that doesn't exist.", context: "Sales told CRM, CRM told you: 'The client wants a faster export.'", prompt: "How do you write the ticket for engineering?", choices: [{ id: "bad", text: "Write: Make the export button faster.", result: "Failure. Engineers optimize the query by 10ms. Client is still unhappy." }, { id: "good", text: "Talk to the client. You find out they export to print PDFs because the dashboard lacks a specific chart.", result: "Success. You build the chart instead." }], visualType: "relay_baton" },
+        "rogue_artist": { role: "Designer", title: "The Rogue Artist", mission: "Design within the system. Restrain creativity when consistency is required.", stakes: "Custom components multiply technical debt and confuse users.", context: "You are designing a settings page. The design system has a toggle switch, but you saw a cool animated checkbox on Dribbble.", prompt: "Which component do you use?", choices: [{ id: "bad", text: "Design the cool new animated checkbox.", result: "Failure. Devs spend 2 days building it. Users don't know if it's a checkbox or a toggle." }, { id: "good", text: "Use the standard design system toggle switch.", result: "Success. Devs implement it in 5 minutes. Users know exactly how it works." }], visualType: "state_matrix" },
+        "static_handover": { role: "Designer", title: "The Static Handover", mission: "Design the transitions and states, not just the static screens.", stakes: "Figma is static, the web is dynamic. Leaving transitions undefined forces devs to guess.", context: "You hand over the Figma file. A dev asks: 'How does this modal appear?'", prompt: "How do you respond?", choices: [{ id: "bad", text: "Say 'Just make it pop up.'", result: "Failure. Dev uses a generic un-eased animation. It feels cheap." }, { id: "good", text: "Provide a quick prototype showing the specific spring animation and easing curves.", result: "Success. The modal feels premium." }], visualType: "timeline_burn" },
+        "lorem_ipsum": { role: "Designer", title: "Lorem Ipsum Design", mission: "Design with real data to find the breaking points.", stakes: "Perfect English text hides the ugly reality of user-generated content.", context: "You are designing a profile card with 'John Doe'.", prompt: "Before finalizing, what should you test?", choices: [{ id: "bad", text: "Nothing. It looks perfectly clean.", result: "Failure. Production data has a user named 'Hubert Blaine Wolfeschlegelsteinhausenbergerdorff Sr.' and it breaks the layout." }, { id: "good", text: "Test with the longest possible name and German translations.", result: "Success. You add proper truncation and max-width rules." }], visualType: "contrast_heatmap" },
+        "estimation_lie": { role: "Developer", title: "The Estimation Lie", mission: "Estimate for reality, including meetings, code reviews, and bugs.", stakes: "Over-promising creates crunch time, poor code quality, and burnt-out teams.", context: "PM asks: 'How long to build the API endpoint?' The code takes 4 hours.", prompt: "What is your estimation?", choices: [{ id: "bad", text: "Say 'Half a day.'", result: "Failure. You forgot to include writing tests, code review, and QA. You miss the deadline." }, { id: "good", text: "Say '2 days. 4 hours to code, the rest for tests, review, and deployment.'", result: "Success. You deliver on time with high quality." }], visualType: "timeline_burn" },
+        "gold_plating": { role: "Developer", title: "The Gold Plating", mission: "Ship value, not perfection.", stakes: "Endlessly refactoring code delays features that users are waiting to pay for.", context: "You built a working feature. You realize you could rewrite it in Rust to make it 5% faster.", prompt: "What do you do?", choices: [{ id: "bad", text: "Spend 3 days rewriting it in Rust.", result: "Failure. You delayed the launch and introduced new bugs. Users don't notice the 5%." }, { id: "good", text: "Merge the working code and add a 'TODO' for future optimization.", result: "Success. The feature launches and generates revenue." }], visualType: "target_focus" },
+        "context_switch": { role: "Developer", title: "The Context Switch", mission: "Protect your flow state.", stakes: "Every interruption costs 15 minutes of re-focus time.", context: "You are deep in complex logic. PM pings you on Slack: 'Quick question about the sprint.'", prompt: "How do you handle it?", choices: [{ id: "bad", text: "Stop what you are doing and reply immediately.", result: "Failure. You lose your train of thought and introduce a subtle bug." }, { id: "good", text: "Ignore it until your scheduled block for checking messages.", result: "Success. You finish the logic flawlessly. PM gets their answer 2 hours later." }], visualType: "listening_eq" },
+        "env_parity": { role: "QA Engineer", title: "The Env Parity Gap", mission: "Test in an environment that perfectly mirrors production.", stakes: "Bugs that hide in Staging will explode in Production.", context: "You are testing a major database migration script on Staging. It works perfectly.", prompt: "Are you ready to sign off for Production?", choices: [{ id: "bad", text: "Yes. Staging passed, so Production will pass.", result: "Failure. Production has 10x more data and the script times out." }, { id: "good", text: "No. First verify that Staging has a recent, anonymized clone of the Production data volume.", result: "Success. You catch the timeout in Staging and the devs optimize the script." }], visualType: "bug_iceberg" },
+        "last_mile": { role: "QA & PM", title: "The Last Mile Crunch", mission: "Protect the QA cycle. QA is a process, not a rubber stamp.", stakes: "Squeezing QA time guarantees critical bugs reach users.", context: "Launch is at 5 PM. Developers hand over the build at 4 PM.", prompt: "What do you do?", choices: [{ id: "bad", text: "Do a frantic 45-minute sanity check and sign off. (The Gamble)", result: "Failure. A critical payment bug slips through. Company loses money." }, { id: "good", text: "Halt the launch. Explain that 1 hour is insufficient for proper QA. Launch tomorrow.", result: "Success. You find the payment bug the next morning. Disaster averted." }], visualType: "timeline_burn" },
         "default": { role: "Unknown", title: "Wait...", context: "Scenario loading...", prompt: "...", choices: [], visualType: "none" }
     };
 
@@ -303,11 +316,74 @@ export const FrictionSimulation = ({ frictionId, onComplete, onBack }: FrictionS
                         {/* 4. TIMELINE BURN (CRM) */}
                         {data.visualType === "timeline_burn" && <TimelineBurn role={data.role} />}
 
+                        {/* 5. CHAIN LINK (BA) */}
+                        {data.visualType === "chain_link" && (
+                            <div className="bg-black p-8 rounded-3xl border border-gray-800 flex flex-col items-center justify-center space-y-8">
+                                <div className="flex gap-4 items-center">
+                                    <div className="p-4 bg-gray-900 rounded-xl border border-gray-700 text-sm">Feature Code</div>
+                                    <div className="text-gray-600">--?--</div>
+                                    <div className="p-4 bg-blue-900/50 rounded-xl border border-blue-500 text-sm text-blue-200">Business Value</div>
+                                </div>
+                                <div className="p-6 bg-white/5 border border-white/10 rounded-2xl max-w-lg text-left">
+                                    <p className="font-mono text-xs text-blue-400 mb-2">// The Broken Trace</p>
+                                    <p className="text-sm text-gray-300">If developers only receive "Build a search bar", they will build a generic text match. By linking it to the specific goal ("User needs to find SKUs to re-order"), they build a "Recent Orders" dropdown instead.</p>
+                                </div>
+                                <p className="text-blue-200 font-mono text-sm">UX Tool: Value Traceability Matrix</p>
+                            </div>
+                        )}
+
+                        {/* 6. CONTRAST HEATMAP (DESIGNER) */}
+                        {data.visualType === "contrast_heatmap" && (
+                            <div className="bg-white p-8 rounded-3xl border border-gray-200 flex flex-col items-center justify-center space-y-12">
+                                <div className="flex gap-16">
+                                    <div className="text-center space-y-4">
+                                        <div className="px-8 py-3 bg-[#f8f9fa] rounded shadow-sm border border-gray-100">
+                                            <span className="text-[#adb5bd] font-medium tracking-wide">Submit Order</span>
+                                        </div>
+                                        <div className="text-xs font-mono text-red-500 bg-red-50 px-3 py-1 rounded inline-block">Contrast Ratio: 1.4:1</div>
+                                        <p className="text-xs text-gray-500">"Looks clean on my iMac"</p>
+                                    </div>
+                                    <div className="text-center space-y-4">
+                                        <div className="px-8 py-3 bg-blue-600 rounded shadow-md">
+                                            <span className="text-white font-medium tracking-wide">Submit Order</span>
+                                        </div>
+                                        <div className="text-xs font-mono text-green-600 bg-green-50 px-3 py-1 rounded inline-block">Contrast Ratio: 8.5:1</div>
+                                        <p className="text-xs text-gray-500">"Legible on a cheap phone in the sun"</p>
+                                    </div>
+                                </div>
+                                <p className="text-blue-600 font-mono text-sm uppercase tracking-widest bg-blue-50 px-4 py-2 rounded-full">UX Tool: WebAIM Accessibility Check</p>
+                            </div>
+                        )}
+
+                        {/* 7. BUG ICEBERG (QA) */}
+                        {data.visualType === "bug_iceberg" && (
+                            <div className="bg-[#0a192f] p-8 rounded-3xl border border-blue-900/50 flex flex-col items-center justify-center space-y-8 relative overflow-hidden">
+                                <div className="w-full max-w-md relative">
+                                    {/* Water Line */}
+                                    <div className="absolute top-1/3 left-0 right-0 h-px bg-blue-400/50 dashed box-border z-10"></div>
+                                    <div className="absolute top-1/3 right-2 -mt-5 text-xs font-mono text-blue-300">The "Passed" Line</div>
+                                    
+                                    {/* Above Water */}
+                                    <div className="bg-blue-100 p-4 rounded-t-lg border-b-0 text-center relative z-20 mx-12">
+                                        <span className="text-blue-900 font-bold text-sm">Button Clicks ✅</span>
+                                    </div>
+                                    
+                                    {/* Below Water */}
+                                    <div className="bg-blue-900/40 p-6 rounded-b-xl border border-blue-500/30 text-center space-y-3 relative z-20 backdrop-blur-sm shadow-xl">
+                                        <div className="p-2 bg-red-900/50 rounded text-red-200 text-xs border border-red-500/30">Touch target too small (Fails iOS guidelines)</div>
+                                        <div className="p-2 bg-red-900/50 rounded text-red-200 text-xs border border-red-500/30">No loading state (User clicks twice)</div>
+                                        <div className="p-2 bg-red-900/50 rounded text-red-200 text-xs border border-red-500/30">Not keyboard accessible (Tab index broken)</div>
+                                    </div>
+                                </div>
+                                <p className="text-blue-300 font-mono text-sm bg-blue-900/30 px-4 py-2 rounded-full border border-blue-500/20">UX Tool: Heuristic Usability Evaluation</p>
+                            </div>
+                        )}
+
                         {/* GENERIC FALLBACK FOR OTHERS (FOR NOW) */}
                         {/* 0. BUSINESS DEV: LISTENING EQ (Signal vs Noise) */}
                         {data.visualType === "listening_eq" && <ListeningEQ uxValue={data.uxValue} />}
 
-                        {!["iceberg", "state_matrix", "network_throttle", "listening_eq", "relay_baton", "target_focus", "timeline_burn"].includes(data.visualType) && (
+                        {!["iceberg", "state_matrix", "network_throttle", "listening_eq", "relay_baton", "target_focus", "timeline_burn", "chain_link", "contrast_heatmap", "bug_iceberg"].includes(data.visualType) && (
                             <div className="bg-white/5 p-12 rounded-3xl border border-white/10 text-center">
                                 <div className="text-6xl mb-6">✨</div>
                                 <h3 className="text-xl font-bold mb-2">Simulation Complete</h3>

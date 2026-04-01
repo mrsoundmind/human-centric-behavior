@@ -209,7 +209,7 @@ export const DesignerJourney = ({ onComplete }: { onComplete?: () => void }) => 
             <main className="relative z-10 pt-32 pb-12 px-6">
                 <AnimatePresence mode="wait">
                     <motion.div key={currentStageIdx} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                        <GenericStageWrapper
+                        <GenericStageWrapper allStageLabels={STAGE_BRIEFINGS.map(b => (b.scenario ? b.scenario.split(" • ")[0] : b.title))}
                             stageNumber={currentStageIdx + 1}
                             totalStages={STAGES.length}
                             title={stage.title}
