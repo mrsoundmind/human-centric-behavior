@@ -65,10 +65,34 @@ export const GlobalMenu = ({ onNavigate }: GlobalMenuProps) => {
                                 onClick={() => handleNavigate("intro")}
                                 className="w-full flex items-center gap-4 text-left p-4 rounded-xl hover:bg-white/[0.05] border border-transparent hover:border-white/10 transition-all group"
                             >
-                                <Home className="w-4 h-4 text-white/40 group-hover:text-white/90" />
+                                <Home className="w-4 h-4 text-blue-400/60 group-hover:text-blue-400" />
                                 <div>
-                                    <h3 className="text-[13px] font-semibold text-white/90">Return Library</h3>
-                                    <p className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Back to start</p>
+                                    <h3 className="text-[13px] font-semibold text-white/90">Introduction</h3>
+                                    <p className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Start the journey</p>
+                                </div>
+                            </motion.button>
+
+                            <motion.button 
+                                variants={itemVariants}
+                                onClick={() => handleNavigate("door")}
+                                className="w-full flex items-center gap-4 text-left p-4 rounded-xl hover:bg-white/[0.05] border border-transparent hover:border-white/10 transition-all group"
+                            >
+                                <ExternalLink className="w-4 h-4 text-amber-400/60 group-hover:text-amber-400" />
+                                <div>
+                                    <h3 className="text-[13px] font-semibold text-white/90">UX Education</h3>
+                                    <p className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Feel the friction</p>
+                                </div>
+                            </motion.button>
+
+                            <motion.button 
+                                variants={itemVariants}
+                                onClick={() => handleNavigate("layer2")}
+                                className="w-full flex items-center gap-4 text-left p-4 rounded-xl hover:bg-white/[0.05] border border-transparent hover:border-white/10 transition-all group"
+                            >
+                                <ExternalLink className="w-4 h-4 text-emerald-400/60 group-hover:text-emerald-400" />
+                                <div>
+                                    <h3 className="text-[13px] font-semibold text-white/90">The SDLC Process</h3>
+                                    <p className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Apply patterns</p>
                                 </div>
                             </motion.button>
 
@@ -77,34 +101,24 @@ export const GlobalMenu = ({ onNavigate }: GlobalMenuProps) => {
                                 onClick={() => handleNavigate("internal-training")}
                                 className="w-full flex items-center gap-4 text-left p-4 rounded-xl hover:bg-white/[0.05] border border-transparent hover:border-white/10 transition-all group"
                             >
-                                <ExternalLink className="w-4 h-4 text-emerald-400/60 group-hover:text-emerald-400" />
+                                <ExternalLink className="w-4 h-4 text-purple-400/60 group-hover:text-purple-400" />
                                 <div>
-                                    <h3 className="text-[13px] font-semibold text-white/90">The Internal Hub</h3>
-                                    <p className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Start Onboarding</p>
+                                    <h3 className="text-[13px] font-semibold text-white/90">Internal Training</h3>
+                                    <p className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Onboarding & Roles</p>
                                 </div>
                             </motion.button>
 
-                            <motion.button 
-                                variants={itemVariants}
-                                onClick={() => handleNavigate("designation")}
-                                className="w-full flex items-center gap-4 text-left p-4 rounded-xl hover:bg-white/[0.05] border border-transparent hover:border-white/10 transition-all group"
-                            >
-                                <ExternalLink className="w-4 h-4 text-blue-400/60 group-hover:text-blue-400" />
-                                <div>
-                                    <h3 className="text-[13px] font-semibold text-white/90">Role Selection Portal</h3>
-                                    <p className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Skip to Scenarios</p>
-                                </div>
-                            </motion.button>
+                            <div className="h-px bg-white/10 my-2" />
 
                             <motion.button 
                                 variants={itemVariants}
-                                onClick={() => handleNavigate("layer2")}
+                                onClick={() => { setIsOpen(false); window.location.href = "/client"; }}
                                 className="w-full flex items-center gap-4 text-left p-4 rounded-xl hover:bg-white/[0.05] border border-transparent hover:border-white/10 transition-all group bg-white/[0.02]"
                             >
-                                <ExternalLink className="w-4 h-4 text-amber-400/60 group-hover:text-amber-400" />
+                                <ExternalLink className="w-4 h-4 text-pink-400/60 group-hover:text-pink-400" />
                                 <div>
-                                    <h3 className="text-[13px] font-semibold text-white/90">Layer 2 Experience</h3>
-                                    <p className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Original Simulation</p>
+                                    <h3 className="text-[13px] font-semibold text-white/90">Client Training</h3>
+                                    <p className="text-[10px] text-white/40 uppercase tracking-widest mt-0.5">Executive View</p>
                                 </div>
                             </motion.button>
                         </motion.div>
