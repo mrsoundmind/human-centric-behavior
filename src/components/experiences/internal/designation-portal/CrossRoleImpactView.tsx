@@ -19,9 +19,9 @@ interface CrossRoleImpactViewProps {
 // ─── Config ─────────────────────────────────────────────────────────────────
 
 const SEVERITY_CONFIG = {
-  high: { label: "High Impact", className: "border-red-500/40 bg-red-500/10 text-red-300" },
-  medium: { label: "Medium Impact", className: "border-amber-500/40 bg-amber-500/10 text-amber-300" },
-  low: { label: "Low Impact", className: "border-blue-500/40 bg-blue-500/10 text-blue-300" },
+  high: { label: "High Impact", className: "border-destructive/40 bg-destructive/10 text-destructive" },
+  medium: { label: "Medium Impact", className: "border-primary/40 bg-primary/10 text-primary" },
+  low: { label: "Low Impact", className: "border-primary/40 bg-primary/10 text-primary" },
 } as const;
 
 const ROLE_DISPLAY: Record<Designation, string> = {
@@ -75,13 +75,13 @@ export const CrossRoleImpactView = ({ decisions }: CrossRoleImpactViewProps) => 
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+      <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
         How Your Decisions Rippled
       </span>
 
       {Array.from(groupedByRole.entries()).map(([targetRole, edges]) => (
         <div key={targetRole} className="space-y-3">
-          <h3 className="text-lg font-semibold text-white">{ROLE_DISPLAY[targetRole]}</h3>
+          <h3 className="text-lg font-semibold text-foreground">{ROLE_DISPLAY[targetRole]}</h3>
 
           {edges.map((edge) => {
             const idx = cardIndex++;
@@ -92,12 +92,12 @@ export const CrossRoleImpactView = ({ decisions }: CrossRoleImpactViewProps) => 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
-                className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-5"
+                className="bg-card border border-border rounded-xl p-5"
               >
-                <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+                <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
                   {PHASE_LABELS[edge.targetPhase] ?? edge.targetPhase}
                 </span>
-                <p className="text-gray-300 leading-relaxed mt-2">{edge.consequence}</p>
+                <p className="text-muted-foreground leading-relaxed mt-2">{edge.consequence}</p>
                 <span
                   className={`text-xs px-2 py-0.5 rounded-full inline-block mt-2 border ${severity.className}`}
                 >

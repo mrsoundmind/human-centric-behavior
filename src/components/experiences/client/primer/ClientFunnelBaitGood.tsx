@@ -11,18 +11,18 @@ export const ClientFunnelBaitGood = ({ onComplete }: ClientFunnelBaitGoodProps) 
     return (
         <div className="max-w-4xl mx-auto py-12 px-6">
             <div className="text-center space-y-4 mb-12">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs font-bold tracking-widest text-green-400 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     THE FIX: RELEVANCE
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
                     Promise Kept.
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     The ad set an expectation. The landing page fulfilled it immediately.
                 </p>
             </div>
 
-            <div className="relative max-w-md mx-auto aspect-[9/16] bg-white border-8 border-gray-800 rounded-[3rem] overflow-hidden shadow-2xl relative text-black">
+            <div className="relative max-w-md mx-auto aspect-[9/16] bg-white border-8 border-border rounded-[3rem] overflow-hidden shadow-2xl relative text-black">
 
                 {/* STATUS BAR */}
                 <div className="absolute top-0 inset-x-0 h-8 bg-black/10 z-20 flex justify-between px-6 items-center">

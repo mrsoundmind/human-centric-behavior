@@ -36,20 +36,20 @@ export const ClientFunnelChaos = ({ onComplete }: ClientFunnelChaosProps) => {
     return (
         <div className="max-w-4xl mx-auto py-12 px-6 h-[800px]"> {/* Increased height for scroll chaos */}
             <div className="text-center space-y-4 mb-8">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-bold tracking-widest text-indigo-400 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     SCENARIO 2: THE FALLACY
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
                     The Vanity Metric Fallacy
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                    <span className="text-green-400">Traffic (14k)</span> is celebrated. <br />
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                    <span className="text-primary">Traffic (14k)</span> is celebrated. <br />
                     <span className="text-red-400">Low Conversion (0.3%)</span> is ignored.
                 </p>
             </div>
 
             {/* THE APP CONTAINER */}
-            <div className="relative max-w-4xl mx-auto border-8 border-gray-800 rounded-3xl overflow-hidden shadow-2xl bg-white text-slate-900 h-[600px] flex flex-col font-sans">
+            <div className="relative max-w-4xl mx-auto border-8 border-border rounded-3xl overflow-hidden shadow-2xl bg-white text-slate-900 h-[600px] flex flex-col font-sans">
 
                 {/* --- 1. OVERWHELMING STICKY HEADER --- */}
                 <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-lg border-b border-indigo-100">
@@ -255,23 +255,23 @@ export const ClientFunnelChaos = ({ onComplete }: ClientFunnelChaosProps) => {
                     <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        className="bg-gray-900 text-white p-8 rounded-3xl shadow-2xl text-center max-w-md mx-auto border border-gray-700"
+                        className="bg-card text-foreground p-8 rounded-3xl shadow-2xl text-center max-w-md mx-auto border border-border"
                     >
                         <div className="text-6xl mb-4">📉</div>
                         <h2 className="text-2xl font-bold mb-2">The Vanity Metric Trap</h2>
-                        <p className="text-gray-400 text-sm mb-6">
+                        <p className="text-muted-foreground text-sm mb-6">
                             High Acquisition Volume. <span className="text-red-400 font-bold">Poor Retention.</span>
                             <br />
                             Traffic is purchased, but the UX forces users to bounce.
                         </p>
-                        <div className="grid grid-cols-2 gap-4 text-left bg-black/40 p-4 rounded-xl">
+                        <div className="grid grid-cols-2 gap-4 text-left bg-muted p-4 rounded-xl">
                             <div>
                                 <div className="text-xs opacity-50 uppercase tracking-widest">Acquisition</div>
-                                <div className="text-xl font-mono text-green-400">14.2k <span className="text-[10px] text-gray-500">Hits</span></div>
+                                <div className="text-xl font-mono text-primary">14.2k <span className="text-[10px] text-muted-foreground">Hits</span></div>
                             </div>
                             <div>
                                 <div className="text-xs opacity-50 uppercase tracking-widest">Conversion</div>
-                                <div className="text-xl font-mono text-red-500">0.3% <span className="text-[10px] text-gray-500">Sales</span></div>
+                                <div className="text-xl font-mono text-red-500">0.3% <span className="text-[10px] text-muted-foreground">Sales</span></div>
                             </div>
                         </div>
                     </motion.div>

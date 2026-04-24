@@ -122,7 +122,7 @@ export const SalesJourney = ({ onComplete }: { onComplete?: () => void }) => {
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-blue-500/30">            {/* Stage Orchestrator */}
+        <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">            {/* Stage Orchestrator */}
             <main className="pt-32 pb-12 px-6">
                 <AnimatePresence mode="wait">
                     {currentStage === "prospecting" && (
@@ -160,17 +160,17 @@ export const SalesJourney = ({ onComplete }: { onComplete?: () => void }) => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] bg-[#030303] overflow-y-auto"
+                        className="fixed inset-0 z-[100] bg-background overflow-y-auto"
                     >
                         <div className="max-w-2xl mx-auto px-6 py-20">
                             {/* Label */}
-                            <p className="text-[10px] font-mono uppercase tracking-[0.35em] text-white/25 mb-8">Decision Analysis</p>
+                            <p className="text-[10px] font-mono uppercase tracking-[0.35em] text-muted-foreground/70 mb-8">Decision Analysis</p>
 
                             {/* Title */}
-                            <h2 className="text-3xl font-black tracking-tight text-white mb-10 leading-tight">{lastDebrief.title}</h2>
+                            <h2 className="text-3xl font-black tracking-tight text-foreground mb-10 leading-tight">{lastDebrief.title}</h2>
 
                             {/* Sections */}
-                            <div className="space-y-0 divide-y divide-white/[0.05]">
+                            <div className="space-y-0 divide-y divide-border">
                                 {[
                                     { label: "What happened", content: lastDebrief.what },
                                     { label: "Why it matters", content: lastDebrief.why },
@@ -178,15 +178,15 @@ export const SalesJourney = ({ onComplete }: { onComplete?: () => void }) => {
                                     { label: "The pattern this creates", content: lastDebrief.who },
                                 ].map((s, i) => (
                                     <div key={i} className="py-7">
-                                        <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/25 mb-3">{s.label}</p>
-                                        <p className="text-[15px] text-white/70 leading-relaxed font-light">{s.content}</p>
+                                        <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground/70 mb-3">{s.label}</p>
+                                        <p className="text-[15px] text-muted-foreground leading-relaxed font-light">{s.content}</p>
                                     </div>
                                 ))}
 
                                 {lastDebrief.tomorrow && (
                                     <div className="py-7">
-                                        <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 mb-3">Try this tomorrow</p>
-                                        <p className="text-[15px] text-white/80 leading-relaxed font-light border-l border-white/20 pl-5">{lastDebrief.tomorrow}</p>
+                                        <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground/70 mb-3">Try this tomorrow</p>
+                                        <p className="text-[15px] text-foreground leading-relaxed font-light border-l border-primary/30 pl-5">{lastDebrief.tomorrow}</p>
                                     </div>
                                 )}
                             </div>
@@ -194,7 +194,7 @@ export const SalesJourney = ({ onComplete }: { onComplete?: () => void }) => {
                             <div className="pt-12">
                                 <button
                                     onClick={nextStage}
-                                    className="w-full py-4 border border-white/15 text-white/60 text-[12px] font-mono uppercase tracking-[0.2em] rounded-xl hover:border-white/40 hover:text-white/90 transition-all"
+                                    className="w-full py-4 bg-primary text-primary-foreground text-[12px] font-mono uppercase tracking-[0.2em] rounded-xl transition-all"
                                 >
                                     {currentStage === "ltv" ? "Complete journey →" : "Next scenario →"}
                                 </button>
@@ -211,39 +211,39 @@ export const SalesJourney = ({ onComplete }: { onComplete?: () => void }) => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[200] bg-[#030303] overflow-y-auto"
+                        className="fixed inset-0 z-[200] bg-background overflow-y-auto"
                     >
                         <div className="max-w-2xl mx-auto px-6 py-20">
                             {/* Eyebrow */}
-                            <p className="text-[10px] font-mono uppercase tracking-[0.35em] text-white/20 mb-6">Sales · {STAGE_BRIEFINGS[currentStage]?.scenario}</p>
+                            <p className="text-[10px] font-mono uppercase tracking-[0.35em] text-muted-foreground/70 mb-6">Sales · {STAGE_BRIEFINGS[currentStage]?.scenario}</p>
 
                             {/* Title */}
-                            <h1 className="text-4xl font-black tracking-tight text-white mb-6 leading-tight">{STAGE_BRIEFINGS[currentStage]?.title}</h1>
+                            <h1 className="text-4xl font-black tracking-tight text-foreground mb-6 leading-tight">{STAGE_BRIEFINGS[currentStage]?.title}</h1>
 
                             {/* Divider */}
-                            <div className="h-px bg-white/[0.06] mb-8" />
+                            <div className="h-px bg-border mb-8" />
 
                             {/* Story */}
                             <div className="mb-8">
-                                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/25 mb-3">The situation</p>
-                                <p className="text-[16px] text-white/65 leading-relaxed font-light">{STAGE_BRIEFINGS[currentStage]?.story}</p>
+                                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground/70 mb-3">The situation</p>
+                                <p className="text-[16px] text-muted-foreground leading-relaxed font-light">{STAGE_BRIEFINGS[currentStage]?.story}</p>
                             </div>
 
                             {/* UX Anchor */}
-                            <div className="mb-8 border border-white/[0.07] rounded-xl p-6">
-                                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/25 mb-3">UX anchor — what to say</p>
-                                <p className="text-[15px] text-white/70 leading-relaxed italic">{STAGE_BRIEFINGS[currentStage]?.uxAnchor}</p>
+                            <div className="mb-8 border border-border rounded-xl p-6">
+                                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground/70 mb-3">UX anchor — what to say</p>
+                                <p className="text-[15px] text-muted-foreground leading-relaxed italic">{STAGE_BRIEFINGS[currentStage]?.uxAnchor}</p>
                             </div>
 
                             {/* Why matters */}
                             <div className="mb-10">
-                                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/25 mb-3">Why this matters</p>
-                                <p className="text-[14px] text-white/50 leading-relaxed font-light">{STAGE_BRIEFINGS[currentStage]?.realLife}</p>
+                                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground/70 mb-3">Why this matters</p>
+                                <p className="text-[14px] text-muted-foreground leading-relaxed font-light">{STAGE_BRIEFINGS[currentStage]?.realLife}</p>
                             </div>
 
                             <button
                                 onClick={() => setShowBriefing(false)}
-                                className="w-full py-4 border border-white/15 text-white/60 text-[12px] font-mono uppercase tracking-[0.2em] rounded-xl hover:border-white/40 hover:text-white/90 transition-all"
+                                className="w-full py-4 bg-primary text-primary-foreground text-[12px] font-mono uppercase tracking-[0.2em] rounded-xl transition-all"
                             >
                                 Enter the scenario →
                             </button>

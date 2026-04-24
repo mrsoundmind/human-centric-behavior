@@ -8,20 +8,20 @@ export const ClientFunnelChaosGood = ({ onComplete }: ClientFunnelChaosGoodProps
     return (
         <div className="max-w-4xl mx-auto py-12 px-6 h-[800px]">
             <div className="text-center space-y-4 mb-8">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs font-bold tracking-widest text-green-400 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     THE FIX: CLARITY
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
                     The Contrast.
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     Same Brand. Same Product. <br />
-                    <span className="text-indigo-400">Zero Noise.</span>
+                    <span className="text-primary">Zero Noise.</span>
                 </p>
             </div>
 
             {/* THE APP CONTAINER - Clean Version */}
-            <div className="relative max-w-4xl mx-auto border-8 border-gray-800 rounded-3xl overflow-hidden shadow-2xl bg-white text-slate-900 h-[600px] flex flex-col font-sans">
+            <div className="relative max-w-4xl mx-auto border-8 border-border rounded-3xl overflow-hidden shadow-2xl bg-white text-slate-900 h-[600px] flex flex-col font-sans">
 
                 {/* --- 1. CLEAN HEADER (Sticky but minimal) --- */}
                 <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 px-6 py-4 flex justify-between items-center">

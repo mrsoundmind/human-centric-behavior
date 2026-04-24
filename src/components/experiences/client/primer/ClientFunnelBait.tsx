@@ -11,25 +11,25 @@ export const ClientFunnelBait = ({ onComplete }: ClientFunnelBaitProps) => {
     return (
         <div className="max-w-4xl mx-auto py-12 px-6">
             <div className="text-center space-y-4 mb-12">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-widest text-indigo-300 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-muted border border-border text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     SCENARIO 1: THE DISCONNECT
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
                     The "Marketing" Win
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     Your marketing team just crushed it. High CTR. Low CPC. <br />
                     Here comes the lead...
                 </p>
             </div>
 
-            <div className="relative max-w-md mx-auto aspect-[9/16] bg-black border-8 border-gray-800 rounded-[3rem] overflow-hidden shadow-2xl relative">
+            <div className="relative max-w-md mx-auto aspect-[9/16] bg-card border-8 border-border rounded-[3rem] overflow-hidden shadow-2xl relative">
                 {/* Status Bar */}
-                <div className="absolute top-0 left-0 right-0 h-6 bg-black z-20 flex justify-between px-6 items-center">
-                    <div className="text-[10px] text-white font-mono">9:41</div>
+                <div className="absolute top-0 left-0 right-0 h-6 bg-card z-20 flex justify-between px-6 items-center">
+                    <div className="text-[10px] text-foreground font-mono">9:41</div>
                     <div className="flex gap-1">
-                        <div className="w-3 h-3 bg-white rounded-full"></div>
-                        <div className="w-3 h-3 bg-white rounded-full"></div>
+                        <div className="w-3 h-3 bg-foreground rounded-full"></div>
+                        <div className="w-3 h-3 bg-foreground rounded-full"></div>
                     </div>
                 </div>
 
@@ -128,7 +128,7 @@ export const ClientFunnelBait = ({ onComplete }: ClientFunnelBaitProps) => {
 
                 {/* STEP 3: BOUNCED */}
                 {step === "bounced" && (
-                    <div className="h-full bg-black flex items-center justify-center">
+                    <div className="h-full bg-card flex items-center justify-center">
                         <motion.div
                             initial={{ scale: 0.8, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
@@ -136,7 +136,7 @@ export const ClientFunnelBait = ({ onComplete }: ClientFunnelBaitProps) => {
                             className="text-center"
                         >
                             <div className="text-6xl mb-4">💸</div>
-                            <div className="text-white font-bold text-xl">Lead Lost.</div>
+                            <div className="text-foreground font-bold text-xl">Lead Lost.</div>
                         </motion.div>
                     </div>
                 )}

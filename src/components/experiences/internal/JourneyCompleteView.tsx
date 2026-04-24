@@ -453,13 +453,13 @@ const DimensionBar = ({ dimension, value }: { dimension: FrictionDimension; valu
   const config = FRICTION_CONFIG[dimension];
   return (
     <div className="flex items-center gap-3">
-      <span className="text-xs text-gray-500 w-36 shrink-0">{config.label}</span>
-      <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+      <span className="text-xs text-muted-foreground w-36 shrink-0">{config.label}</span>
+      <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${value * 100}%` }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className={`h-full rounded-full ${config.className.split(" ").find((c) => c.startsWith("bg-")) ?? "bg-white/30"}`}
+          className={`h-full rounded-full ${config.className.split(" ").find((c) => c.startsWith("bg-")) ?? "bg-muted-foreground/70"}`}
         />
       </div>
     </div>
@@ -473,14 +473,14 @@ const PhaseBreakdown = ({ phases }: { phases: PhaseScore[] }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.4 }}
-    className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-6"
+    className="bg-card border border-border rounded-2xl p-6 space-y-6"
   >
-    <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+    <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
       Where Your Pattern Is Strongest
     </span>
     {phases.map((ps) => (
       <div key={ps.phase} className="space-y-2">
-        <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+        <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
           {PHASE_LABELS[ps.phase] ?? ps.phase}
         </span>
         <div className="space-y-1.5">
@@ -528,25 +528,25 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
   // Insufficient data guard
   if (profileResult.status === "insufficient_data") {
     return (
-      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-8">
+      <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center p-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-md"
         >
-          <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">
+          <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-4">
             Behavioral Profile
           </p>
           <h2 className="text-2xl font-bold mb-4">
             Complete more scenarios to see your behavioral profile
           </h2>
-          <p className="text-gray-400 mb-8">
+          <p className="text-muted-foreground mb-8">
             We need at least 3 decisions to identify your pattern. You've made{" "}
             {profileResult.decisionCount} so far.
           </p>
           <button
             onClick={onReturnHome}
-            className="px-6 py-3 rounded-full border border-white/10 hover:border-white/30 text-sm text-white/70 hover:text-white transition-all"
+            className="px-6 py-3 rounded-full border border-border hover:border-primary/40 text-sm text-muted-foreground hover:text-foreground transition-all"
           >
             Return Home
           </button>
@@ -559,11 +559,11 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
   const roleContent = ROLE_COMPLETION_CONTENT[role];
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-amber-500/30 overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 overflow-x-hidden">
       {/* Background */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[60vw] h-[60vw] rounded-full bg-amber-600/5 blur-[150px]" />
-        <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] rounded-full bg-blue-600/5 blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[60vw] h-[60vw] rounded-full bg-primary/5 blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] rounded-full bg-primary/5 blur-[120px]" />
       </div>
 
       <div className="max-w-3xl mx-auto px-6 py-20 relative z-10 space-y-10">
@@ -574,24 +574,24 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
           transition={{ delay: 0.2 }}
           className="space-y-6"
         >
-          <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+          <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
             Your Behavioral Pattern
           </span>
-          <h1 className="text-3xl md:text-4xl font-bold text-white">{profile.archetypeName}</h1>
-          <p className="text-gray-300 leading-relaxed text-lg">{profile.narrative}</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground">{profile.archetypeName}</h1>
+          <p className="text-muted-foreground leading-relaxed text-lg">{profile.narrative}</p>
 
-          <div className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-4">
+          <div className="bg-card border border-border rounded-2xl p-6 space-y-4">
             <div>
-              <span className="text-xs font-mono text-gray-500 uppercase tracking-widest block mb-2">
+              <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest block mb-2">
                 What You Do
               </span>
-              <p className="text-gray-400 leading-relaxed">{profile.whatYouDo}</p>
+              <p className="text-muted-foreground leading-relaxed">{profile.whatYouDo}</p>
             </div>
             <div>
-              <span className="text-xs font-mono text-gray-500 uppercase tracking-widest block mb-2">
+              <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest block mb-2">
                 Why It Matters
               </span>
-              <p className="text-gray-400 leading-relaxed">{profile.whyItMatters}</p>
+              <p className="text-muted-foreground leading-relaxed">{profile.whyItMatters}</p>
             </div>
           </div>
         </motion.div>
@@ -603,11 +603,11 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35 }}
           >
-            <span className="text-xs font-mono text-gray-500 uppercase tracking-widest block mb-3">
+            <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest block mb-3">
               Cross-Role Pattern
             </span>
-            <div className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6">
-              <p className="text-gray-300 leading-relaxed italic">{compoundInsight}</p>
+            <div className="bg-card border border-border rounded-2xl p-6">
+              <p className="text-muted-foreground leading-relaxed italic">{compoundInsight}</p>
             </div>
           </motion.div>
         )}
@@ -621,17 +621,17 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-3"
+            className="bg-card border border-border rounded-2xl p-6 space-y-3"
           >
-            <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+            <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
               How Your Pattern Shifted
             </span>
             {profile.shifts.map((shift, i) => (
-              <p key={i} className="text-gray-400 italic leading-relaxed">
+              <p key={i} className="text-muted-foreground italic leading-relaxed">
                 Your pattern shifted from{" "}
-                <span className="text-white/80">{FRICTION_CONFIG[shift.fromDimension].label}</span>{" "}
+                <span className="text-foreground">{FRICTION_CONFIG[shift.fromDimension].label}</span>{" "}
                 in {PHASE_LABELS[shift.fromPhase] ?? shift.fromPhase} to{" "}
-                <span className="text-white/80">{FRICTION_CONFIG[shift.toDimension].label}</span>{" "}
+                <span className="text-foreground">{FRICTION_CONFIG[shift.toDimension].label}</span>{" "}
                 in {PHASE_LABELS[shift.toPhase] ?? shift.toPhase}.
               </p>
             ))}
@@ -643,12 +643,12 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-6"
+          className="bg-primary/10 border border-primary/40 rounded-2xl p-6"
         >
-          <span className="text-xs font-mono text-amber-400/70 uppercase tracking-widest mb-2 block">
+          <span className="text-xs font-mono text-primary uppercase tracking-widest mb-2 block">
             Tomorrow's Action
           </span>
-          <p className="text-amber-100 leading-relaxed">{profile.doThis}</p>
+          <p className="text-foreground leading-relaxed">{profile.doThis}</p>
         </motion.div>
 
         {/* Cross-Role Impact */}
@@ -662,9 +662,9 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-8"
+              className="bg-card border border-border rounded-2xl p-8"
             >
-              <p className="text-lg text-white/70 italic leading-relaxed font-light">
+              <p className="text-lg text-muted-foreground italic leading-relaxed font-light">
                 {roleContent.paradigmShift}
               </p>
             </motion.div>
@@ -676,23 +676,23 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
-                className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-8 flex flex-col"
+                className="bg-card border border-border rounded-2xl p-8 flex flex-col"
               >
-                <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-6">
-                  <Target className="w-5 h-5 text-blue-400" />
+                <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/40 flex items-center justify-center mb-6">
+                  <Target className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-xl font-bold mb-1 italic">The Commitment</h3>
-                <p className="text-xs text-white/30 uppercase tracking-widest font-mono mb-8">
+                <p className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-8">
                   Concrete actions for this week
                 </p>
                 <div className="space-y-6 flex-1">
                   {roleContent.commitments.map((c, i) => (
                     <div key={i}>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] font-mono text-blue-400/50">0{i + 1}</span>
-                        <h4 className="text-sm font-bold text-white">{c.label}</h4>
+                        <span className="text-[10px] font-mono text-primary/50">0{i + 1}</span>
+                        <h4 className="text-sm font-bold text-foreground">{c.label}</h4>
                       </div>
-                      <p className="text-sm text-white/50 leading-relaxed pl-6 border-l border-white/5">
+                      <p className="text-sm text-muted-foreground leading-relaxed pl-6 border-l border-border">
                         {c.action}
                       </p>
                     </div>
@@ -705,24 +705,24 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9 }}
-                className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-8 flex flex-col"
+                className="bg-card border border-border rounded-2xl p-8 flex flex-col"
               >
-                <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-6">
-                  <MessageSquare className="w-5 h-5 text-purple-400" />
+                <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/40 flex items-center justify-center mb-6">
+                  <MessageSquare className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-xl font-bold mb-1 italic">The Wordbook</h3>
-                <p className="text-xs text-white/30 uppercase tracking-widest font-mono mb-8">
+                <p className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-8">
                   How to say it in the room
                 </p>
                 <div className="space-y-8">
                   {roleContent.scripts.map((s, i) => (
                     <div key={i}>
-                      <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em] mb-2">
+                      <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.2em] mb-2">
                         {s.trigger}
                       </p>
-                      <div className="bg-white/[0.03] border border-white/5 p-4 rounded-xl relative">
-                        <div className="absolute top-0 left-0 w-1 h-full bg-purple-500 opacity-20" />
-                        <p className="text-sm text-white/70 italic leading-relaxed pl-2">
+                      <div className="bg-muted border border-border p-4 rounded-xl relative">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-20" />
+                        <p className="text-sm text-muted-foreground italic leading-relaxed pl-2">
                           {s.line}
                         </p>
                       </div>
@@ -736,36 +736,36 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.0 }}
-                className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-8 flex flex-col"
+                className="bg-card border border-border rounded-2xl p-8 flex flex-col"
               >
-                <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mb-6">
-                  <ListChecks className="w-5 h-5 text-orange-400" />
+                <div className="w-10 h-10 rounded-xl bg-destructive/10 border border-destructive/40 flex items-center justify-center mb-6">
+                  <ListChecks className="w-5 h-5 text-destructive" />
                 </div>
                 <h3 className="text-xl font-bold mb-1 italic">The Daily Rubric</h3>
-                <p className="text-xs text-white/30 uppercase tracking-widest font-mono mb-8">
+                <p className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-8">
                   Shift your default perspective
                 </p>
                 <div className="space-y-4 flex-1">
                   {roleContent.rubric.map((r, i) => (
                     <div
                       key={i}
-                      className="flex gap-3 items-start bg-white/[0.03] p-4 rounded-xl border border-white/5"
+                      className="flex gap-3 items-start bg-muted p-4 rounded-xl border border-border"
                     >
-                      <div className="w-5 h-5 rounded-full bg-white/5 text-[10px] flex items-center justify-center font-mono text-white/30 shrink-0">
+                      <div className="w-5 h-5 rounded-full bg-muted text-[10px] flex items-center justify-center font-mono text-muted-foreground shrink-0">
                         0{i + 1}
                       </div>
-                      <p className="text-sm text-white/70 leading-relaxed">{r}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{r}</p>
                     </div>
                   ))}
                 </div>
-                <div className="mt-8 p-6 rounded-xl bg-red-500/5 border border-red-500/10">
-                  <div className="flex items-center gap-2 text-red-400 mb-2">
+                <div className="mt-8 p-6 rounded-xl bg-destructive/5 border border-destructive/10">
+                  <div className="flex items-center gap-2 text-destructive mb-2">
                     <AlertTriangle className="w-3.5 h-3.5" />
                     <span className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold">
                       Risk Assessment
                     </span>
                   </div>
-                  <p className="text-xs text-white/40 leading-relaxed">{roleContent.cost}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{roleContent.cost}</p>
                 </div>
               </motion.div>
             </div>
@@ -781,13 +781,13 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
         >
           <button
             onClick={onReturnHome}
-            className="px-8 py-4 bg-white/10 border border-white/20 text-white rounded-lg font-medium text-lg hover:bg-white/20 transition-all"
+            className="px-8 py-4 bg-muted border border-border text-foreground rounded-lg font-medium text-lg hover:bg-muted/80 transition-all"
           >
             Explore Another Role
           </button>
           <button
             onClick={() => window.location.href = "/"}
-            className="text-gray-500 hover:text-white transition-colors text-sm font-mono tracking-widest uppercase"
+            className="text-muted-foreground hover:text-foreground transition-colors text-sm font-mono tracking-widest uppercase"
           >
             Return to Main Experience
           </button>

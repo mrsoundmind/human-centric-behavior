@@ -27,21 +27,21 @@ export const ClientPrimerDoor = ({ onComplete }: ClientPrimerDoorProps) => {
     return (
         <div className="max-w-4xl mx-auto text-center space-y-12 py-12">
             <div className="space-y-4">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-widest text-indigo-300 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-muted border border-border text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     EXAMPLE 1: THE ACQUISITION FAIL
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
                     The "Norman Door"
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     You see a handle. What do you do?
                 </p>
             </div>
 
-            <div className="relative h-[400px] w-full max-w-md mx-auto bg-[#1A1A1A] rounded-xl border-4 border-[#333] overflow-hidden shadow-2xl flex items-center justify-center">
+            <div className="relative h-[400px] w-full max-w-md mx-auto bg-card rounded-xl border-4 border-border overflow-hidden shadow-lg flex items-center justify-center">
                 {/* The Door */}
                 <motion.div
-                    className="absolute inset-4 bg-[#2A2A2A] rounded-lg flex items-center justify-end pr-4 cursor-grab active:cursor-grabbing border-r-4 border-black/20"
+                    className="absolute inset-4 bg-muted rounded-lg flex items-center justify-end pr-4 cursor-grab active:cursor-grabbing border-r-4 border-border"
                     animate={isOpen ? { x: 200, rotateY: -45 } : { x: 0, rotateY: 0 }}
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
@@ -50,7 +50,7 @@ export const ClientPrimerDoor = ({ onComplete }: ClientPrimerDoorProps) => {
                     style={{ transformOrigin: "left center" }}
                 >
                     {/* The "Handle" (looks like a pull handle but plays on push expectation) */}
-                    <div className="w-4 h-32 bg-gradient-to-b from-gray-300 to-gray-500 rounded-full shadow-lg" />
+                    <div className="w-4 h-32 bg-gradient-to-b from-muted-foreground to-foreground rounded-full shadow-lg" />
                 </motion.div>
 
                 {!isOpen && (
@@ -60,7 +60,7 @@ export const ClientPrimerDoor = ({ onComplete }: ClientPrimerDoorProps) => {
                         transition={{ duration: 0.4 }}
                     >
                         {attempts > 0 && (
-                            <div className="text-red-500 font-bold text-xl drop-shadow-md">
+                            <div className="text-destructive font-bold text-xl drop-shadow-md">
                                 LOCKED
                             </div>
                         )}
@@ -72,7 +72,7 @@ export const ClientPrimerDoor = ({ onComplete }: ClientPrimerDoorProps) => {
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="text-pink-500 font-mono text-sm"
+                    className="text-accent font-mono text-sm"
                 >
                     Hint: It looks like a handle, but... maybe drag it?
                 </motion.div>

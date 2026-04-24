@@ -38,32 +38,32 @@ export const ClientPrimerKetchup = ({ onComplete }: ClientPrimerKetchupProps) =>
     return (
         <div className="max-w-4xl mx-auto text-center space-y-12 py-12 px-6">
             <div className="space-y-4">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-widest text-indigo-300 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-muted border border-border text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     EXAMPLE 3: THE STRUGGLE
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
                     The Ketchup Race
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                    Design A vs Design B. <span className="text-white font-bold">Fight for the sauce.</span>
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                    Design A vs Design B. <span className="text-foreground font-bold">Fight for the sauce.</span>
                 </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-12 max-w-3xl mx-auto relative">
 
                 {/* VS Badge */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white text-black font-black text-xl rounded-full w-12 h-12 flex items-center justify-center z-10 border-4 border-gray-900 pointer-events-none">
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-primary-foreground font-black text-xl rounded-full w-12 h-12 flex items-center justify-center z-10 border-4 border-background pointer-events-none">
                     VS
                 </div>
 
                 {/* --- GLASS BOTTLE (The Struggle) --- */}
                 <div
-                    className="bg-[#1a1a1a] rounded-3xl p-8 border border-white/5 flex flex-col items-center justify-between min-h-[400px] cursor-pointer active:scale-[0.98] transition-all select-none hover:bg-white/5"
+                    className="bg-card rounded-3xl p-8 border border-border flex flex-col items-center justify-between min-h-[400px] cursor-pointer active:scale-[0.98] transition-all select-none hover:bg-muted"
                     onClick={handleGlassClick}
                 >
                     <div className="text-center space-y-2 pointer-events-none">
-                        <h3 className="text-2xl font-serif text-white">The Classic</h3>
-                        <p className="text-xs text-gray-400 uppercase tracking-widest">Glass Interface</p>
+                        <h3 className="text-2xl font-serif text-foreground">The Classic</h3>
+                        <p className="text-xs text-muted-foreground uppercase tracking-widest">Glass Interface</p>
                     </div>
 
                     <div className="relative h-48 w-full flex justify-center items-center pointer-events-none">
@@ -83,7 +83,7 @@ export const ClientPrimerKetchup = ({ onComplete }: ClientPrimerKetchupProps) =>
                                     initial={{ opacity: 0, scale: 0 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0 }}
-                                    className="absolute -right-8 top-12 text-xs font-bold text-red-500 bg-white rounded-full px-2 py-1 rotate-12"
+                                    className="absolute -right-8 top-12 text-xs font-bold text-destructive bg-background rounded-full px-2 py-1 rotate-12"
                                 >
                                     HARDER!
                                 </motion.div>
@@ -98,32 +98,32 @@ export const ClientPrimerKetchup = ({ onComplete }: ClientPrimerKetchupProps) =>
                                         key={blob}
                                         initial={{ y: -50, opacity: 0, scale: 0 }}
                                         animate={{ y: 0, opacity: 1, scale: 1 }}
-                                        className="w-3 h-3 bg-red-600 rounded-full"
+                                        className="w-3 h-3 bg-destructive rounded-full"
                                     />
                                 ))}
                             </AnimatePresence>
                         </div>
                     </div>
 
-                    <div className="w-full bg-gray-800 h-16 rounded-xl relative overflow-hidden flex items-center justify-center border border-white/10 pointer-events-none">
+                    <div className="w-full bg-muted h-16 rounded-xl relative overflow-hidden flex items-center justify-center border border-border pointer-events-none">
                         {glassBlobs.length === 0 && (
-                            <span className="text-xs text-gray-500 font-mono">TAP TO DISPENSE</span>
+                            <span className="text-xs text-muted-foreground font-mono">TAP TO DISPENSE</span>
                         )}
                         {glassBlobs.length > 0 && (
-                            <span className="text-xs text-gray-400 font-mono animate-pulse z-10 mix-blend-difference">KEEP TAPPING...</span>
+                            <span className="text-xs text-muted-foreground font-mono animate-pulse z-10">KEEP TAPPING...</span>
                         )}
-                        <div className="absolute bottom-0 left-0 right-0 bg-red-700 transition-all duration-300" style={{ height: `${Math.min(100, glassBlobs.length * 2)}%` }}></div>
+                        <div className="absolute bottom-0 left-0 right-0 bg-destructive transition-all duration-300" style={{ height: `${Math.min(100, glassBlobs.length * 2)}%` }}></div>
                     </div>
                 </div>
 
                 {/* --- SQUEEZE BOTTLE (The Solution) --- */}
                 <div
-                    className="bg-indigo-900/20 rounded-3xl p-8 border border-indigo-500/30 flex flex-col items-center justify-between min-h-[400px] relative overflow-hidden group hover:bg-indigo-900/30 transition-all cursor-pointer active:scale-[0.98] select-none"
+                    className="bg-primary/10 rounded-3xl p-8 border border-primary/30 flex flex-col items-center justify-between min-h-[400px] relative overflow-hidden group hover:bg-primary/20 transition-all cursor-pointer active:scale-[0.98] select-none"
                     onClick={handleSqueezeClick}
                 >
                     <div className="text-center space-y-2 relative z-10 pointer-events-none">
-                        <h3 className="text-2xl font-sans font-bold text-white">The Modern</h3>
-                        <p className="text-xs text-brand-blue uppercase tracking-widest">Squeeze Interface</p>
+                        <h3 className="text-2xl font-sans font-bold text-foreground">The Modern</h3>
+                        <p className="text-xs text-primary uppercase tracking-widest">Squeeze Interface</p>
                     </div>
 
                     <div className="relative h-48 w-full flex justify-center items-center z-10 pointer-events-none">
@@ -138,12 +138,12 @@ export const ClientPrimerKetchup = ({ onComplete }: ClientPrimerKetchupProps) =>
                     </div>
 
                     {/* Squeeze Result - Instant SPLAT */}
-                    <div className="w-full bg-gray-800 h-16 rounded-xl relative overflow-hidden flex items-center justify-center border border-white/10 z-10 pointer-events-none">
+                    <div className="w-full bg-muted h-16 rounded-xl relative overflow-hidden flex items-center justify-center border border-border z-10 pointer-events-none">
                         <motion.div
                             initial={{ scale: 0 }}
                             animate={squeezeComplete ? { scale: 20 } : { scale: 0 }}
                             transition={{ duration: 0.5, ease: "circIn" }}
-                            className="absolute inset-0 bg-red-600 rounded-full"
+                            className="absolute inset-0 bg-destructive rounded-full"
                         ></motion.div>
 
                         {squeezeComplete ? (
@@ -151,19 +151,19 @@ export const ClientPrimerKetchup = ({ onComplete }: ClientPrimerKetchupProps) =>
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
-                                className="relative z-20 font-bold text-white tracking-widest"
+                                className="relative z-20 font-bold text-foreground tracking-widest"
                             >
                                 EFFICIENCY
                             </motion.span>
                         ) : (
-                            <span className="relative z-10 text-xs text-gray-400 font-mono mix-blend-difference group-hover:text-white transition-colors">TAP TO DISPENSE</span>
+                            <span className="relative z-10 text-xs text-muted-foreground font-mono group-hover:text-foreground transition-colors">TAP TO DISPENSE</span>
                         )}
                     </div>
                 </div>
 
             </div>
 
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-muted-foreground">
                 {isFinished ? "Winner: The one designed for Humans." : "Tap the cards to dispense sauce."}
             </p>
         </div>

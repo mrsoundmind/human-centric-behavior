@@ -170,16 +170,16 @@ const FullSDLCJourney = ({ role, onComplete, onBack }: FullSDLCJourneyProps) => 
   };
 
   return (
-    <div className="relative w-full min-h-screen bg-black text-white">
+    <div className="relative w-full min-h-screen bg-background text-foreground">
       <button
         onClick={onBack}
-        className="fixed top-6 left-6 z-50 text-gray-500 hover:text-white transition-colors text-sm font-mono"
+        className="fixed top-6 left-6 z-50 text-muted-foreground hover:text-foreground transition-colors text-sm font-mono"
       >
         ← Back to Briefing
       </button>
 
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
-        <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+        <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
           Phase {sdlcPhaseIndex + 1} of {phaseGroups.length}: {SDLC_PHASE_LABELS[currentPhaseGroup.phase]}
         </span>
       </div>
@@ -211,7 +211,7 @@ export const DesignationPortal = ({ onStartQuickMode, onComplete, onBack }: Desi
         {onBack && (
           <button
             onClick={onBack}
-            className="fixed top-6 left-6 z-50 text-gray-500 hover:text-white transition-colors text-sm font-mono"
+            className="fixed top-6 left-6 z-50 text-muted-foreground hover:text-foreground transition-colors text-sm font-mono"
           >
             ← Back
           </button>

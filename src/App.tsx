@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { ClientExperience } from "./components/experiences/client/ClientExperience";
 import { InternalExperience } from "./components/experiences/internal/InternalExperience";
+import { ThemeProvider } from "./state/ThemeContext";
 
 const queryClient = new QueryClient();
 
@@ -33,13 +34,15 @@ const DomainWrapper = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <DomainWrapper />
-      </BrowserRouter>
-    </TooltipProvider>
+    <ThemeProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <DomainWrapper />
+        </BrowserRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

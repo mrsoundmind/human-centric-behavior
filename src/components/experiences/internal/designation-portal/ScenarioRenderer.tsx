@@ -45,7 +45,7 @@ export const HighlightText = ({ text }: { text: string }) => {
         const isMatch = KEYWORDS.some(k => k.toLowerCase() === part.toLowerCase());
         if (isMatch) {
           return (
-            <span key={i} className="text-white font-semibold bg-white/[0.08] px-1.5 py-0.5 rounded border border-white/[0.15] shadow-sm">
+            <span key={i} className="text-foreground font-semibold bg-muted px-1.5 py-0.5 rounded border border-border shadow-sm">
               {part}
             </span>
           );
@@ -93,7 +93,7 @@ export const ScenarioRenderer = ({
   const colors = ROLE_COLORS[scenario.role] || { c1: "#7c3aed", c2: "#1e40af" };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white flex flex-col p-6 lg:p-12 relative font-sans">
+    <div className="min-h-screen bg-background text-foreground flex flex-col p-6 lg:p-12 relative font-sans">
       <GradientBackground color1={colors.c1} color2={colors.c2} />
 
       <div className="max-w-[1400px] mx-auto w-full relative z-10 my-auto">
@@ -113,14 +113,14 @@ export const ScenarioRenderer = ({
             >
               <div className="flex items-center gap-4">
                 <Badge
-                  className={`border ${frictionConfig.className} font-mono text-[10px] uppercase tracking-[0.2em] px-3 py-1 bg-white/5 backdrop-blur-sm`}
+                  className={`border ${frictionConfig.className} font-mono text-[10px] uppercase tracking-[0.2em] px-3 py-1 bg-muted backdrop-blur-sm`}
                 >
                   {frictionConfig.label}
                 </Badge>
-                <div className="h-px w-12 bg-white/10" />
+                <div className="h-px w-12 bg-border" />
               </div>
-              
-              <h1 className="text-4xl lg:text-5xl font-black text-white leading-[1.1] tracking-tight drop-shadow-2xl">
+
+              <h1 className="text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight drop-shadow-2xl">
                 {scenario.title}
               </h1>
             </motion.div>
@@ -130,10 +130,10 @@ export const ScenarioRenderer = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <div className="bg-white/[0.02] border border-white/[0.08] rounded-3xl p-8 backdrop-blur-xl shadow-2xl relative group hover:border-white/[0.15] transition-colors">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-white/[0.02] rounded-bl-full pointer-events-none" />
-                <p className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em] mb-6">The Situation</p>
-                <p className="text-gray-300 leading-relaxed text-base font-light">
+              <div className="bg-card border border-border rounded-3xl p-8 backdrop-blur-xl shadow-2xl relative group hover:border-primary/40 transition-colors">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-card rounded-bl-full pointer-events-none" />
+                <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.3em] mb-6">The Situation</p>
+                <p className="text-muted-foreground leading-relaxed text-base font-light">
                    <HighlightText text={scenario.setup} />
                 </p>
               </div>
@@ -145,7 +145,7 @@ export const ScenarioRenderer = ({
               transition={{ duration: 0.5, delay: 0.2 }}
               className="space-y-4"
             >
-              <p className="text-[10px] font-mono text-white/40 uppercase tracking-[0.3em] ml-2">What Do You Do?</p>
+              <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.3em] ml-2">What Do You Do?</p>
               <div className="space-y-4">
                 {scenario.choices.map((choice, index) => {
                   const isSelected = selectedChoiceId === choice.id;
@@ -157,18 +157,18 @@ export const ScenarioRenderer = ({
                       className={[
                         "w-full text-left px-6 py-5 rounded-2xl border transition-all duration-300 relative group overflow-hidden",
                         isSelected
-                          ? "border-white/50 bg-white/10 scale-[1.02] shadow-[0_10px_30px_rgba(255,255,255,0.05)]"
-                          : "border-white/[0.08] bg-white/[0.02] hover:border-white/30 hover:bg-white/[0.05]",
+                          ? "border-primary/40 bg-muted scale-[1.02] shadow-lg"
+                          : "border-border bg-card hover:border-primary/40 hover:bg-muted",
                         isReadonly || selectedChoiceId !== null
                           ? (isSelected ? "" : "opacity-30 grayscale cursor-default")
                           : "cursor-pointer",
                       ].join(" ")}
                     >
                       <div className="flex items-start gap-4 relative z-10">
-                        <span className={`text-[11px] font-mono pt-1 ${isSelected ? "text-white" : "text-white/30"}`}>
+                        <span className={`text-[11px] font-mono pt-1 ${isSelected ? "text-foreground" : "text-muted-foreground/70"}`}>
                           {String.fromCharCode(65 + index)}
                         </span>
-                        <span className="text-[15px] leading-relaxed font-medium text-white/90">
+                        <span className="text-[15px] leading-relaxed font-medium text-foreground">
                           <HighlightText text={choice.text} />
                         </span>
                       </div>
@@ -181,7 +181,7 @@ export const ScenarioRenderer = ({
             {/* The Advance button will now be located at the end of the debrief narrative on the right column for better reading flow. */}
             {selectedChoiceId === null && !isReadonly && (
               <div className="pt-4">
-                <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em]">Awaiting Decision...</p>
+                <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.2em]">Awaiting Decision...</p>
               </div>
             )}
           </div>
@@ -208,68 +208,68 @@ export const ScenarioRenderer = ({
                   </motion.div>
 
                   {/* Debrief Analysis Narrative */}
-                  <div className="bg-white/[0.02] border border-white/[0.05] rounded-[2rem] p-8 lg:p-10 backdrop-blur-xl relative overflow-hidden shadow-2xl">
+                  <div className="bg-card border border-border rounded-[2rem] p-8 lg:p-10 backdrop-blur-xl relative overflow-hidden shadow-2xl">
                     <div className="space-y-10 relative z-10">
-                      
+
                       {/* Section 1: The Reality */}
                       <div>
-                        <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.3em] mb-4 flex items-center gap-3">
-                          <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /> The Reality
+                        <h4 className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.3em] mb-4 flex items-center gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse" /> The Reality
                         </h4>
-                        <p className="text-[16px] xl:text-[18px] text-white/90 leading-relaxed font-light">
+                        <p className="text-[16px] xl:text-[18px] text-foreground leading-relaxed font-light">
                           <HighlightText text={scenario.debrief.whatHappened} />
                         </p>
                       </div>
 
                       {/* Section 2: Mechanism & Root Cause */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-white/[0.05]">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-border">
                         <div>
-                          <h4 className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] mb-4 italic">
+                          <h4 className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.2em] mb-4 italic">
                             The Root Cause
                           </h4>
-                          <p className="text-[14px] text-white/60 leading-relaxed font-light">
+                          <p className="text-[14px] text-muted-foreground leading-relaxed font-light">
                             <HighlightText text={scenario.debrief.why} />
                           </p>
                         </div>
                         <div>
-                          <h4 className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] mb-4 italic">
+                          <h4 className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.2em] mb-4 italic">
                             The Mechanism
                           </h4>
-                          <p className="text-[14px] text-white/60 leading-relaxed font-light">
+                          <p className="text-[14px] text-muted-foreground leading-relaxed font-light">
                             <HighlightText text={scenario.debrief.how} />
                           </p>
                         </div>
                       </div>
 
                       {/* Section 3: The Shift (Action) */}
-                      <div className="pt-8 border-t border-white/[0.05]">
-                        <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.3em] mb-4 flex items-center gap-3">
-                          <div className="w-1.5 h-1.5 rounded-full bg-blue-500" /> Identity Shift
+                      <div className="pt-8 border-t border-border">
+                        <h4 className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.3em] mb-4 flex items-center gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary" /> Identity Shift
                         </h4>
-                        <p className="text-[15px] text-white/70 leading-relaxed mb-8 italic">
+                        <p className="text-[15px] text-muted-foreground leading-relaxed mb-8 italic">
                           "{scenario.debrief.whoBecame}"
                         </p>
-                        
-                        <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-6 relative group overflow-hidden">
-                          <div className="absolute -right-4 -top-4 w-24 h-24 bg-amber-500/10 rounded-full blur-xl group-hover:bg-amber-500/20 transition-colors" />
-                          <h4 className="text-[10px] font-mono text-amber-500 uppercase tracking-widest mb-3 relative z-10">
+
+                        <div className="bg-primary/10 border border-primary/40 rounded-2xl p-6 relative group overflow-hidden">
+                          <div className="absolute -right-4 -top-4 w-24 h-24 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-colors" />
+                          <h4 className="text-[10px] font-mono text-primary uppercase tracking-widest mb-3 relative z-10">
                             Tomorrow's Action
                           </h4>
-                          <p className="text-[16px] text-amber-100/90 leading-relaxed font-medium relative z-10">
+                          <p className="text-[16px] text-foreground leading-relaxed font-medium relative z-10">
                             <HighlightText text={scenario.debrief.tomorrowAction} />
                           </p>
                         </div>
                       </div>
-                      
+
                       {/* Advance Button (End of Reading Flow) */}
                       {!isReadonly && (
                         <div className="pt-4">
                           <button
                             onClick={onAdvance}
-                            className="group w-full py-5 bg-white text-black rounded-full font-black text-[12px] uppercase tracking-[0.3em] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_10px_40px_rgba(255,255,255,0.1)] flex items-center justify-center gap-4"
+                            className="group w-full py-5 bg-primary text-primary-foreground rounded-full font-black text-[12px] uppercase tracking-[0.3em] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg flex items-center justify-center gap-4"
                           >
                             Advance Simulation
-                            <div className="w-6 h-6 rounded-full bg-black/10 flex items-center justify-center group-hover:bg-black/20 transition-colors pointer-events-none">
+                            <div className="w-6 h-6 rounded-full bg-primary-foreground/10 flex items-center justify-center group-hover:bg-primary-foreground/20 transition-colors pointer-events-none">
                               <span className="text-lg leading-none translate-x-[1px] -translate-y-[1px]">→</span>
                             </div>
                           </button>
@@ -286,9 +286,9 @@ export const ScenarioRenderer = ({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="h-full min-h-[500px] rounded-3xl border border-white/[0.02] bg-white/[0.01] flex items-center justify-center backdrop-blur-sm"
+                  className="h-full min-h-[500px] rounded-3xl border border-border bg-card flex items-center justify-center backdrop-blur-sm"
                 >
-                  <div className="w-16 h-16 rounded-full border-t border-white/20 animate-spin" />
+                  <div className="w-16 h-16 rounded-full border-t border-border animate-spin" />
                 </motion.div>
               )}
             </AnimatePresence>

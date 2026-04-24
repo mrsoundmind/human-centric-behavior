@@ -20,19 +20,19 @@ export const ClientFunnelWallGood = ({ onComplete }: ClientFunnelWallGoodProps) 
     return (
         <div className="max-w-4xl mx-auto py-12 px-6">
             <div className="text-center space-y-4 mb-12">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs font-bold tracking-widest text-green-400 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     THE FIX: RESPECT
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
                     Value First. Ask Second.
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     We let them read. We let them engage. <br />
                     THEN we invited them to stay (politely).
                 </p>
             </div>
 
-            <div className="relative max-w-md mx-auto aspect-[9/16] bg-white border-8 border-gray-800 rounded-[3rem] overflow-hidden shadow-2xl relative text-black">
+            <div className="relative max-w-md mx-auto aspect-[9/16] bg-white border-8 border-border rounded-[3rem] overflow-hidden shadow-2xl relative text-black">
                 {/* Article Content */}
                 <div className="h-full overflow-y-scroll p-6 space-y-4">
                     <div className="h-48 bg-gray-200 rounded-xl mb-6"></div>
@@ -60,7 +60,7 @@ export const ClientFunnelWallGood = ({ onComplete }: ClientFunnelWallGoodProps) 
                     <motion.div
                         initial={{ y: 200 }}
                         animate={{ y: 0 }}
-                        className="absolute bottom-0 inset-x-0 bg-indigo-900 text-white p-6 rounded-t-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.3)] z-20 m-2 mx-4"
+                        className="absolute bottom-0 inset-x-0 bg-indigo-900 text-white p-6 rounded-t-2xl shadow-lg z-20 m-2 mx-4"
                     >
                         <div className="flex justify-between items-start mb-2">
                             <h3 className="font-bold text-lg">Enjoying the read?</h3>

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/state/ThemeContext";
 
 interface ClientDebugMenuProps {
     currentStep: string;
@@ -8,8 +9,9 @@ interface ClientDebugMenuProps {
 
 export const ClientDebugMenu = ({ currentStep, onJump }: ClientDebugMenuProps) => {
     const [isOpen, setIsOpen] = useState(false);
+    const { theme, toggleTheme } = useTheme();
+    const isLight = theme === "light";
 
-    // Group steps for clearer navigation
     const sections = [
         {
             title: "PHASE 1: THE FUNDAMENTALS",
@@ -58,36 +60,95 @@ export const ClientDebugMenu = ({ currentStep, onJump }: ClientDebugMenuProps) =
         }
     ];
 
+    const triggerClass = isLight
+        ? "fixed top-4 right-4 z-[60] w-11 h-11 bg-white border-[1.5px] border-primary/40 rounded-full flex items-center justify-center hover:bg-primary hover:border-primary transition-all shadow-lg shadow-primary/10 group"
+        : "fixed top-4 right-4 z-[60] w-11 h-11 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center hover:bg-white/20 transition-all shadow-xl group";
+
+    const iconClass = isLight
+        ? "w-5 h-5 text-primary group-hover:text-primary-foreground"
+        : "w-5 h-5 text-white/70 group-hover:text-white";
+
+    const overlayClass = isLight ? "fixed inset-0 z-[70] bg-foreground/30 backdrop-blur-sm flex justify-end" : "fixed inset-0 z-[70] bg-black/80 backdrop-blur-sm flex justify-end";
+
+    const panelClass = isLight
+        ? "w-80 h-full bg-card border-l border-border flex flex-col shadow-2xl overflow-hidden animate-in slide-in-from-right duration-300"
+        : "w-80 h-full bg-slate-950 border-l border-white/10 flex flex-col shadow-2xl overflow-hidden animate-in slide-in-from-right duration-300";
+
+    const headerBarClass = isLight
+        ? "p-4 border-b border-border flex items-center justify-between bg-muted/50"
+        : "p-4 border-b border-white/5 flex items-center justify-between bg-black/40";
+
+    const headerLabelClass = isLight ? "text-xs font-bold text-primary uppercase tracking-widest" : "text-xs font-bold text-indigo-400 uppercase tracking-widest";
+    const closeBtnClass = isLight ? "text-muted-foreground hover:text-foreground" : "text-gray-400 hover:text-white";
+
+    const sectionLabelClass = isLight
+        ? "text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-3 border-b border-border pb-1"
+        : "text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3 border-b border-gray-800 pb-1";
+
+    const stepActiveClass = isLight
+        ? "bg-primary/10 text-primary border-primary font-medium"
+        : "bg-indigo-500/10 text-indigo-300 border-indigo-500 font-medium";
+
+    const stepInactiveClass = isLight
+        ? "border-transparent text-muted-foreground hover:bg-primary/5 hover:text-foreground hover:border-border"
+        : "border-transparent text-gray-400 hover:bg-white/5 hover:text-white hover:border-gray-600";
+
+    const themeRowClass = isLight
+        ? "w-full flex items-center justify-between p-3 rounded-lg hover:bg-primary/5 transition-colors"
+        : "w-full flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors";
+
+    const themePillTrack = isLight ? "w-9 h-5 rounded-full p-0.5 bg-primary/25" : "w-9 h-5 rounded-full p-0.5 bg-amber-300/40";
+
     return (
         <>
-            {/* Toggle Button */}
             <button
                 onClick={() => setIsOpen(true)}
-                className="fixed top-4 right-4 z-[60] p-2 bg-black/50 backdrop-blur-md rounded-full text-white/50 hover:text-white border border-white/10 transition-colors shadow-lg"
+                className={triggerClass}
                 aria-label="Open Menu"
             >
-                <Menu size={20} />
+                <Menu className={iconClass} />
             </button>
 
-            {/* Overlay & Menu */}
             {isOpen && (
-                <div className="fixed inset-0 z-[70] bg-black/80 backdrop-blur-sm flex justify-end">
-                    {/* Close Area */}
+                <div className={overlayClass}>
                     <div className="flex-1" onClick={() => setIsOpen(false)} />
 
-                    {/* Menu Panel */}
-                    <div className="w-80 h-full bg-slate-950 border-l border-white/10 flex flex-col shadow-2xl overflow-hidden animate-in slide-in-from-right duration-300">
-                        <div className="p-4 border-b border-white/5 flex items-center justify-between bg-black/40">
-                            <h3 className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Experience Controller</h3>
-                            <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white">
+                    <div className={panelClass}>
+                        <div className={headerBarClass}>
+                            <h3 className={headerLabelClass}>Experience Controller</h3>
+                            <button onClick={() => setIsOpen(false)} className={closeBtnClass} aria-label="Close menu">
                                 <X size={20} />
+                            </button>
+                        </div>
+
+                        {/* Theme Toggle */}
+                        <div className={isLight ? "p-3 border-b border-border" : "p-3 border-b border-white/5"}>
+                            <button onClick={toggleTheme} className={themeRowClass}>
+                                <div className="flex items-center gap-3">
+                                    {isLight ? (
+                                        <Moon className="w-4 h-4 text-primary" />
+                                    ) : (
+                                        <Sun className="w-4 h-4 text-amber-300" />
+                                    )}
+                                    <div className="text-left">
+                                        <div className={isLight ? "text-[13px] font-semibold text-foreground" : "text-[13px] font-semibold text-white/90"}>
+                                            {isLight ? "Switch to Dark" : "Switch to Light"}
+                                        </div>
+                                        <div className={isLight ? "text-[10px] text-muted-foreground uppercase tracking-widest mt-0.5" : "text-[10px] text-white/40 uppercase tracking-widest mt-0.5"}>
+                                            Theme · {isLight ? "Light" : "Dark"} mode
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={themePillTrack}>
+                                    <div className={`w-4 h-4 rounded-full bg-white transition-transform ${isLight ? "translate-x-0" : "translate-x-4"}`} />
+                                </div>
                             </button>
                         </div>
 
                         <div className="flex-1 overflow-y-auto p-4 space-y-6">
                             {sections.map((section, idx) => (
                                 <div key={idx}>
-                                    <h4 className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3 border-b border-gray-800 pb-1">
+                                    <h4 className={sectionLabelClass}>
                                         {section.title}
                                     </h4>
                                     <div className="space-y-1">
@@ -98,10 +159,9 @@ export const ClientDebugMenu = ({ currentStep, onJump }: ClientDebugMenuProps) =
                                                     onJump(step.id);
                                                     setIsOpen(false);
                                                 }}
-                                                className={`w-full text-left px-3 py-2 text-xs rounded transition-colors border-l-2 ${currentStep === step.id
-                                                        ? "bg-indigo-500/10 text-indigo-300 border-indigo-500 font-medium"
-                                                        : "border-transparent text-gray-400 hover:bg-white/5 hover:text-white hover:border-gray-600"
-                                                    }`}
+                                                className={`w-full text-left px-3 py-2 text-xs rounded transition-colors border-l-2 ${
+                                                    currentStep === step.id ? stepActiveClass : stepInactiveClass
+                                                }`}
                                             >
                                                 {step.label}
                                             </button>

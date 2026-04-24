@@ -44,20 +44,20 @@ export const ClientFunnelMaze = ({ onComplete }: ClientFunnelMazeProps) => {
     return (
         <div className="max-w-4xl mx-auto py-12 px-6 h-[800px]">
             <div className="text-center space-y-4 mb-8">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-bold tracking-widest text-indigo-400 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     SCENARIO 3: THE MAZE
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
                     The "Where is it?" Loop
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     Task: Find the <strong>"Procurement Guidelines"</strong>. <br />
-                    <span className="text-indigo-400 text-sm">(Because Information Architecture is "hard")</span>
+                    <span className="text-primary text-sm">(Because Information Architecture is "hard")</span>
                 </p>
             </div>
 
             {/* THE APP CONTAINER - ACADEMIC / COMPLIANCE STYLE */}
-            <div className="relative max-w-4xl mx-auto border-4 border-gray-700 rounded-xl overflow-hidden shadow-2xl bg-white text-slate-900 h-[600px] flex flex-col font-serif">
+            <div className="relative max-w-4xl mx-auto border-4 border-border rounded-xl overflow-hidden shadow-2xl bg-white text-slate-900 h-[600px] flex flex-col font-serif">
 
                 {/* 1. TOP BAR - Utility Nav */}
                 <div className="bg-slate-900 text-slate-300 text-[10px] py-1 px-4 flex justify-end gap-4 border-b border-slate-700">
@@ -87,7 +87,7 @@ export const ClientFunnelMaze = ({ onComplete }: ClientFunnelMazeProps) => {
                         onClick={() => setActiveMenu(activeMenu === 'OPEN' ? null : 'OPEN')}
                         className={`flex items-center gap-2 border px-3 py-1 rounded transition-all ${activeMenu === 'OPEN'
                             ? 'bg-slate-800 border-white text-white'
-                            : 'border-slate-600 hover:bg-slate-800 animate-pulse border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.3)]'
+                            : 'border-slate-600 hover:bg-slate-800 animate-pulse border-indigo-500/50 shadow-lg'
                             }`}
                     >
                         <span className="uppercase text-[10px] font-bold tracking-widest text-indigo-300">Menu</span>

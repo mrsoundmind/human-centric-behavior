@@ -74,7 +74,7 @@ export const GradientBackground = ({ color1 = "#7c3aed", color2 = "#1e40af" }: {
             <div
                 className="absolute inset-0 opacity-[0.03]"
                 style={{
-                    backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+                    backgroundImage: `linear-gradient(hsl(var(--foreground) / 0.5) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground) / 0.5) 1px, transparent 1px)`,
                     backgroundSize: "60px 60px",
                 }}
             />
@@ -88,7 +88,7 @@ export const GradientBackground = ({ color1 = "#7c3aed", color2 = "#1e40af" }: {
 export const PhaseCarouselIndicator = ({ currentIdx, labels }: { currentIdx: number, labels: string[] }) => {
     return (
         <div className="absolute top-8 left-0 right-0 z-50 flex flex-col items-center justify-center pointer-events-none">
-            <div className="flex items-center gap-12 bg-black/40 backdrop-blur-xl px-10 py-5 rounded-full border border-white/10 shadow-2xl">
+            <div className="flex items-center gap-12 bg-background/80 backdrop-blur-xl px-10 py-5 rounded-full border border-border shadow-lg">
                 {labels.map((label, idx) => {
                     const isActive = idx === currentIdx;
                     const isPast = idx < currentIdx;
@@ -96,12 +96,12 @@ export const PhaseCarouselIndicator = ({ currentIdx, labels }: { currentIdx: num
                         <div key={idx} className="flex flex-col items-center gap-3 relative">
                             {/* Connecting Line (drawn to the next dot) */}
                             {idx < labels.length - 1 && (
-                                <div className="absolute top-[3px] left-[50%] w-full h-px bg-white/10" style={{ transform: 'translateX(5px)', width: 'calc(100% + 2rem)' }}>
+                                <div className="absolute top-[3px] left-[50%] w-full h-px bg-border" style={{ transform: 'translateX(5px)', width: 'calc(100% + 2rem)' }}>
                                     {isPast && (
-                                        <motion.div 
-                                            initial={{ width: 0 }} 
-                                            animate={{ width: '100%' }} 
-                                            className="h-full bg-white/50" 
+                                        <motion.div
+                                            initial={{ width: 0 }}
+                                            animate={{ width: '100%' }}
+                                            className="h-full bg-foreground/50"
                                         />
                                     )}
                                 </div>
@@ -111,15 +111,15 @@ export const PhaseCarouselIndicator = ({ currentIdx, labels }: { currentIdx: num
                             <motion.div
                                 animate={{
                                     scale: isActive ? 1.5 : 1,
-                                    backgroundColor: isActive ? "rgba(255,255,255,1)" : isPast ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.15)",
+                                    backgroundColor: isActive ? "hsl(var(--foreground))" : isPast ? "hsl(var(--muted-foreground))" : "hsl(var(--muted))",
                                 }}
-                                className={`w-2 h-2 rounded-full relative z-10 transition-colors ${isActive ? 'shadow-[0_0_15px_rgba(255,255,255,0.8)]' : ''}`}
+                                className={`w-2 h-2 rounded-full relative z-10 transition-colors ${isActive ? 'shadow-lg' : ''}`}
                             />
 
                             {/* Label */}
                             <span
                                 className={`absolute top-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[9px] font-mono tracking-widest uppercase transition-all duration-500 ${
-                                    isActive ? "text-white opacity-100 font-bold" : isPast ? "text-white opacity-40" : "text-white opacity-20"
+                                    isActive ? "text-foreground opacity-100 font-bold" : isPast ? "text-foreground opacity-40" : "text-foreground opacity-20"
                                 }`}
                             >
                                 {label}
@@ -141,14 +141,14 @@ const ContentRenderer = ({ content, className = "" }: { content: string | string
             <ul className={`space-y-3 ${className}`}>
                 {bulletItems.map((item, i) => (
                     <li key={i} className="flex gap-3 items-start group">
-                        <div className="w-1.5 h-1.5 rounded-full bg-white/20 mt-2 shrink-0 group-hover:bg-white/50 transition-colors" />
-                        <span className="text-white/70 leading-relaxed font-light"><HighlightText text={item} /></span>
+                        <div className="w-1.5 h-1.5 rounded-full bg-muted mt-2 shrink-0 group-hover:bg-muted-foreground transition-colors" />
+                        <span className="text-muted-foreground leading-relaxed font-light"><HighlightText text={item} /></span>
                     </li>
                 ))}
             </ul>
         );
     }
-    return <p className={`text-white/70 leading-relaxed font-light ${className}`}><HighlightText text={items[0]} /></p>;
+    return <p className={`text-muted-foreground leading-relaxed font-light ${className}`}><HighlightText text={items[0]} /></p>;
 };
 
 // ============================================================
@@ -186,11 +186,11 @@ export const GenericStageWrapper = ({
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-4 mb-8 px-1"
             >
-                <span className="text-[11px] font-mono text-white/30 uppercase tracking-[0.25em]">
+                <span className="text-[11px] font-mono text-muted-foreground/70 uppercase tracking-[0.25em]">
                     Scenario {String(stageNumber).padStart(2, "0")} Handled
                 </span>
-                <div className="h-px w-8 bg-white/10" />
-                <span className="text-[13px] font-semibold text-white/60">{title}</span>
+                <div className="h-px w-8 bg-border" />
+                <span className="text-[13px] font-semibold text-muted-foreground">{title}</span>
             </motion.div>
 
             <div className="grid grid-cols-12 gap-8">
@@ -208,21 +208,20 @@ export const GenericStageWrapper = ({
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: revealed ? 1 : 0, y: revealed ? 0 : 20 }}
-                        className="rounded-3xl p-8 border border-white/[0.08]"
-                        style={{ background: "rgba(255,255,255,0.02)", backdropFilter: "blur(20px)" }}
+                        className="rounded-3xl p-8 border border-border bg-muted backdrop-blur-xl"
                     >
-                        <p className="text-[10px] font-mono text-white/25 uppercase tracking-[0.3em] mb-6">The Situation</p>
-                        <p className="text-[15px] text-white/80 leading-relaxed font-light mb-6">
+                        <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.3em] mb-6">The Situation</p>
+                        <p className="text-[15px] text-foreground leading-relaxed font-light mb-6">
                             <HighlightText text={story} />
                         </p>
-                        <div className="pt-6 border-t border-white/[0.05]">
-                            <p className="text-[10px] font-mono text-white/40 uppercase tracking-[0.2em] mb-2 italic">UX Connection</p>
-                            <p className="text-[13px] text-white/40 leading-relaxed"><HighlightText text={uxConnection} /></p>
+                        <div className="pt-6 border-t border-border">
+                            <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.2em] mb-2 italic">UX Connection</p>
+                            <p className="text-[13px] text-muted-foreground/70 leading-relaxed"><HighlightText text={uxConnection} /></p>
                         </div>
                     </motion.div>
 
                     <motion.div className="space-y-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-                        <p className="text-[10px] font-mono text-white/25 uppercase tracking-[0.3em] ml-2">Your Move</p>
+                        <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.3em] ml-2">Your Move</p>
                         {choices.map((choice, idx) => (
                             <motion.button
                                 key={choice.type}
@@ -230,17 +229,17 @@ export const GenericStageWrapper = ({
                                 onMouseLeave={() => setHoveredChoice(null)}
                                 onClick={() => handleChoice(choice.type)}
                                 disabled={!!selected}
-                                className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden group ${selected === choice.type ? "border-white/50 bg-white/10 scale-[1.02]" :
-                                    selected ? "opacity-30 border-white/[0.02] grayscale" : "border-white/[0.06] hover:border-white/30 hover:bg-white/[0.03]"
+                                className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden group ${selected === choice.type ? "border-primary/30 bg-primary/10 scale-[1.02]" :
+                                    selected ? "opacity-30 border-border grayscale" : "border-border hover:border-primary/30 hover:bg-muted"
                                     }`}
                             >
                                 <div className="flex gap-4 items-start relative z-10">
-                                    <div className={`mt-0.5 text-[11px] font-mono ${selected === choice.type ? "text-white" : "text-white/20"}`}>
+                                    <div className={`mt-0.5 text-[11px] font-mono ${selected === choice.type ? "text-foreground" : "text-muted-foreground/70"}`}>
                                         {String.fromCharCode(65 + idx)}
                                     </div>
                                     <div className="flex-1">
-                                        <p className="text-[14px] font-bold text-white mb-1"><HighlightText text={choice.label} /></p>
-                                        <p className="text-[11px] text-white/30 uppercase tracking-widest font-mono"><HighlightText text={choice.sublabel} /></p>
+                                        <p className="text-[14px] font-bold text-foreground mb-1"><HighlightText text={choice.label} /></p>
+                                        <p className="text-[11px] text-muted-foreground/70 uppercase tracking-widest font-mono"><HighlightText text={choice.sublabel} /></p>
                                     </div>
                                     <ChevronRight className={`w-4 h-4 mt-0.5 transition-transform ${selected === choice.type ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"}`} />
                                 </div>
@@ -264,78 +263,78 @@ export const GenericDebriefOverlay = ({ debrief, onNext, isLastStage }: DebriefO
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="fixed inset-0 z-[100] bg-[#050507] overflow-y-auto overflow-x-hidden selection:bg-red-500/30 font-sans"
+                className="fixed inset-0 z-[100] bg-background overflow-y-auto overflow-x-hidden selection:bg-destructive/30 font-sans"
             >
                 {/* Tactical Grid Background */}
-                <div className="fixed inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
-                <div className="fixed inset-0 bg-gradient-to-b from-blue-900/5 via-transparent to-transparent pointer-events-none" />
+                <div className="fixed inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
+                <div className="fixed inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
 
                 <div className="min-h-screen flex items-center justify-center p-6 md:p-12 relative">
                     <div className="max-w-4xl w-full">
                         {/* Debrief Analysis Narrative - Unified Card UI */}
-                        <div className="bg-white/[0.02] border border-white/[0.05] rounded-[2rem] p-8 lg:p-12 backdrop-blur-xl relative overflow-hidden shadow-2xl">
+                        <div className="bg-muted border border-border rounded-[2rem] p-8 lg:p-12 backdrop-blur-xl relative overflow-hidden shadow-lg">
                             <div className="space-y-10 relative z-10">
-                                
+
                                 {/* Header Section */}
                                 <div className="mb-8">
                                     <div className="flex items-center gap-4 mb-6">
-                                        <div className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono text-white/50 uppercase tracking-[0.2em] backdrop-blur-sm">
+                                        <div className="px-3 py-1 bg-muted border border-border rounded-full text-[10px] font-mono text-muted-foreground uppercase tracking-[0.2em] backdrop-blur-sm">
                                             System State: 0x4F2
                                         </div>
                                     </div>
-                                    <h2 className="text-3xl md:text-5xl font-black text-white leading-[1.1] tracking-tight">
+                                    <h2 className="text-3xl md:text-5xl font-black text-foreground leading-[1.1] tracking-tight">
                                         <HighlightText text={debrief.title} />
                                     </h2>
                                 </div>
 
                                 {/* Section 1: The Reality */}
                                 <div>
-                                    <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.3em] mb-4 flex items-center gap-3">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /> The Reality
+                                    <h4 className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.3em] mb-4 flex items-center gap-3">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse" /> The Reality
                                     </h4>
-                                    <ContentRenderer content={debrief.what} className="text-[16px] xl:text-[18px] text-white/90 leading-relaxed font-light" />
+                                    <ContentRenderer content={debrief.what} className="text-[16px] xl:text-[18px] text-foreground leading-relaxed font-light" />
                                 </div>
 
                                 {/* Section 2: Mechanism & Root Cause */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-white/[0.05]">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-border">
                                     <div>
-                                        <h4 className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] mb-4 italic">
+                                        <h4 className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.2em] mb-4 italic">
                                             The Root Cause
                                         </h4>
-                                        <ContentRenderer content={debrief.why} className="text-[14px] text-white/60 leading-relaxed font-light" />
+                                        <ContentRenderer content={debrief.why} className="text-[14px] text-muted-foreground leading-relaxed font-light" />
                                     </div>
                                     <div>
-                                        <h4 className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] mb-4 italic">
+                                        <h4 className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.2em] mb-4 italic">
                                             The Ripple Effect
                                         </h4>
-                                        <ContentRenderer content={debrief.how} className="text-[14px] text-white/60 leading-relaxed font-light" />
+                                        <ContentRenderer content={debrief.how} className="text-[14px] text-muted-foreground leading-relaxed font-light" />
                                     </div>
                                 </div>
 
                                 {/* Section 3: Identity Shift (Action) */}
-                                <div className="pt-8 border-t border-white/[0.05]">
-                                    <h4 className="text-[10px] font-mono text-white/40 uppercase tracking-[0.3em] mb-4 flex items-center gap-3">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500" /> Identity Shift
+                                <div className="pt-8 border-t border-border">
+                                    <h4 className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.3em] mb-4 flex items-center gap-3">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-primary" /> Identity Shift
                                     </h4>
-                                    <p className="text-[16px] text-amber-100/90 leading-relaxed font-medium italic mb-2 relative z-10">
+                                    <p className="text-[16px] text-primary leading-relaxed font-medium italic mb-2 relative z-10">
                                         "{debrief.tomorrow}"
                                     </p>
                                 </div>
 
                                 {/* Advance Button (End of Reading Flow) */}
-                                <div className="pt-8 border-t border-white/[0.05]">
+                                <div className="pt-8 border-t border-border">
                                     <motion.button
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         transition={{ delay: 0.8 }}
                                         onClick={onNext}
-                                        className="group w-full py-5 bg-white text-black rounded-full font-black text-[12px] uppercase tracking-[0.3em] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_10px_40px_rgba(255,255,255,0.1)] flex items-center justify-center gap-4"
+                                        className="group w-full py-5 bg-primary text-primary-foreground rounded-full font-black text-[12px] uppercase tracking-[0.3em] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg flex items-center justify-center gap-4"
                                     >
                                         <span className="relative z-10">
                                             {isLastStage ? "Generate Profile Analysis" : "Next Scenario"}
                                         </span>
-                                        <div className="relative z-10 w-6 h-6 rounded-full bg-black/10 flex items-center justify-center group-hover:bg-black/20 transition-all">
-                                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform group-hover:text-black" />
+                                        <div className="relative z-10 w-6 h-6 rounded-full bg-primary-foreground/10 flex items-center justify-center group-hover:bg-primary-foreground/20 transition-all">
+                                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                         </div>
                                     </motion.button>
                                 </div>
@@ -358,13 +357,12 @@ export const GenericBriefingOverlay = ({ title, scenario, story, uxConnection, r
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 0.98, filter: "blur(20px)" }}
-            className="fixed inset-0 z-[200] bg-[#030303] overflow-y-auto font-sans text-white selection:bg-blue-500/30"
+            className="fixed inset-0 z-[200] bg-background overflow-y-auto font-sans text-foreground selection:bg-primary/30"
         >
             {/* Cinematic Background */}
             <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-[60vw] h-[60vw] rounded-full bg-blue-600/10 blur-[150px] animate-pulse" />
-                <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] rounded-full bg-purple-600/5 blur-[120px]" />
-                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03] mix-blend-overlay" />
+                <div className="absolute top-0 right-0 w-[60vw] h-[60vw] rounded-full bg-primary/10 blur-[150px] animate-pulse" />
+                <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] rounded-full bg-accent/5 blur-[120px]" />
             </div>
 
             <div className="min-h-screen flex items-center justify-center p-6 md:p-12 relative z-10">
@@ -377,15 +375,15 @@ export const GenericBriefingOverlay = ({ title, scenario, story, uxConnection, r
                         className="mb-16"
                     >
                         <div className="flex items-center gap-4 mb-8">
-                            <div className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono text-white/50 uppercase tracking-[0.2em] backdrop-blur-sm">
+                            <div className="px-3 py-1 bg-muted border border-border rounded-full text-[10px] font-mono text-muted-foreground uppercase tracking-[0.2em] backdrop-blur-sm">
                                 Operational Readiness
                             </div>
-                            <div className="h-px w-24 bg-white/10" />
+                            <div className="h-px w-24 bg-border" />
                         </div>
-                        <h1 className="text-4xl lg:text-5xl font-black text-white leading-[1.1] tracking-tight drop-shadow-2xl mb-8 uppercase">
+                        <h1 className="text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight drop-shadow-2xl mb-8 uppercase">
                             <HighlightText text={title} />
                         </h1>
-                        <p className="text-xl md:text-2xl text-white/70 font-light tracking-wide max-w-2xl leading-relaxed">
+                        <p className="text-xl md:text-2xl text-muted-foreground font-light tracking-wide max-w-2xl leading-relaxed">
                             <HighlightText text={scenario} />
                         </p>
                     </motion.div>
@@ -393,9 +391,9 @@ export const GenericBriefingOverlay = ({ title, scenario, story, uxConnection, r
                     {/* Information Cluster */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
                         {[
-                            { label: "The Scenario", content: story, icon: AlertCircle, color: "red" },
-                            { label: "UX Connection", content: uxConnection, icon: Zap, color: "blue" },
-                            { label: "High-Stakes Cost", content: realLifeImpact, icon: Shield, color: "orange" },
+                            { label: "The Scenario", content: story, icon: AlertCircle, accent: "destructive" as const },
+                            { label: "UX Connection", content: uxConnection, icon: Zap, accent: "primary" as const },
+                            { label: "High-Stakes Cost", content: realLifeImpact, icon: Shield, accent: "destructive" as const },
                         ].map((card, i) => (
                             <motion.div
                                 key={card.label}
@@ -404,14 +402,14 @@ export const GenericBriefingOverlay = ({ title, scenario, story, uxConnection, r
                                 transition={{ delay: 0.2 + i * 0.1 }}
                                 className="group relative"
                             >
-                                <div className="absolute inset-0 bg-white shadow-xl rounded-[2rem] -rotate-1 opacity-0 group-hover:opacity-[0.03] transition-all duration-500" />
-                                <div className="p-10 rounded-[2rem] border border-white/[0.05] bg-white/[0.02] backdrop-blur-xl h-full flex flex-col relative z-10 transition-all duration-300 group-hover:translate-y-[-4px] group-hover:border-white/10">
-                                    <div className={`w-12 h-12 rounded-2xl bg-${card.color}-500/10 flex items-center justify-center mb-8 border border-${card.color}-500/20 group-hover:scale-110 transition-transform`}>
-                                        <card.icon className={`w-6 h-6 text-${card.color}-400`} />
+                                <div className="absolute inset-0 bg-foreground shadow-lg rounded-[2rem] -rotate-1 opacity-0 group-hover:opacity-[0.03] transition-all duration-500" />
+                                <div className="p-10 rounded-[2rem] border border-border bg-muted backdrop-blur-xl h-full flex flex-col relative z-10 transition-all duration-300 group-hover:translate-y-[-4px] group-hover:border-border">
+                                    <div className={`w-12 h-12 rounded-2xl ${card.accent === "primary" ? "bg-primary/10 border-primary/20" : "bg-destructive/10 border-destructive/20"} flex items-center justify-center mb-8 border group-hover:scale-110 transition-transform`}>
+                                        <card.icon className={`w-6 h-6 ${card.accent === "primary" ? "text-primary" : "text-destructive"}`} />
                                     </div>
-                                    <p className="text-[10px] font-mono text-white/30 uppercase tracking-[0.4em] mb-6">{card.label}</p>
+                                    <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.4em] mb-6">{card.label}</p>
                                     <div className="flex-1">
-                                        <ContentRenderer content={card.content} className="text-[15px] leading-relaxed text-white/70 font-light" />
+                                        <ContentRenderer content={card.content} className="text-[15px] leading-relaxed text-muted-foreground font-light" />
                                     </div>
                                 </div>
                             </motion.div>
@@ -427,14 +425,14 @@ export const GenericBriefingOverlay = ({ title, scenario, story, uxConnection, r
                     >
                         <button
                             onClick={onStart}
-                            className="group relative px-12 py-6 bg-white text-black rounded-full font-black text-sm uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-all shadow-[0_20px_50px_rgba(255,255,255,0.15)] overflow-hidden"
+                            className="group relative px-12 py-6 bg-primary text-primary-foreground rounded-full font-black text-sm uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-all shadow-lg overflow-hidden"
                         >
-                            <div className="absolute inset-x-0 bottom-0 h-1 bg-black/10 transition-all group-hover:h-full group-hover:opacity-5" />
+                            <div className="absolute inset-x-0 bottom-0 h-1 bg-primary-foreground/10 transition-all group-hover:h-full group-hover:opacity-5" />
                             <span className="relative z-10 flex items-center gap-4">
                                 Enter Simulation <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                             </span>
                         </button>
-                        <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em] max-w-[200px] leading-relaxed">
+                        <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.2em] max-w-[200px] leading-relaxed">
                             Decisions will impact role-specific mastery metrics in real-time.
                         </p>
                     </motion.div>

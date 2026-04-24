@@ -14,21 +14,21 @@ export const ClientContextCard = ({ children, step }: ClientContextCardProps) =>
             <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="bg-void/50 border border-white/10 rounded-2xl p-6 space-y-6 sticky top-24"
+                className="bg-card border border-border rounded-2xl p-6 space-y-6 sticky top-24"
             >
-                <div className="space-y-2 pb-6 border-b border-white/10">
-                    <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Executive Brief</h3>
-                    <p className="text-xl text-white font-display">Project "Velocity"</p>
+                <div className="space-y-2 pb-6 border-b border-border">
+                    <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Executive Brief</h3>
+                    <p className="text-xl text-foreground font-display">Project "Velocity"</p>
                 </div>
 
                 <div className="space-y-4">
                     <div>
-                        <p className="text-xs text-indigo-400 uppercase font-bold mb-1">Your Goal</p>
-                        <p className="text-sm text-gray-300">Launch fast. Minimize budget. Make it look "Premium".</p>
+                        <p className="text-xs text-primary uppercase font-bold mb-1">Your Goal</p>
+                        <p className="text-sm text-muted-foreground">Launch fast. Minimize budget. Make it look "Premium".</p>
                     </div>
                     <div>
-                        <p className="text-xs text-pink-500 uppercase font-bold mb-1">Current Status</p>
-                        <p className="text-sm text-gray-300">
+                        <p className="text-xs text-accent uppercase font-bold mb-1">Current Status</p>
+                        <p className="text-sm text-muted-foreground">
                             {step === "hook" && "Live User Testing"}
                             {step === "reflection" && "Post-Test Analysis"}
                             {step === "analysis" && "Business Auditing"}
@@ -36,8 +36,8 @@ export const ClientContextCard = ({ children, step }: ClientContextCardProps) =>
                     </div>
                 </div>
 
-                <div className="pt-6 border-t border-white/10">
-                    <p className="text-xs text-gray-500 italic">
+                <div className="pt-6 border-t border-border">
+                    <p className="text-xs text-muted-foreground italic">
                         "We don't need expensive research. Just follow the style guide."
                     </p>
                 </div>

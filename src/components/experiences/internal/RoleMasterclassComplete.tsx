@@ -245,28 +245,27 @@ export const RoleMasterclassComplete = ({ role, onReturnHome }: CompletionProps)
     const content = getRoleContent(role);
 
     return (
-        <div className="min-h-screen bg-[#030305] text-white selection:bg-purple-500/30 overflow-x-hidden pt-20 pb-12">
+        <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 overflow-x-hidden pt-20 pb-12">
 
             {/* Background elements */}
             <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-[60vw] h-[60vw] rounded-full bg-purple-600/10 blur-[150px]" />
-                <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] rounded-full bg-blue-600/5 blur-[120px]" />
-                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03] mix-blend-overlay" />
+                <div className="absolute top-0 right-0 w-[60vw] h-[60vw] rounded-full bg-primary/10 blur-[150px]" />
+                <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] rounded-full bg-primary/5 blur-[120px]" />
             </div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
                 {/* Hero Recognition Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20 bg-white/[0.02] border border-white/[0.05] rounded-[3rem] p-8 md:p-16 backdrop-blur-xl">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20 bg-card border border-border rounded-[3rem] p-8 md:p-16 backdrop-blur-xl">
                     <div className="lg:col-span-8">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="flex items-center gap-4 mb-8"
                         >
-                            <div className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-[10px] font-mono text-purple-400 uppercase tracking-[0.3em]">Masterclass Certified</div>
-                            <div className="h-px w-12 bg-white/10" />
-                            <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em]">{content.subtitle} Specialization</span>
+                            <div className="px-3 py-1 rounded-full bg-primary/10 border border-primary/40 text-[10px] font-mono text-primary uppercase tracking-[0.3em]">Masterclass Certified</div>
+                            <div className="h-px w-12 bg-border" />
+                            <span className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.2em]">{content.subtitle} Specialization</span>
                         </motion.div>
 
                         <motion.h1
@@ -282,7 +281,7 @@ export const RoleMasterclassComplete = ({ role, onReturnHome }: CompletionProps)
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2 }}
-                            className="text-lg md:text-xl text-white/50 font-light leading-relaxed max-w-3xl"
+                            className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-3xl"
                         >
                             {content.paradigmShift}
                         </motion.p>
@@ -295,12 +294,12 @@ export const RoleMasterclassComplete = ({ role, onReturnHome }: CompletionProps)
                             transition={{ type: "spring", duration: 0.8, delay: 0.3 }}
                             className="relative"
                         >
-                            <div className="absolute inset-0 bg-purple-500/20 blur-[60px] rounded-full animate-pulse" />
-                            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full border border-white/20 bg-gradient-to-br from-white/[0.05] to-transparent backdrop-blur-3xl flex flex-col items-center justify-center relative z-10 p-8 text-center">
-                                <Trophy className="w-12 h-12 md:w-16 md:h-16 text-white mb-4" />
-                                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/40 mb-1">Status</p>
+                            <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-full animate-pulse" />
+                            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full border border-primary/30 bg-gradient-to-br from-card to-transparent backdrop-blur-3xl flex flex-col items-center justify-center relative z-10 p-8 text-center">
+                                <Trophy className="w-12 h-12 md:w-16 md:h-16 text-foreground mb-4" />
+                                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground/70 mb-1">Status</p>
                                 <p className="text-xl md:text-2xl font-black uppercase tracking-tighter">Level 1 Mastery</p>
-                                <ShieldCheck className="w-6 h-6 text-purple-400 absolute bottom-6 right-6" />
+                                <ShieldCheck className="w-6 h-6 text-primary absolute bottom-6 right-6" />
                             </div>
                         </motion.div>
                     </div>
@@ -314,22 +313,22 @@ export const RoleMasterclassComplete = ({ role, onReturnHome }: CompletionProps)
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
-                        className="lg:col-span-1 bg-white/[0.02] border border-white/[0.05] rounded-[2.5rem] p-10 flex flex-col"
+                        className="lg:col-span-1 bg-card border border-border rounded-[2.5rem] p-10 flex flex-col"
                     >
-                        <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-8">
-                            <Target className="w-6 h-6 text-blue-400" />
+                        <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/40 flex items-center justify-center mb-8">
+                            <Target className="w-6 h-6 text-primary" />
                         </div>
                         <h3 className="text-2xl font-black mb-2 italic">The Commitment</h3>
-                        <p className="text-sm text-white/30 uppercase tracking-widest font-mono mb-10">Concrete actions for this week</p>
+                        <p className="text-sm text-muted-foreground/70 uppercase tracking-widest font-mono mb-10">Concrete actions for this week</p>
 
                         <div className="space-y-8 flex-1">
                             {content.commitments.map((c, i) => (
                                 <div key={i} className="group cursor-default">
                                     <div className="flex items-center gap-3 mb-2">
-                                        <span className="text-[10px] font-mono text-blue-400/50">0{i + 1}</span>
-                                        <h4 className="text-base font-bold text-white group-hover:text-blue-400 transition-colors">{c.label}</h4>
+                                        <span className="text-[10px] font-mono text-primary/50">0{i + 1}</span>
+                                        <h4 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{c.label}</h4>
                                     </div>
-                                    <p className="text-sm text-white/50 leading-relaxed font-light pl-7 border-l border-white/5">{c.action}</p>
+                                    <p className="text-sm text-muted-foreground leading-relaxed font-light pl-7 border-l border-border">{c.action}</p>
                                 </div>
                             ))}
                         </div>
@@ -340,29 +339,29 @@ export const RoleMasterclassComplete = ({ role, onReturnHome }: CompletionProps)
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5 }}
-                        className="lg:col-span-1 bg-white/[0.02] border border-white/[0.05] rounded-[2.5rem] p-10 flex flex-col"
+                        className="lg:col-span-1 bg-card border border-border rounded-[2.5rem] p-10 flex flex-col"
                     >
-                        <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-8">
-                            <MessageSquare className="w-6 h-6 text-purple-400" />
+                        <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/40 flex items-center justify-center mb-8">
+                            <MessageSquare className="w-6 h-6 text-primary" />
                         </div>
                         <h3 className="text-2xl font-black mb-2 italic">The Wordbook</h3>
-                        <p className="text-sm text-white/30 uppercase tracking-widest font-mono mb-10">How to say it in the room</p>
+                        <p className="text-sm text-muted-foreground/70 uppercase tracking-widest font-mono mb-10">How to say it in the room</p>
 
                         <div className="space-y-10 mb-auto">
                             {content.scripts.map((s, i) => (
                                 <div key={i}>
-                                    <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em] mb-3">{s.trigger}</p>
-                                    <div className="bg-white/[0.03] border border-white/5 p-5 rounded-2xl relative">
-                                        <div className="absolute top-0 left-0 w-1 h-full bg-purple-500 opacity-20" />
-                                        <p className="text-sm text-white/70 italic font-light leading-relaxed">"{s.line}"</p>
+                                    <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.2em] mb-3">{s.trigger}</p>
+                                    <div className="bg-muted border border-border p-5 rounded-2xl relative">
+                                        <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-20" />
+                                        <p className="text-sm text-muted-foreground italic font-light leading-relaxed">"{s.line}"</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
 
-                        <div className="mt-12 pt-10 border-t border-white/5">
-                            <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em] mb-4 text-center">Takeaway</p>
-                            <p className="text-lg text-white font-bold text-center leading-snug">"{content.insight}"</p>
+                        <div className="mt-12 pt-10 border-t border-border">
+                            <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.3em] mb-4 text-center">Takeaway</p>
+                            <p className="text-lg text-foreground font-bold text-center leading-snug">"{content.insight}"</p>
                         </div>
                     </motion.div>
 
@@ -371,29 +370,29 @@ export const RoleMasterclassComplete = ({ role, onReturnHome }: CompletionProps)
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6 }}
-                        className="lg:col-span-1 bg-white/[0.02] border border-white/[0.05] rounded-[2.5rem] p-10 flex flex-col"
+                        className="lg:col-span-1 bg-card border border-border rounded-[2.5rem] p-10 flex flex-col"
                     >
-                        <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mb-8">
-                            <ListChecks className="w-6 h-6 text-orange-400" />
+                        <div className="w-12 h-12 rounded-2xl bg-destructive/10 border border-destructive/40 flex items-center justify-center mb-8">
+                            <ListChecks className="w-6 h-6 text-destructive" />
                         </div>
                         <h3 className="text-2xl font-black mb-2 italic">The Daily Rubric</h3>
-                        <p className="text-sm text-white/30 uppercase tracking-widest font-mono mb-10">Shift your default perspective</p>
+                        <p className="text-sm text-muted-foreground/70 uppercase tracking-widest font-mono mb-10">Shift your default perspective</p>
 
                         <div className="space-y-6 flex-1">
                             {content.rubric.map((r, i) => (
-                                <div key={i} className="flex gap-4 items-start bg-white/[0.03] p-6 rounded-3xl border border-white/5 group hover:border-orange-500/30 transition-all">
-                                    <div className="w-6 h-6 rounded-full bg-white/5 text-[10px] flex items-center justify-center font-mono text-white/30 shrink-0 group-hover:bg-orange-500/20 group-hover:text-orange-400 transition-colors">0{i + 1}</div>
-                                    <p className="text-sm text-white/70 font-light leading-relaxed">{r}</p>
+                                <div key={i} className="flex gap-4 items-start bg-muted p-6 rounded-3xl border border-border group hover:border-destructive/30 transition-all">
+                                    <div className="w-6 h-6 rounded-full bg-muted text-[10px] flex items-center justify-center font-mono text-muted-foreground shrink-0 group-hover:bg-destructive/20 group-hover:text-destructive transition-colors">0{i + 1}</div>
+                                    <p className="text-sm text-muted-foreground font-light leading-relaxed">{r}</p>
                                 </div>
                             ))}
                         </div>
 
-                        <div className="mt-12 p-8 rounded-3xl bg-red-500/5 border border-red-500/10">
-                            <div className="flex items-center gap-2 text-red-400 mb-3">
+                        <div className="mt-12 p-8 rounded-3xl bg-destructive/5 border border-destructive/10">
+                            <div className="flex items-center gap-2 text-destructive mb-3">
                                 <AlertTriangle className="w-3.5 h-3.5" />
                                 <span className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold">Risk Assessment</span>
                             </div>
-                            <p className="text-xs text-white/40 leading-relaxed font-light">{content.cost}</p>
+                            <p className="text-xs text-muted-foreground leading-relaxed font-light">{content.cost}</p>
                         </div>
                     </motion.div>
                 </div>
@@ -405,11 +404,11 @@ export const RoleMasterclassComplete = ({ role, onReturnHome }: CompletionProps)
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.8 }}
                         onClick={onReturnHome}
-                        className="group flex items-center gap-6 py-6 px-12 rounded-full border border-white/10 hover:border-white/40 bg-white/[0.02] hover:bg-white text-black transition-all"
+                        className="group flex items-center gap-6 py-6 px-12 rounded-full border border-border hover:border-primary/40 bg-card hover:bg-primary text-primary-foreground transition-all"
                     >
-                        <span className="text-[12px] font-black uppercase tracking-[0.4em] text-white group-hover:text-black transition-colors">Complete Session & Exit</span>
-                        <div className="w-10 h-10 rounded-full bg-white/5 group-hover:bg-black/5 flex items-center justify-center transition-all">
-                            <ArrowRight className="w-5 h-5 text-white group-hover:text-black group-hover:translate-x-1 transition-all" />
+                        <span className="text-[12px] font-black uppercase tracking-[0.4em] text-foreground group-hover:text-primary-foreground transition-colors">Complete Session & Exit</span>
+                        <div className="w-10 h-10 rounded-full bg-muted group-hover:bg-primary-foreground/10 flex items-center justify-center transition-all">
+                            <ArrowRight className="w-5 h-5 text-foreground group-hover:text-primary-foreground group-hover:translate-x-1 transition-all" />
                         </div>
                     </motion.button>
                 </div>

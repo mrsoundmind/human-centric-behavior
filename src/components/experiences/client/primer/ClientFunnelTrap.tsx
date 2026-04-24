@@ -11,19 +11,19 @@ export const ClientFunnelTrap = ({ onComplete }: ClientFunnelTrapProps) => {
     return (
         <div className="max-w-4xl mx-auto py-12 px-6">
             <div className="text-center space-y-4 mb-12">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-widest text-indigo-300 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-muted border border-border text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     SCENARIO 4: THE LEAK
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
                     The "Lead Gen" Trap
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     They are interested in your product. <br />
                     But you treat them like a lead, not a human.
                 </p>
             </div>
 
-            <div className="relative max-w-5xl mx-auto h-[600px] bg-white border-4 border-gray-800 rounded-xl overflow-hidden shadow-2xl relative text-slate-900 flex flex-col">
+            <div className="relative max-w-5xl mx-auto h-[600px] bg-white border-4 border-border rounded-xl overflow-hidden shadow-2xl relative text-slate-900 flex flex-col">
                 {/* Desktop Header */}
                 <div className="bg-white border-b px-6 py-4 flex justify-between items-center z-10 shadow-sm shrink-0">
                     <div className="flex items-center gap-8">
@@ -221,12 +221,12 @@ export const ClientFunnelTrap = ({ onComplete }: ClientFunnelTrapProps) => {
                             <div className="text-5xl">🚫</div>
                         </div>
                         <div>
-                            <div className="text-white font-serif font-bold text-3xl mb-2">Browser Window Closed.</div>
-                            <div className="text-indigo-200 text-lg italic font-light">
+                            <div className="text-foreground font-serif font-bold text-3xl mb-2">Browser Window Closed.</div>
+                            <div className="text-primary text-lg italic font-light">
                                 "I'm just browsing. I don't want an agent calling me."
                             </div>
                         </div>
-                        <div className="mt-8 px-6 py-2 rounded-full border border-white/10 text-xs font-mono text-gray-500">
+                        <div className="mt-8 px-6 py-2 rounded-full border border-border text-xs font-mono text-muted-foreground">
                             Lead Status: <span className="text-red-500">LOST</span> • Opportunity Cost: <span className="text-red-500">HIGH</span>
                         </div>
                     </div>

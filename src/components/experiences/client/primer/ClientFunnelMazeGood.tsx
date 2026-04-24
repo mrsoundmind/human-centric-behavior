@@ -12,20 +12,20 @@ export const ClientFunnelMazeGood = ({ onComplete }: ClientFunnelMazeGoodProps) 
     return (
         <div className="max-w-4xl mx-auto py-20 px-6">
             <div className="text-center space-y-4 mb-16">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs font-bold tracking-widest text-green-400 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     THE FIX: FINDABILITY
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
-                    Structure for <span className="text-indigo-400">Humans</span>.
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
+                    Structure for <span className="text-primary">Humans</span>.
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     Flatten the hierarchy. Expose the value. <br />
                     Stop hiding your most important assets.
                 </p>
             </div>
 
             {/* THE APP CONTAINER - FIXED ACADEMIC STYLE */}
-            <div className="relative max-w-4xl mx-auto border-4 border-gray-700 rounded-xl overflow-hidden shadow-2xl bg-white text-slate-900 h-[600px] flex flex-col font-serif">
+            <div className="relative max-w-4xl mx-auto border-4 border-border rounded-xl overflow-hidden shadow-2xl bg-white text-slate-900 h-[600px] flex flex-col font-serif">
 
                 {/* 1. TOP BAR - Utility Nav */}
                 <div className="bg-slate-900 text-slate-300 text-[10px] py-1 px-4 flex justify-end gap-4 border-b border-slate-700">

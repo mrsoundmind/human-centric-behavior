@@ -203,8 +203,8 @@ export const QAJourney = ({ onComplete }: { onComplete?: () => void }) => {
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] text-white font-sans relative overflow-hidden">
-            <GradientBackground color1="#ec4899" color2="#f43f5e" />
+        <div className="min-h-screen bg-background text-foreground font-sans relative overflow-hidden">
+            <GradientBackground color1="#9335AA" color2="#DB5388" />
 
             <main className="relative z-10 pt-32 pb-12 px-6">
                 <AnimatePresence mode="wait">

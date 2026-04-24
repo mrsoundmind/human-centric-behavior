@@ -38,9 +38,7 @@ export const SilentButtonExperience = ({ onComplete }: SilentButtonExperiencePro
 
   if (stage === "context") {
     return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 pt-16">
-
-        <ExperienceWrapper stage="context">
+      <ExperienceWrapper stage="context">
           <ContextCard>
             <motion.p
               initial={{ opacity: 0 }}
@@ -81,38 +79,35 @@ export const SilentButtonExperience = ({ onComplete }: SilentButtonExperiencePro
             </motion.button>
           </ContextCard>
         </ExperienceWrapper>
-      </div>
     );
   }
 
   if (stage === "interaction") {
     return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 pt-16">
-
-        <ExperienceWrapper stage="interaction">
+      <ExperienceWrapper stage="interaction">
           <div className="flex flex-col items-center gap-12">
             {/* Fake form container */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="w-full max-w-none w-[1000px] bg-card border border-border rounded-lg p-8 shadow-deep"
+              className="w-full max-w-xl bg-card border border-border rounded-lg p-8 shadow-deep"
             >
               {/* Fake form fields */}
               <div className="space-y-6 mb-8">
                 {/* Fake Name Input */}
                 <div className="space-y-2">
-                  <div className="h-3 w-24 bg-gray-600 rounded" />
-                  <div className="h-14 bg-gray-700/30 border-2 border-gray-600 rounded-md w-full" />
+                  <div className="h-3 w-24 bg-muted-foreground/30 rounded" />
+                  <div className="h-14 bg-muted border border-border rounded-md w-full" />
                 </div>
                 {/* Fake Email Input */}
                 <div className="space-y-2">
-                  <div className="h-3 w-20 bg-gray-600 rounded" />
-                  <div className="h-14 bg-gray-700/30 border-2 border-gray-600 rounded-md w-full" />
+                  <div className="h-3 w-20 bg-muted-foreground/30 rounded" />
+                  <div className="h-14 bg-muted border border-border rounded-md w-full" />
                 </div>
                 {/* Fake Message Input */}
                 <div className="space-y-2">
-                  <div className="h-3 w-28 bg-gray-600 rounded" />
-                  <div className="h-32 bg-gray-700/30 border-2 border-gray-600 rounded-md w-full" />
+                  <div className="h-3 w-28 bg-muted-foreground/30 rounded" />
+                  <div className="h-32 bg-muted border border-border rounded-md w-full" />
                 </div>
               </div>
 
@@ -157,7 +152,6 @@ export const SilentButtonExperience = ({ onComplete }: SilentButtonExperiencePro
             )}
           </div>
         </ExperienceWrapper>
-      </div>
     );
   }
 
@@ -165,9 +159,7 @@ export const SilentButtonExperience = ({ onComplete }: SilentButtonExperiencePro
   const multipleClicks = clickCount > 1;
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 pt-16">
-
-      <ExperienceWrapper stage="reflection">
+    <ExperienceWrapper stage="reflection">
         <ReflectionCard>
           <div className="space-y-8">
             <motion.div
@@ -237,6 +229,5 @@ export const SilentButtonExperience = ({ onComplete }: SilentButtonExperiencePro
           </div>
         </ReflectionCard>
       </ExperienceWrapper>
-    </div>
   );
 };

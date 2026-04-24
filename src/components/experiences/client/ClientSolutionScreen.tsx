@@ -54,12 +54,12 @@ export const ClientSolutionScreen = ({ onRestart }: ClientSolutionScreenProps) =
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-2"
                 >
-                    <h2 className="text-3xl font-display font-light text-white">The Fix</h2>
-                    <p className="text-gray-400">
+                    <h2 className="text-3xl font-display font-light text-foreground">The Fix</h2>
+                    <p className="text-muted-foreground">
                         How do we ensure that friction never happens? <br />
                         We apply a human-centric process.
                     </p>
-                    <p className="text-xs uppercase tracking-widest text-indigo-400 font-bold pt-4">Select to Apply:</p>
+                    <p className="text-xs uppercase tracking-widest text-primary font-bold pt-4">Select to Apply:</p>
                 </motion.div>
 
                 <div className="space-y-4">
@@ -73,28 +73,28 @@ export const ClientSolutionScreen = ({ onRestart }: ClientSolutionScreenProps) =
                                 transition={{ delay: i * 0.1 }}
                                 onClick={() => toggleSolution(sol.id)}
                                 className={`w-full text-left p-6 rounded-xl border transition-all duration-300 group ${isActive
-                                        ? "bg-indigo-500/10 border-indigo-500 shadow-[0_0_30px_rgba(99,102,241,0.2)]"
-                                        : "bg-white/5 border-white/10 hover:bg-white/10"
+                                        ? "bg-primary/10 border-primary shadow-lg"
+                                        : "bg-muted border-border hover:bg-card"
                                     }`}
                             >
                                 <div className="flex justify-between items-start">
                                     <div className="flex gap-4">
                                         <span className="text-2xl pt-1">{sol.icon}</span>
                                         <div>
-                                            <h3 className={`text-lg font-medium transition-colors ${isActive ? "text-white" : "text-gray-300"}`}>
+                                            <h3 className={`text-lg font-medium transition-colors ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
                                                 {sol.title}
                                             </h3>
-                                            <div className="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-2">
+                                            <div className="text-xs font-bold uppercase tracking-wider text-primary mb-2">
                                                 {sol.subtitle}
                                             </div>
-                                            <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
+                                            <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
                                                 {sol.desc}
                                             </p>
                                         </div>
                                     </div>
-                                    <div className={`h-6 w-6 rounded-full border border-white/20 flex items-center justify-center transition-colors ${isActive ? "bg-indigo-500 border-indigo-500" : "bg-transparent"
+                                    <div className={`h-6 w-6 rounded-full border border-primary/30 flex items-center justify-center transition-colors ${isActive ? "bg-primary border-primary" : "bg-transparent"
                                         }`}>
-                                        {isActive && <span className="text-white text-xs">✓</span>}
+                                        {isActive && <span className="text-primary-foreground text-xs">✓</span>}
                                     </div>
                                 </div>
                             </motion.button>
@@ -105,16 +105,16 @@ export const ClientSolutionScreen = ({ onRestart }: ClientSolutionScreenProps) =
 
             {/* Right: The Outcome Visualizer */}
             <div className="sticky top-24 pt-12 md:pt-0">
-                <div className="bg-[#0F172A] border border-white/10 rounded-3xl p-8 relative overflow-hidden text-center space-y-8">
+                <div className="bg-card border border-border rounded-3xl p-8 relative overflow-hidden text-center space-y-8">
 
-                    <h3 className="text-gray-400 text-sm uppercase tracking-widest">Project Projection</h3>
+                    <h3 className="text-muted-foreground text-sm uppercase tracking-widest">Project Projection</h3>
 
                     <div className="relative h-48 w-48 mx-auto flex items-center justify-center">
                         {/* Background Circle */}
                         <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="#1e293b" strokeWidth="8" />
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="hsl(var(--muted))" strokeWidth="8" />
                             <motion.circle
-                                cx="50" cy="50" r="45" fill="none" stroke="#6366f1" strokeWidth="8"
+                                cx="50" cy="50" r="45" fill="none" stroke="hsl(var(--primary))" strokeWidth="8"
                                 strokeDasharray="283"
                                 initial={{ strokeDashoffset: 283 }}
                                 animate={{ strokeDashoffset: 283 - (283 * (successScore / 100)) }}
@@ -124,26 +124,26 @@ export const ClientSolutionScreen = ({ onRestart }: ClientSolutionScreenProps) =
                         </svg>
                         <div className="text-center">
                             <motion.div
-                                className="text-4xl font-bold text-white font-mono"
+                                className="text-4xl font-bold text-foreground font-mono"
                                 key={successScore}
                                 initial={{ scale: 0.8, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
                             >
                                 {successScore.toFixed(0)}%
                             </motion.div>
-                            <div className="text-xs text-gray-500 uppercase mt-1">Success Probability</div>
+                            <div className="text-xs text-muted-foreground uppercase mt-1">Success Probability</div>
                         </div>
                     </div>
 
                     <div className="space-y-2">
-                        <p className="text-sm text-gray-400">Projected Outcome</p>
+                        <p className="text-sm text-muted-foreground">Projected Outcome</p>
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeSolutions.length}
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
-                                className="text-xl font-medium text-white h-16 flex items-center justify-center"
+                                className="text-xl font-medium text-foreground h-16 flex items-center justify-center"
                             >
                                 {activeSolutions.length === 0 && "Launch scoring low. High churn risk."}
                                 {activeSolutions.length === 1 && "Better, but significant gaps remain."}
@@ -156,8 +156,8 @@ export const ClientSolutionScreen = ({ onRestart }: ClientSolutionScreenProps) =
                     <button
                         disabled={activeSolutions.length < 3}
                         className={`w-full py-4 rounded-xl font-display font-bold transition-all ${activeSolutions.length === 3
-                                ? "bg-white text-black hover:scale-[1.02] shadow-lg"
-                                : "bg-white/10 text-gray-500 cursor-not-allowed"
+                                ? "bg-primary text-primary-foreground hover:scale-[1.02] shadow-lg"
+                                : "bg-muted text-muted-foreground cursor-not-allowed"
                             }`}
                         onClick={() => alert("This would link to your contact form / calendar.")}
                     >
@@ -166,7 +166,7 @@ export const ClientSolutionScreen = ({ onRestart }: ClientSolutionScreenProps) =
 
                     <p
                         onClick={onRestart}
-                        className="text-xs text-gray-600 cursor-pointer hover:text-white transition-colors"
+                        className="text-xs text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
                     >
                         Restart Experience
                     </p>

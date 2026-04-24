@@ -33,19 +33,19 @@ export const ClientFunnelWall = ({ onComplete }: ClientFunnelWallProps) => {
     return (
         <div className="max-w-4xl mx-auto py-12 px-6">
             <div className="text-center space-y-4 mb-12">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-widest text-indigo-300 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-muted border border-border text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     SCENARIO 2: THE INTRUSION
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
                     The "Growth Hacking" Wall
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     The user is interested. They are reading. <br />
                     Then you punch them in the face.
                 </p>
             </div>
 
-            <div className="relative max-w-md mx-auto aspect-[9/16] bg-white border-8 border-gray-800 rounded-[3rem] overflow-hidden shadow-2xl relative text-black">
+            <div className="relative max-w-md mx-auto aspect-[9/16] bg-white border-8 border-border rounded-[3rem] overflow-hidden shadow-2xl relative text-black">
                 {/* Browser Bar */}
                 <div className="bg-gray-100 p-4 border-b border-gray-200 flex items-center justify-between">
                     <div className="text-xs font-bold text-gray-700">InterestingArticle.com</div>
@@ -99,7 +99,7 @@ export const ClientFunnelWall = ({ onComplete }: ClientFunnelWallProps) => {
 
                 {/* Overlay for Bounced State inside the phone */}
                 {state === "bounced" && (
-                    <div className="absolute inset-0 bg-black z-[60] flex items-center justify-center flex-col gap-4">
+                    <div className="absolute inset-0 bg-card z-[60] flex items-center justify-center flex-col gap-4">
                         <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
@@ -107,7 +107,7 @@ export const ClientFunnelWall = ({ onComplete }: ClientFunnelWallProps) => {
                         >
                             🤬
                         </motion.div>
-                        <div className="text-white font-bold">Rage Quit.</div>
+                        <div className="text-foreground font-bold">Rage Quit.</div>
                     </div>
                 )}
 

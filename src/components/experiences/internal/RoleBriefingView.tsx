@@ -68,8 +68,8 @@ export const RoleBriefingView = ({ role, onContinue, onBack, onSelectMode }: Rol
     const data = ROLE_BRIEFINGS[role];
 
     return (
-        <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-8 relative">
-            <button onClick={onBack} className="absolute top-8 left-8 text-gray-500 hover:text-white transition-colors">← Back to Roles</button>
+        <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center p-8 relative">
+            <button onClick={onBack} className="absolute top-8 left-8 text-muted-foreground hover:text-foreground transition-colors">← Back to Roles</button>
 
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -77,31 +77,31 @@ export const RoleBriefingView = ({ role, onContinue, onBack, onSelectMode }: Rol
                 className="max-w-4xl w-full"
             >
                 <div className="text-center mb-12 space-y-4">
-                    <div className="inline-block px-3 py-1 rounded-full bg-white/10 text-gray-300 text-xs font-bold uppercase tracking-widest">
+                    <div className="inline-block px-3 py-1 rounded-full bg-muted text-muted-foreground text-xs font-bold uppercase tracking-widest">
                         Selected Role
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500">
+                    <h1 className="text-5xl md:text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-foreground to-muted-foreground">
                         {data.title}
                     </h1>
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-6">
-                    <div className="bg-white/5 border border-white/10 p-8 rounded-2xl flex flex-col gap-4 hover:bg-white/10 transition-colors">
+                    <div className="bg-card border border-border p-8 rounded-2xl flex flex-col gap-4 hover:bg-muted transition-colors">
                         <div className="text-2xl">👁️</div>
-                        <h3 className="text-lg font-bold text-blue-400">What to Expect</h3>
-                        <p className="text-gray-400 leading-relaxed text-sm">{data.expect}</p>
+                        <h3 className="text-lg font-bold text-primary">What to Expect</h3>
+                        <p className="text-muted-foreground leading-relaxed text-sm">{data.expect}</p>
                     </div>
 
-                    <div className="bg-white/5 border border-white/10 p-8 rounded-2xl flex flex-col gap-4 hover:bg-white/10 transition-colors">
+                    <div className="bg-card border border-border p-8 rounded-2xl flex flex-col gap-4 hover:bg-muted transition-colors">
                         <div className="text-2xl">🧠</div>
-                        <h3 className="text-lg font-bold text-purple-400">What You'll Discover</h3>
-                        <p className="text-gray-400 leading-relaxed text-sm">{data.discover}</p>
+                        <h3 className="text-lg font-bold text-primary">What You'll Discover</h3>
+                        <p className="text-muted-foreground leading-relaxed text-sm">{data.discover}</p>
                     </div>
 
-                    <div className="bg-white/5 border border-white/10 p-8 rounded-2xl flex flex-col gap-4 hover:bg-white/10 transition-colors">
+                    <div className="bg-card border border-border p-8 rounded-2xl flex flex-col gap-4 hover:bg-muted transition-colors">
                         <div className="text-2xl">⚡</div>
-                        <h3 className="text-lg font-bold text-yellow-400">Why It Matters</h3>
-                        <p className="text-gray-400 leading-relaxed text-sm">{data.why}</p>
+                        <h3 className="text-lg font-bold text-primary">Why It Matters</h3>
+                        <p className="text-muted-foreground leading-relaxed text-sm">{data.why}</p>
                     </div>
                 </div>
 
@@ -110,19 +110,19 @@ export const RoleBriefingView = ({ role, onContinue, onBack, onSelectMode }: Rol
                         <div className="grid md:grid-cols-2 gap-4">
                             <button
                                 onClick={() => onSelectMode("full-sdlc")}
-                                className="group flex flex-col gap-2 px-8 py-6 bg-white text-black font-bold rounded-2xl hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(255,255,255,0.3)] text-left"
+                                className="group flex flex-col gap-2 px-8 py-6 bg-primary text-primary-foreground font-bold rounded-2xl hover:scale-[1.02] transition-transform shadow-lg text-left"
                             >
                                 <span className="text-lg">Full SDLC Journey</span>
-                                <span className="text-xs font-normal text-gray-600 leading-snug">
+                                <span className="text-xs font-normal text-primary-foreground/70 leading-snug">
                                     Walk through Discovery, Requirements, and Design phases with role-specific friction scenarios
                                 </span>
                             </button>
                             <button
                                 onClick={() => onSelectMode("quick")}
-                                className="group flex flex-col gap-2 px-8 py-6 bg-white/10 border border-white/20 text-white font-bold rounded-2xl hover:bg-white/20 hover:scale-[1.02] transition-all text-left"
+                                className="group flex flex-col gap-2 px-8 py-6 bg-muted border border-border text-foreground font-bold rounded-2xl hover:bg-muted/80 hover:scale-[1.02] transition-all text-left"
                             >
                                 <span className="text-lg">Quick Scenarios</span>
-                                <span className="text-xs font-normal text-gray-400 leading-snug">
+                                <span className="text-xs font-normal text-muted-foreground leading-snug">
                                     Play the original 3-scenario experience
                                 </span>
                             </button>
@@ -131,7 +131,7 @@ export const RoleBriefingView = ({ role, onContinue, onBack, onSelectMode }: Rol
                         <div className="text-center">
                             <button
                                 onClick={onContinue}
-                                className="px-12 py-4 bg-white text-black font-bold text-xl rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                                className="px-12 py-4 bg-primary text-primary-foreground font-bold text-xl rounded-full hover:scale-105 transition-transform shadow-lg"
                             >
                                 Enter Simulation
                             </button>

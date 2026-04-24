@@ -48,20 +48,10 @@ type ClientStep =
 
 export const ClientExperience = () => {
     const [step, setStep] = useState<ClientStep>("intro");
-    const [metrics, setMetrics] = useState<{ time: number; clicks: number; attempts: number } | null>(null);
 
     return (
         <ClientLayout step={getStepIndex(step)} totalSteps={18}>
-            <ClientDebugMenu
-                currentStep={step}
-                onJump={(s) => {
-                    setStep(s);
-                    // Mock metrics if jumping past hook
-                    if (s === "reflection" || s === "analysis") {
-                        if (!metrics) setMetrics({ time: 12.5, clicks: 8, attempts: 3 });
-                    }
-                }}
-            />
+            <ClientDebugMenu currentStep={step} onJump={(s) => setStep(s)} />
             <AnimatePresence mode="wait">
                 <motion.div
                     key={step}

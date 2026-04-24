@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -61,9 +61,9 @@
     --shadow-glow-friction: 0 0 40px hsl(8 75% 50% / 0.3);
     --shadow-deep: 0 25px 50px -12px hsl(240 10% 2% / 0.8);
 
-    /* Typography */
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    /* Typography — Raleway is the Zyxware brand corporate typeface */
+    --font-display: 'Raleway', 'Space Grotesk', sans-serif;
+    --font-body: 'Raleway', 'Inter', sans-serif;
 
     /* Sidebar - keeping for compatibility */
     --sidebar-background: 240 8% 6%;
@@ -106,6 +106,132 @@
     --sidebar-border: 240 6% 18%;
     --sidebar-ring: 38 92% 50%;
   }
+}
+
+/* ── Zyxware brand: Light theme global override ───────────────────────────
+   Maps every structural token to brand colors. Triggered by
+   <html data-theme="light"> set by ThemeContext. Buttons stay solid via
+   --primary = Vivid Violet. Gradients live in dedicated utilities (text,
+   dividers, backgrounds) — never on buttons. */
+:root[data-theme="light"] {
+  /* Brand — calibrated for contrast: 4-step ladder bg → muted → card */
+  --background: 288 25% 96%;       /* warm paper with violet hint, lets white cards pop */
+  --foreground: 0 0% 12%;          /* near-ink, slightly softer than pure 10% */
+
+  --card: 0 0% 100%;               /* pure white surfaces — clear lift over bg */
+  --card-foreground: 0 0% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 12%;
+
+  --primary: 288 52% 44%;          /* Vivid Violet #9335AA */
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 288 35% 94%;        /* tinted violet hover surface — visible on bg */
+  --secondary-foreground: 288 52% 32%;
+
+  --muted: 288 20% 92%;            /* clearly between bg and card */
+  --muted-foreground: 0 0% 32%;    /* stronger than #666 for AA on bg */
+
+  --accent: 337 65% 55%;           /* Brand pink #DB5388, slightly deeper */
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 8 75% 48%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 288 25% 82%;           /* visible violet-tinted borders */
+  --input: 288 25% 88%;
+  --ring: 288 52% 44%;
+
+  /* Custom experience tokens — keep clarity/friction/relief moments */
+  --void: 0 0% 98%;                /* immersive bg → paper in light mode */
+  --clarity: 288 52% 44%;          /* brand violet replaces amber */
+  --friction: 8 65% 45%;
+  --relief: 337 65% 59%;           /* pink for relief */
+
+  /* Gradients */
+  --gradient-void: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 0% 96%) 100%);
+  --gradient-clarity: linear-gradient(135deg, #9335AA 0%, #DB5388 100%);
+  --gradient-friction: linear-gradient(135deg, hsl(8 75% 50%) 0%, hsl(20 70% 45%) 100%);
+
+  /* Shadows — stronger lift in light mode so cards feel grounded */
+  --shadow-glow-clarity: 0 0 40px rgba(147, 53, 170, 0.22);
+  --shadow-glow-friction: 0 0 40px hsl(8 75% 50% / 0.22);
+  --shadow-deep: 0 18px 40px -10px rgba(60, 30, 90, 0.18), 0 4px 12px -2px rgba(60, 30, 90, 0.08);
+
+  /* Sidebar */
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 0 0% 10%;
+  --sidebar-primary: 288 52% 44%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 288 30% 96%;
+  --sidebar-accent-foreground: 288 52% 36%;
+  --sidebar-border: 288 30% 88%;
+  --sidebar-ring: 288 52% 44%;
+}
+
+/* Selection accents */
+:root[data-theme="light"] .selection\:bg-amber-500\/30::selection,
+:root[data-theme="light"] .selection\:bg-purple-500\/30::selection,
+:root[data-theme="light"] .selection\:bg-indigo-500\/30::selection {
+  background-color: rgba(147, 53, 170, 0.25);
+}
+
+
+/* Stronger, more evident hover for primary buttons in light theme.
+   Applies to anything using Tailwind's bg-primary (covers most CTAs)
+   without needing to touch individual components. */
+:root[data-theme="light"] button.bg-primary,
+:root[data-theme="light"] a.bg-primary,
+:root[data-theme="light"] .bg-primary {
+  transition: background-color 200ms ease, transform 180ms ease, box-shadow 200ms ease, filter 200ms ease;
+}
+:root[data-theme="light"] button.bg-primary:hover:not(:disabled),
+:root[data-theme="light"] a.bg-primary:hover,
+:root[data-theme="light"] .bg-primary:hover {
+  background-color: #7a2a8e !important;       /* darker Vivid Violet */
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -8px rgba(147, 53, 170, 0.55);
+  filter: brightness(1.02);
+}
+:root[data-theme="light"] button.bg-primary:active:not(:disabled),
+:root[data-theme="light"] .bg-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px -4px rgba(147, 53, 170, 0.45);
+}
+
+/* Body grain on light theme — applied automatically everywhere */
+:root[data-theme="light"] body {
+  background-color: hsl(var(--background));
+  background-image: radial-gradient(circle, rgba(60, 30, 90, 0.10) 0.8px, transparent 0.8px);
+  background-size: 12px 12px;
+  font-family: 'Raleway', 'Inter', sans-serif;
+}
+
+/* Card surfaces always sit on solid white in light mode (no grain bleed-through) */
+:root[data-theme="light"] .bg-card,
+:root[data-theme="light"] .bg-popover {
+  box-shadow: 0 1px 3px rgba(60, 30, 90, 0.06), 0 1px 2px rgba(60, 30, 90, 0.04);
+}
+
+/* Stronger placeholder contrast in light */
+:root[data-theme="light"] ::placeholder {
+  color: hsl(0 0% 48%);
+  opacity: 1;
+}
+
+/* Cleaner default focus ring in light */
+:root[data-theme="light"] :focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+:root[data-theme="light"] h1,
+:root[data-theme="light"] h2,
+:root[data-theme="light"] h3,
+:root[data-theme="light"] h4,
+:root[data-theme="light"] h5,
+:root[data-theme="light"] h6 {
+  font-family: 'Raleway', 'Space Grotesk', sans-serif;
 }
 
 @layer base {
@@ -165,5 +291,60 @@
 
   .preserve-3d {
     transform-style: preserve-3d;
+  }
+
+  /* ── Zyxware brand (scoped — only applies inside .zyx-brand wrapper) ── */
+  .zyx-brand {
+    --zyx-violet: #9335AA;
+    --zyx-violet-deep: #7a2a8e;
+    --zyx-pink: #DB5388;
+    --zyx-yellow: #FFEE71;
+    --zyx-gray: #666666;
+    --zyx-ink: #1a1a1a;
+    --zyx-paper: #ffffff;
+    --zyx-gradient: linear-gradient(135deg, #9335AA 0%, #DB5388 100%);
+    font-family: 'Raleway', 'Inter', sans-serif;
+  }
+
+  .zyx-grain {
+    background-color: #fafafa;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.08) 0.7px, transparent 0.7px);
+    background-size: 10px 10px;
+  }
+
+  .zyx-text-violet { color: var(--zyx-violet); }
+  .zyx-text-gray   { color: var(--zyx-gray); }
+  .zyx-text-ink    { color: var(--zyx-ink); }
+
+  .zyx-bg-violet   { background-color: var(--zyx-violet); }
+  .zyx-bg-gradient { background-image: var(--zyx-gradient); }
+
+  .zyx-text-gradient {
+    background-image: var(--zyx-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .zyx-btn-primary {
+    background-image: var(--zyx-gradient);
+    color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+  .zyx-btn-primary:hover {
+    filter: brightness(1.05);
+    box-shadow: 0 10px 30px -10px rgba(147, 53, 170, 0.55);
+    transform: translateY(-1px);
+  }
+
+  .zyx-btn-secondary {
+    background-color: #ffffff;
+    color: var(--zyx-violet);
+    border: 1.5px solid var(--zyx-violet);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .zyx-btn-secondary:hover {
+    background-color: var(--zyx-violet);
+    color: #ffffff;
   }
 }

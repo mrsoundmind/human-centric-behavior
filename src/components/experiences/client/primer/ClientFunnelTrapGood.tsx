@@ -8,19 +8,19 @@ export const ClientFunnelTrapGood = ({ onComplete }: ClientFunnelTrapGoodProps) 
     return (
         <div className="max-w-5xl mx-auto py-12 px-6">
             <div className="text-center space-y-4 mb-12">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs font-bold tracking-widest text-green-400 font-mono mb-4">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-xs font-bold tracking-widest text-primary font-mono mb-4">
                     THE FIX: TRANSPARENCY
                 </div>
-                <h2 className="text-4xl md:text-5xl font-display font-light text-white">
+                <h2 className="text-4xl md:text-5xl font-display font-light text-foreground">
                     Value First, Ask Later.
                 </h2>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     Give them what they want. <br />
                     They will contact you when they are ready.
                 </p>
             </div>
 
-            <div className="relative max-w-5xl mx-auto h-[600px] bg-white border-4 border-gray-800 rounded-xl overflow-hidden shadow-2xl relative text-slate-900 flex flex-col">
+            <div className="relative max-w-5xl mx-auto h-[600px] bg-white border-4 border-border rounded-xl overflow-hidden shadow-2xl relative text-slate-900 flex flex-col">
                 {/* Desktop Header */}
                 <div className="bg-white border-b px-6 py-4 flex justify-between items-center z-10 shadow-sm shrink-0">
                     <div className="flex items-center gap-8">
