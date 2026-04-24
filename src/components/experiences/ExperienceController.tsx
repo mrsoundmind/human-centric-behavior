@@ -12,7 +12,11 @@ import { BridgeToWork } from "./BridgeToWork";
 import { Layer15Controller } from "./layer15/Layer15Controller";
 import { Layer2Controller, Layer2Step, DiscoveryScreen, RequirementsScreen, DesignScreen, DevScreen, TestScreen, LaunchScreen, MaintenanceStage, LAYER2_ORDER, DISCOVERY_SCREENS, REQUIREMENTS_SCREENS, DESIGN_SCREENS } from "./layer2/Layer2Controller";
 import { InternalExperience } from "./internal/InternalExperience";
+import type { Designation } from "./internal/DesignationSelect";
 import { GlobalMenu } from "../navigation/GlobalMenu";
+
+const ROLE_IDS: readonly Designation[] = ["sales", "crm", "pm", "developer", "qa", "designer", "ba", "strategy"] as const;
+const isRoleId = (s: string): s is Designation => (ROLE_IDS as readonly string[]).includes(s);
 
 type ExperienceStep =
   | "intro"
@@ -45,6 +49,9 @@ const EXPERIENCE_ORDER: ExperienceStep[] = [
 
 const ExperienceControllerInner = () => {
   const [currentStep, setCurrentStep] = useState<ExperienceStep>("intro");
+  const [internalInitialStep, setInternalInitialStep] = useState<string | undefined>(undefined);
+  const [internalInitialRole, setInternalInitialRole] = useState<Designation | undefined>(undefined);
+  const [internalKey, setInternalKey] = useState(0);
   const [layer2InitialStep, setLayer2InitialStep] = useState<Layer2Step | undefined>(undefined);
   const [layer2InitialScreen, setLayer2InitialScreen] = useState<DiscoveryScreen | undefined>(undefined);
   const [layer2InitialRequirementsScreen, setLayer2InitialRequirementsScreen] = useState<RequirementsScreen | undefined>(undefined);
@@ -157,6 +164,41 @@ const ExperienceControllerInner = () => {
       {showLayerSwitcher && <LayerSwitcher />}
 
       <GlobalMenu onNavigate={(step) => {
+          // Role deep-link: "internal-role-sales" → role-journey for sales
+          if (step.startsWith("internal-role-")) {
+            const roleId = step.replace("internal-role-", "");
+            if (isRoleId(roleId)) {
+              setInternalInitialStep("role-journey");
+              setInternalInitialRole(roleId);
+              setInternalKey((k) => k + 1);
+              setCurrentStep("internal-training");
+              setCurrentLayer("layer1");
+              return;
+            }
+          }
+
+          // Internal deep-links: any onboarding-*, designation, role-briefing, masterclass-complete
+          const INTERNAL_STEPS = [
+            "internal-intro",
+            "onboarding-brief",
+            "onboarding-war-room",
+            "onboarding-system-reaction",
+            "onboarding-decision-lens",
+            "onboarding-identity",
+            "designation",
+            "role-briefing",
+            "masterclass-complete",
+          ];
+          if (INTERNAL_STEPS.includes(step)) {
+            const target = step === "internal-intro" ? "intro" : step;
+            setInternalInitialStep(target);
+            setInternalInitialRole(undefined);
+            setInternalKey((k) => k + 1);
+            setCurrentStep("internal-training");
+            setCurrentLayer("layer1");
+            return;
+          }
+
           setCurrentStep(step as ExperienceStep);
           if (step === "layer15") setCurrentLayer("layer1.5");
           else if (step === "layer2") {
@@ -165,7 +207,7 @@ const ExperienceControllerInner = () => {
             setLayer2InitialScreen(undefined);
             setLayer2Key(prev => prev + 1);
           }
-          else if (step === "internal-training" || step === "designation" || step === "intro") {
+          else if (step === "internal-training" || step === "intro") {
             setCurrentLayer("layer1");
           }
       }} />
@@ -251,18 +293,14 @@ const ExperienceControllerInner = () => {
 
 
           {/* INTERNAL ROUTING */}
-          {(currentStep === "internal-training" ||
-            ["internal-intro", "onboarding-brief", "onboarding-war-room", "onboarding-system-reaction", "onboarding-decision-lens", "onboarding-identity", "designation", "sales-journey", "pipeline", "simulation", "experiential", "briefing"].includes(currentStep)
-          ) && (
-              <InternalExperience
-                onBack={restart}
-                initialStep={
-                  currentStep === "internal-training" ? undefined :
-                    currentStep === "internal-intro" ? "intro" :
-                      (currentStep as any)
-                }
-              />
-            )}
+          {currentStep === "internal-training" && (
+            <InternalExperience
+              key={internalKey}
+              onBack={restart}
+              initialStep={internalInitialStep as any}
+              initialRole={internalInitialRole}
+            />
+          )}
         </motion.div>
       </AnimatePresence>
 

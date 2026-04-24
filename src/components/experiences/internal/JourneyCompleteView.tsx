@@ -13,7 +13,7 @@
 import { useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
-import { ArrowRight, Target, MessageSquare, ListChecks, AlertTriangle } from "lucide-react";
+import { ArrowRight, Target, MessageSquare, ListChecks, AlertTriangle, Eye, Zap, Activity, FileText, HelpCircle, Shield, Quote, CheckCircle2, Sparkles } from "lucide-react";
 import { useDesignationStore } from "../../../state/designation-store";
 import { computeProfile } from "../../../../data/scoring-engine";
 import { FRICTION_CONFIG } from "./designation-portal/friction-config";
@@ -447,51 +447,97 @@ function buildCompoundInsight(
   return `Your journey arc: ${arcDescription}. ${patternObservation}`;
 }
 
+// ─── Dimension visual mapping (theme-aware via CSS vars) ─────────────────────
+
+const DIM_THEME: Record<FrictionDimension, { dot: string; bar: string; tint: string }> = {
+  client_friction:      { dot: "bg-primary",            bar: "bg-primary",            tint: "bg-primary/10" },
+  internal_bureaucracy: { dot: "bg-amber-500",          bar: "bg-amber-500",          tint: "bg-amber-500/10" },
+  knowledge_gap:        { dot: "bg-accent",             bar: "bg-accent",             tint: "bg-accent/10" },
+  conflict_avoidance:   { dot: "bg-destructive",        bar: "bg-destructive",        tint: "bg-destructive/10" },
+};
+
 // ─── Dimension Bar Component ────────────────────────────────────────────────
 
-const DimensionBar = ({ dimension, value }: { dimension: FrictionDimension; value: number }) => {
+const DimensionBar = ({ dimension, value, isDominant = false }: { dimension: FrictionDimension; value: number; isDominant?: boolean }) => {
   const config = FRICTION_CONFIG[dimension];
+  const theme = DIM_THEME[dimension];
+  const pct = Math.round(value * 100);
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-xs text-muted-foreground w-36 shrink-0">{config.label}</span>
-      <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
+    <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3">
+      <div className="flex items-center gap-2 w-44 shrink-0">
+        <span className={`w-2 h-2 rounded-full ${theme.dot}`} />
+        <span className={`text-[13px] ${isDominant ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
+          {config.label}
+        </span>
+      </div>
+      <div className="h-2 bg-muted rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
-          animate={{ width: `${value * 100}%` }}
+          animate={{ width: `${pct}%` }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className={`h-full rounded-full ${config.className.split(" ").find((c) => c.startsWith("bg-")) ?? "bg-muted-foreground/70"}`}
+          className={`h-full rounded-full ${theme.bar}`}
         />
       </div>
+      <span className={`text-xs font-mono tabular-nums w-10 text-right ${isDominant ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
+        {pct}%
+      </span>
     </div>
   );
 };
 
 // ─── Phase Breakdown Section ────────────────────────────────────────────────
 
-const PhaseBreakdown = ({ phases }: { phases: PhaseScore[] }) => (
+const PhaseBreakdown = ({ phases, dominantDim }: { phases: PhaseScore[]; dominantDim: FrictionDimension }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.4 }}
-    className="bg-card border border-border rounded-2xl p-6 space-y-6"
+    className="space-y-5"
   >
-    <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-      Where Your Pattern Is Strongest
-    </span>
-    {phases.map((ps) => (
-      <div key={ps.phase} className="space-y-2">
-        <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-          {PHASE_LABELS[ps.phase] ?? ps.phase}
-        </span>
-        <div className="space-y-1.5">
-          {(Object.entries(ps.dimensions) as [FrictionDimension, number][]).map(([dim, val]) => (
-            <DimensionBar key={dim} dimension={dim} value={val} />
-          ))}
+    <div className="flex items-baseline justify-between">
+      <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+        Where Your Pattern Is Strongest
+      </span>
+      <span className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-widest">
+        Dimension intensity per phase
+      </span>
+    </div>
+
+    <div className="grid gap-4">
+      {phases.map((ps, i) => (
+        <div
+          key={ps.phase}
+          className="bg-card border border-border rounded-2xl p-5 hover:border-primary/30 transition-colors"
+        >
+          <div className="flex items-center gap-3 mb-4 pb-3 border-b border-border">
+            <span className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-[11px] font-mono font-bold text-primary tabular-nums">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <h4 className="text-sm font-bold text-foreground tracking-tight">
+              {PHASE_LABELS[ps.phase] ?? ps.phase}
+            </h4>
+          </div>
+          <div className="space-y-2.5">
+            {(Object.entries(ps.dimensions) as [FrictionDimension, number][])
+              .sort(([, a], [, b]) => b - a)
+              .map(([dim, val]) => (
+                <DimensionBar key={dim} dimension={dim} value={val} isDominant={dim === dominantDim} />
+              ))}
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </motion.div>
 );
+
+// ─── Archetype Glyph (driven by dominant friction dimension) ─────────────────
+
+const ARCHETYPE_GLYPH: Record<FrictionDimension, typeof Eye> = {
+  client_friction: MessageSquare,
+  internal_bureaucracy: FileText,
+  knowledge_gap: HelpCircle,
+  conflict_avoidance: Shield,
+};
 
 // ─── Component ──────────────────────────────────────────────────────────────
 
@@ -566,33 +612,118 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
         <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] rounded-full bg-primary/5 blur-[120px]" />
       </div>
 
-      <div className="max-w-3xl mx-auto px-6 py-20 relative z-10 space-y-10">
-        {/* Archetype Profile Card */}
+      <div className="max-w-4xl mx-auto px-6 py-20 relative z-10 space-y-12">
+        {/* ── Archetype Hero ──────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="space-y-6"
+          className="grid md:grid-cols-[auto_1fr] gap-8 items-start"
         >
-          <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-            Your Behavioral Pattern
-          </span>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground">{profile.archetypeName}</h1>
-          <p className="text-muted-foreground leading-relaxed text-lg">{profile.narrative}</p>
+          {/* Glyph */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-3xl blur-2xl opacity-30" />
+            <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-3xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/20">
+              {(() => {
+                const Glyph = ARCHETYPE_GLYPH[profile.dominantDimension];
+                return <Glyph className="w-12 h-12 md:w-14 md:h-14 text-white" strokeWidth={1.5} />;
+              })()}
+            </div>
+          </div>
 
-          <div className="bg-card border border-border rounded-2xl p-6 space-y-4">
-            <div>
-              <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest block mb-2">
+          {/* Title block */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="text-[10px] font-mono text-primary uppercase tracking-[0.25em] font-semibold">
+                Your Behavioral Pattern
+              </span>
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+                {profile.archetypeName}
+              </span>
+            </h1>
+            <p className="text-foreground/80 leading-relaxed text-lg max-w-2xl">
+              {profile.narrative}
+            </p>
+          </div>
+        </motion.div>
+
+        {/* ── Pattern signal stats ─────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="grid grid-cols-2 md:grid-cols-3 gap-3"
+        >
+          {(() => {
+            const overall = profile.phaseBreakdown.reduce(
+              (acc, ph) => acc + (ph.dimensions[profile.dominantDimension] ?? 0),
+              0
+            );
+            const intensity = Math.round((overall / Math.max(profile.phaseBreakdown.length, 1)) * 100);
+            const stats = [
+              { label: "Decisions Analyzed", value: decisions.length, icon: Activity },
+              { label: "Dominant Friction", value: FRICTION_CONFIG[profile.dominantDimension].label, icon: Zap },
+              { label: "Pattern Intensity", value: `${intensity}%`, icon: Eye },
+            ];
+            return stats.map((s, i) => (
+              <div
+                key={i}
+                className="bg-card border border-border rounded-xl p-4 flex items-start gap-3"
+              >
+                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <s.icon className="w-4 h-4 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest mb-1">
+                    {s.label}
+                  </div>
+                  <div className="text-base font-bold text-foreground truncate" title={String(s.value)}>
+                    {s.value}
+                  </div>
+                </div>
+              </div>
+            ));
+          })()}
+        </motion.div>
+
+        {/* ── What You Do / Why It Matters — 2-col, distinct framing ─ */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35 }}
+          className="grid md:grid-cols-2 gap-4"
+        >
+          {/* What You Do — neutral observational tone */}
+          <div className="bg-card border border-border rounded-2xl p-6 space-y-3 hover:border-primary/30 transition-colors">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Eye className="w-4 h-4 text-primary" />
+              </div>
+              <span className="text-[11px] font-mono text-primary uppercase tracking-widest font-semibold">
                 What You Do
               </span>
-              <p className="text-muted-foreground leading-relaxed">{profile.whatYouDo}</p>
             </div>
-            <div>
-              <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest block mb-2">
+            <p className="text-foreground/85 leading-relaxed text-[15px]">
+              {profile.whatYouDo}
+            </p>
+          </div>
+
+          {/* Why It Matters — consequence framing, accent tint */}
+          <div className="bg-accent/5 border border-accent/20 rounded-2xl p-6 space-y-3 hover:border-accent/40 transition-colors">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg bg-accent/15 flex items-center justify-center">
+                <AlertTriangle className="w-4 h-4 text-accent" />
+              </div>
+              <span className="text-[11px] font-mono text-accent uppercase tracking-widest font-semibold">
                 Why It Matters
               </span>
-              <p className="text-muted-foreground leading-relaxed">{profile.whyItMatters}</p>
             </div>
+            <p className="text-foreground/85 leading-relaxed text-[15px]">
+              {profile.whyItMatters}
+            </p>
           </div>
         </motion.div>
 
@@ -613,7 +744,7 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
         )}
 
         {/* Phase Breakdown */}
-        <PhaseBreakdown phases={profile.phaseBreakdown} />
+        <PhaseBreakdown phases={profile.phaseBreakdown} dominantDim={profile.dominantDimension} />
 
         {/* Behavioral Shifts */}
         {profile.shifts.length > 0 && (
@@ -654,121 +785,217 @@ export const JourneyCompleteView = ({ role, onReturnHome }: JourneyCompleteViewP
         {/* Cross-Role Impact */}
         <CrossRoleImpactView decisions={decisions} />
 
-        {/* Role-Specific Content (only for Phase 3 roles) */}
+        {/* Role-Specific Content — Playbook Bento (Phase 3 roles only) */}
         {roleContent && (
           <>
-            {/* Paradigm Shift */}
+            {/* Section divider */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.65 }}
+              className="flex items-center gap-4 pt-4"
+            >
+              <span className="text-[10px] font-mono text-primary uppercase tracking-[0.25em] font-semibold">
+                Your Playbook
+              </span>
+              <span className="flex-1 h-px bg-gradient-to-r from-primary/30 via-border to-transparent" />
+            </motion.div>
+
+            {/* Paradigm Shift — premium quote */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="bg-card border border-border rounded-2xl p-8"
+              className="relative bg-gradient-to-br from-card to-primary/5 border border-border rounded-2xl p-8 md:p-10 overflow-hidden"
             >
-              <p className="text-lg text-muted-foreground italic leading-relaxed font-light">
+              <Quote className="absolute top-6 left-6 w-10 h-10 text-primary/15" strokeWidth={1.5} />
+              <p className="relative text-lg md:text-xl text-foreground/90 italic leading-relaxed font-light pl-12">
                 {roleContent.paradigmShift}
               </p>
             </motion.div>
 
-            {/* Strategy Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Commitments */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="bg-card border border-border rounded-2xl p-8 flex flex-col"
-              >
-                <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/40 flex items-center justify-center mb-6">
-                  <Target className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold mb-1 italic">The Commitment</h3>
-                <p className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-8">
-                  Concrete actions for this week
-                </p>
-                <div className="space-y-6 flex-1">
-                  {roleContent.commitments.map((c, i) => (
-                    <div key={i}>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] font-mono text-primary/50">0{i + 1}</span>
-                        <h4 className="text-sm font-bold text-foreground">{c.label}</h4>
-                      </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed pl-6 border-l border-border">
-                        {c.action}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Scripts */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
-                className="bg-card border border-border rounded-2xl p-8 flex flex-col"
-              >
-                <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/40 flex items-center justify-center mb-6">
-                  <MessageSquare className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold mb-1 italic">The Wordbook</h3>
-                <p className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-8">
-                  How to say it in the room
-                </p>
-                <div className="space-y-8">
-                  {roleContent.scripts.map((s, i) => (
-                    <div key={i}>
-                      <p className="text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.2em] mb-2">
-                        {s.trigger}
-                      </p>
-                      <div className="bg-muted border border-border p-4 rounded-xl relative">
-                        <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-20" />
-                        <p className="text-sm text-muted-foreground italic leading-relaxed pl-2">
-                          {s.line}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Rubric */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.0 }}
-                className="bg-card border border-border rounded-2xl p-8 flex flex-col"
-              >
-                <div className="w-10 h-10 rounded-xl bg-destructive/10 border border-destructive/40 flex items-center justify-center mb-6">
-                  <ListChecks className="w-5 h-5 text-destructive" />
-                </div>
-                <h3 className="text-xl font-bold mb-1 italic">The Daily Rubric</h3>
-                <p className="text-xs text-muted-foreground/70 uppercase tracking-widest font-mono mb-8">
-                  Shift your default perspective
-                </p>
-                <div className="space-y-4 flex-1">
-                  {roleContent.rubric.map((r, i) => (
-                    <div
-                      key={i}
-                      className="flex gap-3 items-start bg-muted p-4 rounded-xl border border-border"
-                    >
-                      <div className="w-5 h-5 rounded-full bg-muted text-[10px] flex items-center justify-center font-mono text-muted-foreground shrink-0">
-                        0{i + 1}
-                      </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{r}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-8 p-6 rounded-xl bg-destructive/5 border border-destructive/10">
-                  <div className="flex items-center gap-2 text-destructive mb-2">
-                    <AlertTriangle className="w-3.5 h-3.5" />
-                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold">
-                      Risk Assessment
-                    </span>
+            {/* ── THE COMMITMENT — 3-card bento with big numerals ─── */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="space-y-5"
+            >
+              <div className="flex items-end justify-between gap-4 flex-wrap">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
+                    <Target className="w-5 h-5 text-primary" />
                   </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{roleContent.cost}</p>
+                  <div>
+                    <h3 className="text-xl font-bold tracking-tight">The Commitment</h3>
+                    <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest mt-0.5">
+                      Concrete actions for this week
+                    </p>
+                  </div>
                 </div>
-              </motion.div>
-            </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {roleContent.commitments.map((c, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.85 + i * 0.07 }}
+                    className="group relative bg-card border border-border rounded-2xl p-6 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all overflow-hidden"
+                  >
+                    {/* Big watermark numeral */}
+                    <span
+                      aria-hidden
+                      className="absolute -top-2 -right-1 text-[88px] font-black leading-none text-primary/[0.06] select-none pointer-events-none tabular-nums"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+
+                    {/* Index pill */}
+                    <div className="relative flex items-center gap-2 mb-4">
+                      <span className="px-2 py-0.5 rounded-full bg-primary/10 text-[10px] font-mono font-bold text-primary uppercase tracking-widest">
+                        Action {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-primary/40" strokeWidth={2} />
+                    </div>
+
+                    <h4 className="relative text-base font-bold text-foreground mb-2 leading-snug">
+                      {c.label}
+                    </h4>
+                    <p className="relative text-[13px] text-muted-foreground leading-relaxed">
+                      {c.action}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* ── THE WORDBOOK — speech-bubble dialogue cards ─── */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.95 }}
+              className="space-y-5"
+            >
+              <div className="flex items-end justify-between gap-4 flex-wrap">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
+                    <MessageSquare className="w-5 h-5 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold tracking-tight">The Wordbook</h3>
+                    <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest mt-0.5">
+                      How to say it in the room
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {roleContent.scripts.map((s, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.0 + i * 0.08 }}
+                    className="group relative bg-card border border-border rounded-2xl p-6 hover:border-accent/40 transition-all"
+                  >
+                    {/* Trigger header */}
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="w-1 h-4 rounded-full bg-accent" />
+                      <span className="text-[10px] font-mono text-accent uppercase tracking-[0.2em] font-semibold">
+                        {s.trigger}
+                      </span>
+                    </div>
+
+                    {/* Speech bubble */}
+                    <div className="relative bg-gradient-to-br from-accent/5 to-primary/5 border border-accent/15 rounded-2xl rounded-tl-sm p-5">
+                      <Quote className="absolute -top-2 -left-2 w-5 h-5 text-accent/60 bg-card rounded-full p-0.5" strokeWidth={2} />
+                      <p className="text-[14px] text-foreground/90 italic leading-relaxed">
+                        {s.line}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* ── THE DAILY RUBRIC — question cards ─── */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1 }}
+              className="space-y-5"
+            >
+              <div className="flex items-end justify-between gap-4 flex-wrap">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center">
+                    <ListChecks className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold tracking-tight">The Daily Rubric</h3>
+                    <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest mt-0.5">
+                      Three questions to ask yourself
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {roleContent.rubric.map((r, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.15 + i * 0.06 }}
+                    className="group relative bg-card border border-border rounded-2xl p-6 hover:border-amber-500/30 transition-all overflow-hidden"
+                  >
+                    {/* Big question mark */}
+                    <span
+                      aria-hidden
+                      className="absolute -top-3 -right-1 text-[88px] font-black leading-none text-amber-500/[0.07] select-none pointer-events-none"
+                    >
+                      ?
+                    </span>
+
+                    <div className="relative flex items-center gap-2 mb-4">
+                      <HelpCircle className="w-4 h-4 text-amber-600 dark:text-amber-400" strokeWidth={2} />
+                      <span className="text-[10px] font-mono font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest">
+                        Q{i + 1}
+                      </span>
+                    </div>
+
+                    <p className="relative text-[15px] text-foreground/90 leading-relaxed font-medium">
+                      {r}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* ── RISK ASSESSMENT — full-width footer card ─── */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.25 }}
+              className="relative bg-gradient-to-br from-destructive/5 to-accent/5 border border-destructive/20 rounded-2xl p-6 md:p-8 overflow-hidden"
+            >
+              <Sparkles className="absolute top-6 right-6 w-5 h-5 text-destructive/30" />
+              <div className="grid md:grid-cols-[auto_1fr] gap-5 items-start">
+                <div className="w-12 h-12 rounded-xl bg-destructive/10 border border-destructive/30 flex items-center justify-center shrink-0">
+                  <AlertTriangle className="w-6 h-6 text-destructive" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono text-destructive uppercase tracking-[0.25em] font-bold block mb-2">
+                    The Cost of Not Doing This
+                  </span>
+                  <p className="text-[15px] text-foreground/85 leading-relaxed">
+                    {roleContent.cost}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </>
         )}
 

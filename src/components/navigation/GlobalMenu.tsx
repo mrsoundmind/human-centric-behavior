@@ -207,7 +207,7 @@ export const GlobalMenu = ({ onNavigate }: GlobalMenuProps) => {
                                         <ExternalLink className={isLight ? "w-4 h-4 text-primary/70 group-hover:text-primary" : "w-4 h-4 text-purple-400/60 group-hover:text-purple-400"} />
                                         <div className="text-left">
                                             <h3 className={titleClass}>Internal Training</h3>
-                                            <p className={subtitleClass}>Onboarding & Roles</p>
+                                            <p className={subtitleClass}>Onboarding · Roles · Wrap-up</p>
                                         </div>
                                     </div>
                                     <ChevronDown className={`${chevronBase} ${expandedSection === "internal" ? "rotate-180" : ""}`} />
@@ -216,10 +216,41 @@ export const GlobalMenu = ({ onNavigate }: GlobalMenuProps) => {
                                 <AnimatePresence>
                                     {expandedSection === "internal" && (
                                         <motion.div variants={nestedVariants} initial="closed" animate="open" exit="closed" className={nestedWrapClass}>
-                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("internal-intro")} className={nestedItemClass}>Training Intro</motion.button>
-                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("designation")} className={nestedItemClass}>Role Designation</motion.button>
-                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("onboarding-brief")} className={nestedItemClass}>Onboarding Brief</motion.button>
-                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("onboarding-war-room")} className={nestedItemClass}>UX War Room</motion.button>
+                                            {/* Onboarding sequence */}
+                                            <p className={isLight ? "text-[9px] font-mono text-primary/70 uppercase tracking-[0.25em] pt-1 pb-1" : "text-[9px] font-mono text-purple-400/70 uppercase tracking-[0.25em] pt-1 pb-1"}>
+                                                Onboarding
+                                            </p>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("internal-intro")} className={nestedItemClass}>1 · Training Intro</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("onboarding-brief")} className={nestedItemClass}>2 · Project Brief</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("onboarding-war-room")} className={nestedItemClass}>3 · Slack War Room</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("onboarding-system-reaction")} className={nestedItemClass}>4 · System Reaction</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("onboarding-decision-lens")} className={nestedItemClass}>5 · Decision Lens</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("onboarding-identity")} className={nestedItemClass}>6 · Identity Reflection</motion.button>
+
+                                            {/* Designation hub */}
+                                            <p className={isLight ? "text-[9px] font-mono text-primary/70 uppercase tracking-[0.25em] pt-3 pb-1" : "text-[9px] font-mono text-purple-400/70 uppercase tracking-[0.25em] pt-3 pb-1"}>
+                                                Hub
+                                            </p>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("designation")} className={nestedItemClass}>Role Designation Portal</motion.button>
+
+                                            {/* Role journeys */}
+                                            <p className={isLight ? "text-[9px] font-mono text-primary/70 uppercase tracking-[0.25em] pt-3 pb-1" : "text-[9px] font-mono text-purple-400/70 uppercase tracking-[0.25em] pt-3 pb-1"}>
+                                                Role Journeys
+                                            </p>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("internal-role-sales")} className={nestedItemClass}>Sales</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("internal-role-crm")} className={nestedItemClass}>CRM</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("internal-role-pm")} className={nestedItemClass}>Product Manager</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("internal-role-developer")} className={nestedItemClass}>Developer</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("internal-role-qa")} className={nestedItemClass}>QA</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("internal-role-designer")} className={nestedItemClass}>Designer</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("internal-role-ba")} className={nestedItemClass}>Business Analyst</motion.button>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("internal-role-strategy")} className={nestedItemClass}>Strategy</motion.button>
+
+                                            {/* Wrap-up */}
+                                            <p className={isLight ? "text-[9px] font-mono text-primary/70 uppercase tracking-[0.25em] pt-3 pb-1" : "text-[9px] font-mono text-purple-400/70 uppercase tracking-[0.25em] pt-3 pb-1"}>
+                                                Wrap-up
+                                            </p>
+                                            <motion.button variants={nestedItemVariants} onClick={() => handleNavigate("masterclass-complete")} className={nestedItemClass}>Masterclass Complete</motion.button>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>

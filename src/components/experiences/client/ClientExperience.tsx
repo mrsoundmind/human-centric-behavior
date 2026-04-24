@@ -304,38 +304,38 @@ const IntroSection = ({ onStart }: { onStart: () => void }) => (
             animate={{ opacity: 1, scale: 1 }}
             className="space-y-6"
         >
-            <div className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-widest text-indigo-300 font-mono mb-4">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-bold tracking-widest text-primary font-mono mb-4">
                 ZYXWARE HUMAN CENTRIC LAB
             </div>
-            <h1 className="text-5xl md:text-7xl font-display font-bold text-white tracking-tight leading-[0.9]">
+            <h1 className="text-5xl md:text-7xl font-display font-bold text-foreground tracking-tight leading-[0.9]">
                 The Hidden <br />
-                <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">Revenue Leak.</span>
+                <span className="bg-gradient-to-r from-accent to-primary text-transparent bg-clip-text">Revenue Leak.</span>
             </h1>
-            <p className="text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto font-light">
-                Every confusing click is a <span className="text-white font-bold border-b border-pink-500/50">tax on your revenue</span>. <br />
+            <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-light">
+                Every confusing click is a <span className="text-foreground font-bold border-b border-accent/50">tax on your revenue</span>. <br />
                 Calculating your liability now...
             </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8 text-left max-w-4xl mx-auto py-8">
-            <div className="space-y-3 bg-gradient-to-br from-indigo-600/30 via-indigo-900/20 to-white/5 backdrop-blur-2xl p-6 rounded-2xl border border-white/20 hover:border-indigo-500/50 transition-all duration-500 group shadow-2xl">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-xl shadow-[0_0_20px_rgba(99,102,241,0.5)]">📉</div>
-                <h3 className="text-white font-bold text-lg group-hover:text-indigo-300 transition-colors">The Leak</h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
+            <div className="space-y-3 bg-card p-6 rounded-2xl border border-border hover:border-primary/40 transition-all duration-500 group shadow-sm">
+                <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xl">📉</div>
+                <h3 className="text-foreground font-bold text-lg group-hover:text-primary transition-colors">The Leak</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
                     Marketing fills the bucket. Bad UX punches holes in the bottom.
                 </p>
             </div>
-            <div className="space-y-3 bg-gradient-to-br from-purple-600/30 via-purple-900/20 to-white/5 backdrop-blur-2xl p-6 rounded-2xl border border-white/20 hover:border-purple-500/50 transition-all duration-500 group shadow-2xl">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-xl shadow-[0_0_20px_rgba(168,85,247,0.5)]">🧠</div>
-                <h3 className="text-white font-bold text-lg group-hover:text-purple-300 transition-colors">The Cause</h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
-                    It's not "ugly". It's <strong>Cognitively Expensive</strong>. Users don't think, they leave.
+            <div className="space-y-3 bg-card p-6 rounded-2xl border border-border hover:border-primary/40 transition-all duration-500 group shadow-sm">
+                <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-xl">🧠</div>
+                <h3 className="text-foreground font-bold text-lg group-hover:text-primary transition-colors">The Cause</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                    It's not "ugly". It's <strong className="text-foreground">Cognitively Expensive</strong>. Users don't think, they leave.
                 </p>
             </div>
-            <div className="space-y-3 bg-gradient-to-br from-pink-600/30 via-pink-900/20 to-white/5 backdrop-blur-2xl p-6 rounded-2xl border border-white/20 hover:border-pink-500/50 transition-all duration-500 group shadow-2xl">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-pink-500 to-red-600 flex items-center justify-center text-xl shadow-[0_0_20px_rgba(236,72,153,0.5)]">👁️</div>
-                <h3 className="text-white font-bold text-lg group-hover:text-pink-300 transition-colors">The Audit</h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
+            <div className="space-y-3 bg-card p-6 rounded-2xl border border-border hover:border-accent/40 transition-all duration-500 group shadow-sm">
+                <div className="h-10 w-10 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-xl">👁️</div>
+                <h3 className="text-foreground font-bold text-lg group-hover:text-accent transition-colors">The Audit</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
                     We will simulate your customer's frustration to quantify the exact cost.
                 </p>
             </div>
@@ -343,7 +343,7 @@ const IntroSection = ({ onStart }: { onStart: () => void }) => (
 
         <button
             onClick={onStart}
-            className="group relative inline-flex items-center gap-3 px-10 py-5 text-xl font-bold text-black bg-white rounded-full hover:scale-105 transition-transform shadow-[0_0_40px_-5px_rgba(255,255,255,0.4)]"
+            className="group relative inline-flex items-center gap-3 px-10 py-5 text-xl font-bold text-primary-foreground bg-primary rounded-full hover:scale-105 transition-transform shadow-lg"
         >
             <span>Start The Primer</span>
             <span className="group-hover:translate-x-1 transition-transform">→</span>

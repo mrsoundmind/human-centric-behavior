@@ -34,16 +34,21 @@ type InternalStep =
 interface InternalExperienceProps {
     onBack?: () => void;
     initialStep?: InternalStep;
+    initialRole?: Designation;
 }
 
-export const InternalExperience = ({ onBack, initialStep }: InternalExperienceProps) => {
+export const InternalExperience = ({ onBack, initialStep, initialRole }: InternalExperienceProps) => {
     const [step, setStep] = useState<InternalStep>(initialStep || "intro");
-    const [role, setRole] = useState<Designation | null>(null);
+    const [role, setRole] = useState<Designation | null>(initialRole ?? null);
 
     // Sync with external navigation (like debug menu)
     useEffect(() => {
         if (initialStep) setStep(initialStep);
     }, [initialStep]);
+
+    useEffect(() => {
+        if (initialRole) setRole(initialRole);
+    }, [initialRole]);
 
     const handleRoleSelect = (selected: Designation) => {
         setRole(selected);
