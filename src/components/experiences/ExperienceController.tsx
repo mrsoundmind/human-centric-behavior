@@ -51,6 +51,7 @@ const ExperienceControllerInner = () => {
   const [currentStep, setCurrentStep] = useState<ExperienceStep>("intro");
   const [internalInitialStep, setInternalInitialStep] = useState<string | undefined>(undefined);
   const [internalInitialRole, setInternalInitialRole] = useState<Designation | undefined>(undefined);
+  const [internalInitialPortalMode, setInternalInitialPortalMode] = useState<"briefing" | "full-sdlc" | undefined>(undefined);
   const [internalKey, setInternalKey] = useState(0);
   const [layer2InitialStep, setLayer2InitialStep] = useState<Layer2Step | undefined>(undefined);
   const [layer2InitialScreen, setLayer2InitialScreen] = useState<DiscoveryScreen | undefined>(undefined);
@@ -164,12 +165,16 @@ const ExperienceControllerInner = () => {
       {showLayerSwitcher && <LayerSwitcher />}
 
       <GlobalMenu onNavigate={(step) => {
-          // Role deep-link: "internal-role-sales" → role-journey for sales
+          // Role deep-link: "internal-role-sales" → DesignationPortal full-sdlc for sales
+          //   This routes through the NEW Full SDLC path (records decisions →
+          //   ends in the new bento JourneyCompleteView), NOT the old quick-mode
+          //   role-journey (which ends in the old RoleMasterclassComplete).
           if (step.startsWith("internal-role-")) {
             const roleId = step.replace("internal-role-", "");
             if (isRoleId(roleId)) {
-              setInternalInitialStep("role-journey");
+              setInternalInitialStep("designation");
               setInternalInitialRole(roleId);
+              setInternalInitialPortalMode("full-sdlc");
               setInternalKey((k) => k + 1);
               setCurrentStep("internal-training");
               setCurrentLayer("layer1");
@@ -193,6 +198,7 @@ const ExperienceControllerInner = () => {
             const target = step === "internal-intro" ? "intro" : step;
             setInternalInitialStep(target);
             setInternalInitialRole(undefined);
+            setInternalInitialPortalMode(undefined);
             setInternalKey((k) => k + 1);
             setCurrentStep("internal-training");
             setCurrentLayer("layer1");
@@ -299,6 +305,7 @@ const ExperienceControllerInner = () => {
               onBack={restart}
               initialStep={internalInitialStep as any}
               initialRole={internalInitialRole}
+              initialPortalMode={internalInitialPortalMode}
             />
           )}
         </motion.div>

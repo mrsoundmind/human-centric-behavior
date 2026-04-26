@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+  <circle cx="22" cy="22" r="20" fill="#9335AA"/>
+  <g fill="rgba(255,255,255,0.55)">
+    <circle cx="36" cy="22" r="1.6"/>
+    <circle cx="34.124" cy="29" r="1.6"/>
+    <circle cx="29" cy="34.124" r="1.6"/>
+    <circle cx="22" cy="36" r="1.6"/>
+    <circle cx="15" cy="34.124" r="1.6"/>
+    <circle cx="9.876" cy="29" r="1.6"/>
+    <circle cx="8" cy="22" r="1.6"/>
+    <circle cx="9.876" cy="15" r="1.6"/>
+    <circle cx="15" cy="9.876" r="1.6"/>
+    <circle cx="22" cy="8" r="1.6"/>
+    <circle cx="29" cy="9.876" r="1.6"/>
+    <circle cx="34.124" cy="15" r="1.6"/>
+  </g>
+  <text x="22" y="30" text-anchor="middle" font-family="Raleway, Inter, sans-serif" font-weight="800" font-size="22" fill="#ffffff">Z</text>
+</svg>

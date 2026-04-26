@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTheme } from "@/state/ThemeContext";
 import { DesignationSelect, Designation } from "./DesignationSelect";
 import { DesignationPortal } from "./DesignationPortal";
 import { InternalIntroScreen } from "./InternalIntroScreen";
@@ -35,11 +36,14 @@ interface InternalExperienceProps {
     onBack?: () => void;
     initialStep?: InternalStep;
     initialRole?: Designation;
+    initialPortalMode?: "briefing" | "full-sdlc";
 }
 
-export const InternalExperience = ({ onBack, initialStep, initialRole }: InternalExperienceProps) => {
+export const InternalExperience = ({ onBack, initialStep, initialRole, initialPortalMode }: InternalExperienceProps) => {
     const [step, setStep] = useState<InternalStep>(initialStep || "intro");
     const [role, setRole] = useState<Designation | null>(initialRole ?? null);
+    const { theme } = useTheme();
+    const logoSrc = theme === "light" ? "/brand/zyxware-logo-light.png" : "/brand/zyxware-logo-dark.png";
 
     // Sync with external navigation (like debug menu)
     useEffect(() => {
@@ -83,7 +87,17 @@ export const InternalExperience = ({ onBack, initialStep, initialRole }: Interna
     };
 
     return (
-        <div className="min-h-screen bg-black text-white">
+        <div className="min-h-screen bg-background text-foreground relative">
+            {/* Brand logo — fixed top-left across every internal step */}
+            <div className="fixed top-0 left-0 px-6 py-5 z-50 pointer-events-none">
+                <img
+                    src={logoSrc}
+                    alt="Zyxware Technologies"
+                    className="h-8 md:h-9 w-auto select-none"
+                    draggable={false}
+                />
+            </div>
+
             {/* Overlapping back button removed. Handled by DesignationPortal. */}
 
             <AnimatePresence mode="wait">
@@ -126,6 +140,8 @@ export const InternalExperience = ({ onBack, initialStep, initialRole }: Interna
                                 setStep("role-journey");
                             }}
                             onComplete={handleJourneyComplete}
+                            initialRole={initialRole}
+                            initialMode={initialPortalMode}
                         />
                     )}
 

@@ -49,6 +49,8 @@ interface DesignationPortalProps {
   onStartQuickMode: (role: Designation) => void;
   onComplete: () => void;
   onBack?: () => void;
+  initialRole?: Designation;
+  initialMode?: "briefing" | "full-sdlc";
 }
 
 // ─── Phase-Grouped Scenario Data ──────────────────────────────────────────────
@@ -199,10 +201,10 @@ const FullSDLCJourney = ({ role, onComplete, onBack }: FullSDLCJourneyProps) => 
 
 type PortalMode = "select" | "briefing" | "full-sdlc" | "quick" | "complete";
 
-export const DesignationPortal = ({ onStartQuickMode, onComplete, onBack }: DesignationPortalProps) => {
-  const [selectedRole, setSelectedRole] = useState<Designation | null>(null);
+export const DesignationPortal = ({ onStartQuickMode, onComplete, onBack, initialRole, initialMode }: DesignationPortalProps) => {
+  const [selectedRole, setSelectedRole] = useState<Designation | null>(initialRole ?? null);
   const [completedRole, setCompletedRole] = useState<Designation | null>(null);
-  const [mode, setMode] = useState<PortalMode>("select");
+  const [mode, setMode] = useState<PortalMode>(initialRole && initialMode ? initialMode : "select");
   const completeRole = useDesignationStore((s) => s.completeRole);
 
   if (mode === "select") {
